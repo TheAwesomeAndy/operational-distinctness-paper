@@ -1,0 +1,23 @@
+# Input data — never commit raw or processed clinical material
+data/
+*.pkl
+*.npz
+clinical_profile.csv
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.env
+
+# Editor / OS
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+
+# Generated outputs (regenerable from inputs; commit only the curated subset)
+outputs/operational_distinctness/*.csv.bak
+figures/operational_distinctness/*.png
