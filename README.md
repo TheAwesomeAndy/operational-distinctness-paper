@@ -30,11 +30,20 @@ experiments/operational_distinctness/
 ├── 07_optional_layer_redundancy.py        # CKA, CCA, ridge cross-predictability
 └── run_all.py                             # orchestrator + run_manifest.json
 
+prepare_inputs/                       # how to (re)generate the input pickles on a clean machine
+├── README.md                            # raw-EEG layout, env vars, runtime, runbook
+└── extract_ch67_features.py             # env-var-driven Ch6/Ch7 feature extraction
+
 outputs/operational_distinctness/    # CSVs + JSONs (manifest, predictions, metrics)
 figures/operational_distinctness/    # fig1–fig5 PDFs
 tables/operational_distinctness/     # table1–table4 .tex
-data/                                # (gitignored) optional drop point for input pickles
+data/                                # (gitignored) drop point for the three input files
 ```
+
+> **Cloud / fresh-machine setup:** see [`prepare_inputs/README.md`](prepare_inputs/README.md)
+> for the exact runbook to (re)generate `ch6_ch7_3class_features.pkl` from
+> raw EEG, where to source `shape_features_211.pkl`, and where to drop
+> `clinical_profile.csv`.
 
 ---
 
