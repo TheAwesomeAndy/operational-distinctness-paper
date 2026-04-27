@@ -1,0 +1,151 @@
+======================================================================
+Feature-block diagnostics — operational distinctness pipeline
+======================================================================
+
+Resolved input paths and SHA-256:
+  ARSPI_CH5_FILE:
+    path:   /home/user/operational-distinctness-paper/data/shape_features_211.pkl
+    exists: True
+    size:   55967744 bytes
+    sha256: b5ce2d542f15139bc6da9fccdfe0afa62f69b16aed90ab0b2ffd611e8a21568f
+  ARSPI_CH67_FILE:
+    path:   /home/user/operational-distinctness-paper/data/ch6_ch7_3class_features.pkl
+    exists: True
+    size:   26095371 bytes
+    sha256: 30823e383a5a85a81dcfe56a6de8eb0dedaad0c296ec60413205cd092508f66b
+  ARSPI_CLINICAL_FILE:
+    path:   /home/user/operational-distinctness-paper/data/clinical_profile.csv
+    exists: True
+    size:   41437 bytes
+    sha256: 4ee9d21de9a468a9db7683cc2d0c913ce94dd021fd1a07b233fe861faddde673
+
+n_observations: 633
+n_subjects:     211
+label_counts:   {0: 211, 1: 211, 2: 211}
+
+----------------------------------------------------------------------
+Block: BandPower
+  shape                                     = [633, 170]
+  dtype                                     = float64
+  finite_fraction                           = 1.0
+  nan_count                                 = 0
+  inf_count                                 = 0
+  mean                                      = 0.026546868582800098
+  std                                       = 0.036040126781617346
+  min                                       = 5.291791329336641e-06
+  max                                       = 0.2885942184525843
+  median_abs                                = 0.009374610587393806
+  zero_fraction                             = 0.0
+  row_norm_min                              = 0.1617213941827568
+  row_norm_median                           = 0.5577469081378653
+  row_norm_max                              = 1.100856883438482
+  n_constant_columns                        = 0
+  n_near_constant_columns_std_lt_1e_minus_12= 0
+  column_std_min                            = 0.0002520589947970375
+  column_std_median                         = 0.011992448478348246
+  column_std_max                            = 0.041352810797919755
+  approx_rank_after_standardization         = 170
+----------------------------------------------------------------------
+Block: E
+  shape                                     = [633, 2176]
+  dtype                                     = float64
+  finite_fraction                           = 1.0
+  nan_count                                 = 0
+  inf_count                                 = 0
+  mean                                      = 0.0
+  std                                       = 0.0
+  min                                       = 0.0
+  max                                       = 0.0
+  median_abs                                = 0.0
+  zero_fraction                             = 1.0
+  row_norm_min                              = 0.0
+  row_norm_median                           = 0.0
+  row_norm_max                              = 0.0
+  n_constant_columns                        = 2176
+  n_near_constant_columns_std_lt_1e_minus_12= 2176
+  column_std_min                            = 0.0
+  column_std_median                         = 0.0
+  column_std_max                            = 0.0
+  approx_rank_after_standardization         = 0
+----------------------------------------------------------------------
+Block: D
+  shape                                     = [633, 238]
+  dtype                                     = float32
+  finite_fraction                           = 1.0
+  nan_count                                 = 0
+  inf_count                                 = 0
+  mean                                      = 1352.7374267578125
+  std                                       = 3311.23779296875
+  min                                       = 0.0
+  max                                       = 10098.0
+  median_abs                                = 0.9846088886260986
+  zero_fraction                             = 0.00015266770215195083
+  row_norm_min                              = 52707.6875
+  row_norm_median                           = 55241.75
+  row_norm_max                              = 56676.39453125
+  n_constant_columns                        = 0
+  n_near_constant_columns_std_lt_1e_minus_12= 0
+  column_std_min                            = 0.0003267651190981269
+  column_std_median                         = 0.029046956449747086
+  column_std_max                            = 333.7735900878906
+  approx_rank_after_standardization         = 204
+----------------------------------------------------------------------
+Block: T
+  shape                                     = [633, 68]
+  dtype                                     = float32
+  finite_fraction                           = 1.0
+  nan_count                                 = 0
+  inf_count                                 = 0
+  mean                                      = 10.713433265686035
+  std                                       = 10.595377922058105
+  min                                       = 0.20731686055660248
+  max                                       = 30.8095760345459
+  median_abs                                = 3.428502082824707
+  zero_fraction                             = 0.0
+  row_norm_min                              = 84.50767517089844
+  row_norm_median                           = 120.93036651611328
+  row_norm_max                              = 170.33497619628906
+  n_constant_columns                        = 0
+  n_near_constant_columns_std_lt_1e_minus_12= 0
+  column_std_min                            = 0.10528022795915604
+  column_std_median                         = 1.6992603540420532
+  column_std_max                            = 4.967916011810303
+  approx_rank_after_standardization         = 68
+----------------------------------------------------------------------
+Block: C
+  shape                                     = [633, 3]
+  dtype                                     = float64
+  finite_fraction                           = 1.0
+  nan_count                                 = 0
+  inf_count                                 = 0
+  mean                                      = 0.10070268344183339
+  std                                       = 0.13731810780161496
+  min                                       = -0.19995634617483352
+  max                                       = 0.6630230403410166
+  median_abs                                = 0.0867183236931136
+  zero_fraction                             = 0.0
+  row_norm_min                              = 0.05329976080176822
+  row_norm_median                           = 0.24863283497817948
+  row_norm_max                              = 0.6654277000113219
+  n_constant_columns                        = 0
+  n_near_constant_columns_std_lt_1e_minus_12= 0
+  column_std_min                            = 0.06955833848405822
+  column_std_median                         = 0.07010357883127787
+  column_std_max                            = 0.11470233972725667
+  approx_rank_after_standardization         = 3
+
+----------------------------------------------------------------------
+E-block extra diagnostics
+  ch5_keys: ['X_ds', 'conv_feats', 'lsm_bsc6_pca', 'subjects', 'y']
+  lsm_bsc6_pca_type: ndarray
+  lsm_bsc6_pca_dtype: float64
+  lsm_bsc6_pca_shape: [633, 34, 64]
+  E_reshaped_shape: [633, 2176]
+  np_allclose_E_zero: True
+  unique_value_count: 1
+  first_5_row_norms: [0.0, 0.0, 0.0, 0.0, 0.0]
+  row_norm_zero_fraction: 1.0
+  classwise:
+    y=0: {'n': 211, 'mean_row_norm': 0.0, 'column_std_min': 0.0, 'column_std_median': 0.0, 'column_std_max': 0.0, 'n_constant_columns_in_class': 2176}
+    y=1: {'n': 211, 'mean_row_norm': 0.0, 'column_std_min': 0.0, 'column_std_median': 0.0, 'column_std_max': 0.0, 'n_constant_columns_in_class': 2176}
+    y=2: {'n': 211, 'mean_row_norm': 0.0, 'column_std_min': 0.0, 'column_std_median': 0.0, 'column_std_max': 0.0, 'n_constant_columns_in_class': 2176}
