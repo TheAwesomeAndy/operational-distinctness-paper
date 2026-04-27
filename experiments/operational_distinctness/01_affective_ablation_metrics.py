@@ -64,7 +64,6 @@ def _make_classifier() -> LogisticRegression:
         class_weight="balanced",
         max_iter=2000,
         solver="lbfgs",
-        multi_class="multinomial",
         random_state=cfg.RANDOM_STATE,
     )
 

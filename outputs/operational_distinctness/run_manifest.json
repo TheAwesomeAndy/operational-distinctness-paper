@@ -1,0 +1,37 @@
+{
+  "commit_hash": "c2fea323ce798643bd8e5ad30cf34b2b8b9bb687",
+  "run_datetime": "2026-04-27T01:09:58",
+  "python_version": "3.11.15",
+  "numpy_version": "2.4.4",
+  "scipy_version": "1.17.1",
+  "sklearn_version": "1.8.0",
+  "pandas_version": "3.0.2",
+  "random_state": 42,
+  "input_files_found": {
+    "shape_features_211.pkl": true,
+    "ch6_ch7_3class_features.pkl": true,
+    "clinical_profile.csv": true
+  },
+  "output_files_created": [
+    "outputs/operational_distinctness/affective_ablation_metrics.csv",
+    "outputs/operational_distinctness/affective_confusion_matrices.json",
+    "outputs/operational_distinctness/affective_predictions.csv",
+    "outputs/operational_distinctness/clinical_confusion_matrices.json",
+    "outputs/operational_distinctness/clinical_predictions.csv",
+    "outputs/operational_distinctness/clinical_sensitivity_metrics.csv",
+    "outputs/operational_distinctness/comorbidity_adjusted.csv",
+    "outputs/operational_distinctness/layer_redundancy.csv",
+    "outputs/operational_distinctness/run_manifest.json",
+    "figures/operational_distinctness/fig1_arspinet_layer_decomposition.pdf",
+    "figures/operational_distinctness/fig2_operational_distinctness_framework.pdf",
+    "figures/operational_distinctness/fig3_affective_ablation_metrics.pdf",
+    "figures/operational_distinctness/fig4_clinical_sensitivity_heatmap.pdf",
+    "figures/operational_distinctness/fig5_clinical_best_layer_summary.pdf",
+    "tables/operational_distinctness/table1_feature_blocks.tex",
+    "tables/operational_distinctness/table2_affective_ablation.tex",
+    "tables/operational_distinctness/table3_clinical_sensitivity.tex",
+    "tables/operational_distinctness/table4_full_clinical_matrix.tex"
+  ],
+  "n_subjects": 211,
+  "n_observations": 633
+}
