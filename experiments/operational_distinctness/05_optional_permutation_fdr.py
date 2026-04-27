@@ -63,7 +63,7 @@ def _cv_balanced_accuracy_3class(X, y, subjects):
         Xtr = sc.fit_transform(X[tr])
         Xte = sc.transform(X[te])
         clf = LogisticRegression(C=1.0, class_weight="balanced", max_iter=2000,
-                                 solver="lbfgs", multi_class="multinomial",
+                                 solver="lbfgs",
                                  random_state=cfg.RANDOM_STATE)
         clf.fit(Xtr, y[tr])
         accs.append(balanced_accuracy_score(y[te], clf.predict(Xte)))
