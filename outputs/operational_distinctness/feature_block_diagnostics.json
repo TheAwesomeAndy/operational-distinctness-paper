@@ -10,8 +10,8 @@
     "ARSPI_CH5_FILE": {
       "path": "/home/user/operational-distinctness-paper/data/shape_features_211.pkl",
       "exists": true,
-      "size_bytes": 55967744,
-      "sha256": "b5ce2d542f15139bc6da9fccdfe0afa62f69b16aed90ab0b2ffd611e8a21568f"
+      "size_bytes": 55967778,
+      "sha256": "d49ad55184a0fecb60f5e2b49fb56ea03f0082f2846c215f78fe2c98bb85d3f8"
     },
     "ARSPI_CH67_FILE": {
       "path": "/home/user/operational-distinctness-paper/data/ch6_ch7_3class_features.pkl",
@@ -63,21 +63,21 @@
       "finite_fraction": 1.0,
       "nan_count": 0,
       "inf_count": 0,
-      "mean": 0.0,
-      "std": 0.0,
-      "min": 0.0,
-      "max": 0.0,
-      "median_abs": 0.0,
-      "zero_fraction": 1.0,
-      "row_norm_min": 0.0,
-      "row_norm_median": 0.0,
-      "row_norm_max": 0.0,
-      "n_constant_columns": 2176,
-      "n_near_constant_columns_std_lt_1e_minus_12": 2176,
-      "column_std_min": 0.0,
-      "column_std_median": 0.0,
-      "column_std_max": 0.0,
-      "approx_rank_after_standardization": 0
+      "mean": -6.074707897958295e-17,
+      "std": 4.830923103810843,
+      "min": -53.07736171019664,
+      "max": 51.60053333767277,
+      "median_abs": 1.2932513242512762,
+      "zero_fraction": 0.0,
+      "row_norm_min": 171.92313773380155,
+      "row_norm_median": 224.60971519961325,
+      "row_norm_max": 284.5997553852555,
+      "n_constant_columns": 0,
+      "n_near_constant_columns_std_lt_1e_minus_12": 0,
+      "column_std_min": 1.243701556545437,
+      "column_std_median": 1.7466250485231298,
+      "column_std_max": 30.079023741011344,
+      "approx_rank_after_standardization": 632
     },
     {
       "block": "D",
@@ -177,40 +177,40 @@
       633,
       2176
     ],
-    "np_allclose_E_zero": true,
-    "unique_value_count": 1,
+    "np_allclose_E_zero": false,
+    "unique_value_count": 1371712,
     "first_5_row_norms": [
-      0.0,
-      0.0,
-      0.0,
-      0.0,
-      0.0
+      200.78721233918188,
+      209.04590118811572,
+      223.19840140415525,
+      235.59681134448408,
+      183.9605393313978
     ],
-    "row_norm_zero_fraction": 1.0,
+    "row_norm_zero_fraction": 0.0,
     "classwise": {
       "0": {
         "n": 211,
-        "mean_row_norm": 0.0,
-        "column_std_min": 0.0,
-        "column_std_median": 0.0,
-        "column_std_max": 0.0,
-        "n_constant_columns_in_class": 2176
+        "mean_row_norm": 224.17714914444664,
+        "column_std_min": 1.1833014935765112,
+        "column_std_median": 1.7555437193850634,
+        "column_std_max": 30.498473597018126,
+        "n_constant_columns_in_class": 0
       },
       "1": {
         "n": 211,
-        "mean_row_norm": 0.0,
-        "column_std_min": 0.0,
-        "column_std_median": 0.0,
-        "column_std_max": 0.0,
-        "n_constant_columns_in_class": 2176
+        "mean_row_norm": 229.56664679241172,
+        "column_std_min": 1.1273046261512134,
+        "column_std_median": 1.7296953675746602,
+        "column_std_max": 29.227820403405186,
+        "n_constant_columns_in_class": 0
       },
       "2": {
         "n": 211,
-        "mean_row_norm": 0.0,
-        "column_std_min": 0.0,
-        "column_std_median": 0.0,
-        "column_std_max": 0.0,
-        "n_constant_columns_in_class": 2176
+        "mean_row_norm": 219.0220564784586,
+        "column_std_min": 1.24279063187099,
+        "column_std_median": 1.7599242641157131,
+        "column_std_max": 29.168872652843255,
+        "n_constant_columns_in_class": 0
       }
     }
   }

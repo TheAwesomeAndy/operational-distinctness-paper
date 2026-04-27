@@ -1,6 +1,6 @@
 {
-  "commit_hash": "c2fea323ce798643bd8e5ad30cf34b2b8b9bb687",
-  "run_datetime": "2026-04-27T01:09:58",
+  "commit_hash": "f1f9a059016dca958557ed15da861ee979a1bee3",
+  "run_datetime": "2026-04-27T01:33:53",
   "python_version": "3.11.15",
   "numpy_version": "2.4.4",
   "scipy_version": "1.17.1",
@@ -20,6 +20,8 @@
     "outputs/operational_distinctness/clinical_predictions.csv",
     "outputs/operational_distinctness/clinical_sensitivity_metrics.csv",
     "outputs/operational_distinctness/comorbidity_adjusted.csv",
+    "outputs/operational_distinctness/feature_block_diagnostics.json",
+    "outputs/operational_distinctness/feature_block_diagnostics.txt",
     "outputs/operational_distinctness/layer_redundancy.csv",
     "outputs/operational_distinctness/run_manifest.json",
     "figures/operational_distinctness/fig1_arspinet_layer_decomposition.pdf",
