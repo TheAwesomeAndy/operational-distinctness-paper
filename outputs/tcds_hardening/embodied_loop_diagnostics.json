@@ -1,0 +1,95 @@
+{
+  "script": "experiments/tcds_hardening/run_embodied_loop.py",
+  "n_subjects_total": 211,
+  "n_observations": 633,
+  "n_folds": 5,
+  "n_steps": 10,
+  "policies": [
+    "E_only",
+    "D_only",
+    "T_only",
+    "EDT_full",
+    "random",
+    "greedy_eig"
+  ],
+  "policy_feature_dims": {
+    "E_only": 2176,
+    "D_only": 238,
+    "T_only": 68,
+    "EDT_full": 2482
+  },
+  "summary_table": [
+    {
+      "policy": "EDT_full",
+      "n_subjects": 211,
+      "final_entropy_mean": 0.9314623119696706,
+      "final_entropy_sd": 0.12275351396926651,
+      "final_entropy_ci95_lo": 0.9151100999231425,
+      "final_entropy_ci95_hi": 0.9474781454158245,
+      "final_decision_accuracy": 0.45023696682464454,
+      "mean_info_gain_per_step": 0.016714997669843894,
+      "mean_cumulative_info_gain_at_T": 0.1671499766984392
+    },
+    {
+      "policy": "E_only",
+      "n_subjects": 211,
+      "final_entropy_mean": 0.9377860663815007,
+      "final_entropy_sd": 0.11704803887068324,
+      "final_entropy_ci95_lo": 0.9214969797608789,
+      "final_entropy_ci95_hi": 0.953351149746849,
+      "final_decision_accuracy": 0.44549763033175355,
+      "mean_info_gain_per_step": 0.016082622228660876,
+      "mean_cumulative_info_gain_at_T": 0.160826222286609
+    },
+    {
+      "policy": "D_only",
+      "n_subjects": 211,
+      "final_entropy_mean": 0.9569958308262132,
+      "final_entropy_sd": 0.10897025275745853,
+      "final_entropy_ci95_lo": 0.9422822163759907,
+      "final_entropy_ci95_hi": 0.9719094232664938,
+      "final_decision_accuracy": 0.36018957345971564,
+      "mean_info_gain_per_step": 0.014161645784189637,
+      "mean_cumulative_info_gain_at_T": 0.14161645784189658
+    },
+    {
+      "policy": "greedy_eig",
+      "n_subjects": 211,
+      "final_entropy_mean": 1.0237310137384823,
+      "final_entropy_sd": 0.062222896923637576,
+      "final_entropy_ci95_lo": 1.0154736435560037,
+      "final_entropy_ci95_hi": 1.032152871704597,
+      "final_decision_accuracy": 0.41706161137440756,
+      "mean_info_gain_per_step": 0.007488127492962726,
+      "mean_cumulative_info_gain_at_T": 0.07488127492962748
+    },
+    {
+      "policy": "random",
+      "n_subjects": 211,
+      "final_entropy_mean": 1.0254981370522338,
+      "final_entropy_sd": 0.06362585766932394,
+      "final_entropy_ci95_lo": 1.0166839629461915,
+      "final_entropy_ci95_hi": 1.03365926562194,
+      "final_decision_accuracy": 0.4028436018957346,
+      "mean_info_gain_per_step": 0.007311415161587573,
+      "mean_cumulative_info_gain_at_T": 0.07311415161587595
+    },
+    {
+      "policy": "T_only",
+      "n_subjects": 211,
+      "final_entropy_mean": 1.075115708259373,
+      "final_entropy_sd": 0.024653488296864867,
+      "final_entropy_ci95_lo": 1.071517598649833,
+      "final_entropy_ci95_hi": 1.0781761588826113,
+      "final_decision_accuracy": 0.33175355450236965,
+      "mean_info_gain_per_step": 0.0023496580408736687,
+      "mean_cumulative_info_gain_at_T": 0.023496580408736912
+    }
+  ],
+  "input_file_size_hash_sha256": "6f07045f8f5a86b3c0568fad608a582e",
+  "runtime_seconds": 7.456162214279175,
+  "platform": "Linux-6.18.5-x86_64-with-glibc2.39",
+  "python_version": "3.11.15",
+  "numpy_version": "2.4.4",
+  "sklearn_version": "1.8.0"
+}

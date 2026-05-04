@@ -1,0 +1,4 @@
+diagnosis,config_id,feature_set,coef,se,p_value,model_auc
+SUD,C3,T,-1.7417,0.7494,0.0201,0.6699
+ADHD,C1,E,2.1289,1.0531,0.0432,0.7215
+ADHD,C5,E+D+T,2.6385,1.0158,0.0094,0.7301

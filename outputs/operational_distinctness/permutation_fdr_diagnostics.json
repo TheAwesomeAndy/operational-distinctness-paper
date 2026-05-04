@@ -1,0 +1,12 @@
+{
+  "script": "experiments/operational_distinctness/05b_optional_permutation_fdr_parallel.py",
+  "n_permutations": 200,
+  "n_jobs": 4,
+  "affective_inference_csv": "/home/user/operational-distinctness-paper/outputs/operational_distinctness/affective_inference.csv",
+  "clinical_inference_csv": "/home/user/operational-distinctness-paper/outputs/operational_distinctness/clinical_inference.csv",
+  "runtime_seconds": 407.2997615337372,
+  "platform": "Linux-6.18.5-x86_64-with-glibc2.39",
+  "python_version": "3.11.15",
+  "numpy_version": "2.4.4",
+  "sklearn_version": "1.8.0"
+}

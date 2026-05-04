@@ -1,0 +1,22 @@
+{
+  "script": "experiments/tcds_hardening/run_kappa_coupling.py",
+  "n_observations": 633,
+  "n_subjects": 211,
+  "n_electrodes": 34,
+  "q_features_D": 7,
+  "p_features_T": 2,
+  "kappa_normalizer_sqrt_pq": 3.7416573867739413,
+  "n_permutations_per_observation": 5000,
+  "kappa_obs_mean": 0.2505001947748353,
+  "kappa_obs_sd": 0.11479304938139198,
+  "rejection_rate_at_p0p05": 0.334913112164297,
+  "kappa_vs_a6_spearman_rho": 0.013514134308151961,
+  "kappa_vs_a6_spearman_p": 0.8452779240098319,
+  "input_file_size_hash_sha256": "6f07045f8f5a86b3c0568fad608a582e",
+  "runtime_seconds": 189.2057387828827,
+  "platform": "Linux-6.18.5-x86_64-with-glibc2.39",
+  "python_version": "3.11.15",
+  "numpy_version": "2.4.4",
+  "scipy_version": "1.17.1",
+  "pandas_version": "3.0.2"
+}
