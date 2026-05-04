@@ -1,0 +1,54 @@
+{
+  "script": "experiments/tcds_hardening/run_reservoir_dynamics_fig.py",
+  "n_observations": 633,
+  "exemplar_obs_indices": {
+    "Negative": 501,
+    "Neutral": 76,
+    "Pleasant": 263
+  },
+  "exemplar_subject_hashes": {
+    "Negative": "9b871512327c09ce",
+    "Neutral": "c6f3ac57944a5314",
+    "Pleasant": "9537f32ec7599e1a"
+  },
+  "exemplar_total_spikes": {
+    "Negative": 8215,
+    "Neutral": 8599,
+    "Pleasant": 8392
+  },
+  "channel_for_raster_and_vmem": 15,
+  "reservoir_params": {
+    "N_res": 256,
+    "beta": 0.05,
+    "theta": 0.5,
+    "seed": 42,
+    "bsc_n_bins": 6,
+    "bsc_t_start": 10,
+    "bsc_t_end": 70
+  },
+  "lsm_pca_explained_variance_ratio": [
+    0.36625693712209134,
+    0.07885669324927062
+  ],
+  "tPLV_per_class_means": {
+    "Negative": {
+      "mean": 0.6460305452346802,
+      "max": 1.0,
+      "min": 0.4172818660736084
+    },
+    "Neutral": {
+      "mean": 0.6424275636672974,
+      "max": 1.0,
+      "min": 0.3909563422203064
+    },
+    "Pleasant": {
+      "mean": 0.6371814608573914,
+      "max": 1.0,
+      "min": 0.3976501226425171
+    }
+  },
+  "input_file_size_hash_sha256": "6f07045f8f5a86b3c0568fad608a582e",
+  "runtime_seconds": 1.4284553527832031,
+  "platform": "Linux-6.18.5-x86_64-with-glibc2.39",
+  "python_version": "3.11.15"
+}
