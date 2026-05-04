@@ -1,0 +1,211 @@
+{
+  "data_dir": "/home/user/operational-distinctness-paper/data/batch_data_full",
+  "n_files": 633,
+  "n_subjects": 211,
+  "excluded_subjects": [
+    127
+  ],
+  "label_counts": {
+    "0": 211,
+    "1": 211,
+    "2": 211
+  },
+  "filename_list_sha256": "44a6304deb9d1aa3293d9605599ac3a8f6da4e13148c1f43f16c4de0290f8557",
+  "fs_hz": 1024,
+  "n_channels": 34,
+  "n_samples_total": 1229,
+  "pre_stim_samples": 205,
+  "post_stim_samples": 1024,
+  "erp_windows_ms": [
+    {
+      "name": "P1",
+      "t_start_ms": 80,
+      "t_end_ms": 130,
+      "sample_start": 287,
+      "sample_end": 338
+    },
+    {
+      "name": "N1",
+      "t_start_ms": 130,
+      "t_end_ms": 200,
+      "sample_start": 338,
+      "sample_end": 410
+    },
+    {
+      "name": "P2",
+      "t_start_ms": 200,
+      "t_end_ms": 300,
+      "sample_start": 410,
+      "sample_end": 512
+    },
+    {
+      "name": "P3",
+      "t_start_ms": 300,
+      "t_end_ms": 450,
+      "sample_start": 512,
+      "sample_end": 666
+    },
+    {
+      "name": "LPP_early",
+      "t_start_ms": 450,
+      "t_end_ms": 700,
+      "sample_start": 666,
+      "sample_end": 922
+    },
+    {
+      "name": "LPP_late",
+      "t_start_ms": 700,
+      "t_end_ms": 1000,
+      "sample_start": 922,
+      "sample_end": 1229
+    }
+  ],
+  "n_features_per_observation": 204,
+  "feature_blocks": {
+    "raw": {
+      "block": "raw",
+      "shape": [
+        633,
+        204
+      ],
+      "finite_fraction": 1.0,
+      "mean": -0.4536606573579296,
+      "std": 6.969446963486212,
+      "min": -58.933513029315954,
+      "max": 53.22692736156352,
+      "row_norm_min": 37.01467984612599,
+      "row_norm_median": 89.36844805030152,
+      "row_norm_max": 317.4698488423895
+    },
+    "calibrated": {
+      "block": "calibrated",
+      "shape": [
+        633,
+        204
+      ],
+      "finite_fraction": 1.0,
+      "mean": 1.5488254149305165,
+      "std": 3.9020474272654297,
+      "min": -41.904837254901956,
+      "max": 45.75040779220779,
+      "row_norm_min": 0.0,
+      "row_norm_median": 45.95875167083137,
+      "row_norm_max": 299.06852254589
+    },
+    "raw_2class_subset": {
+      "block": "raw_2class_subset",
+      "shape": [
+        422,
+        204
+      ],
+      "finite_fraction": 1.0,
+      "mean": 0.32075205010732866,
+      "std": 6.874349882262101,
+      "min": -58.93225798045605,
+      "max": 53.22692736156352,
+      "row_norm_min": 37.01467984612599,
+      "row_norm_median": 88.98500156482055,
+      "row_norm_max": 217.81189050463368
+    },
+    "calibrated_2class_subset": {
+      "block": "calibrated_2class_subset",
+      "shape": [
+        422,
+        204
+      ],
+      "finite_fraction": 1.0,
+      "mean": 2.3232381223957748,
+      "std": 4.586917926286901,
+      "min": -41.904837254901956,
+      "max": 45.75040779220779,
+      "row_norm_min": 20.394264573075535,
+      "row_norm_median": 60.16332442804636,
+      "row_norm_max": 299.06852254589
+    }
+  },
+  "cv": {
+    "scheme": "StratifiedGroupKFold",
+    "n_splits": 5,
+    "shuffle": true,
+    "random_state": 42,
+    "group": "subject_index"
+  },
+  "classifier": {
+    "estimator": "LogisticRegression",
+    "C": 1.0,
+    "solver": "lbfgs",
+    "class_weight": "balanced",
+    "max_iter": 2000,
+    "random_state": 42
+  },
+  "preprocessing": "StandardScaler (per-fold fit on train, applied to test)",
+  "results": [
+    {
+      "config_id": "raw_3class",
+      "n_classes": 3,
+      "labels": "Negative,Neutral,Pleasant",
+      "n_observations": 633,
+      "n_subjects": 211,
+      "n_features": 204,
+      "n_folds": 5,
+      "balanced_accuracy_mean": 0.6715023994093761,
+      "balanced_accuracy_sd": 0.021354910947930583,
+      "accuracy_mean": 0.6715023994093763,
+      "accuracy_sd": 0.021354910947930558,
+      "macro_f1_mean": 0.6682155114587621,
+      "macro_f1_sd": 0.021270213551342832,
+      "roc_auc_mean": 0.8460565188758034,
+      "roc_auc_sd": 0.015168879108003058,
+      "fold_balanced_accuracy_values": "[0.6511627906976744, 0.6666666666666666, 0.7063492063492064, 0.6587301587301587, 0.6746031746031745]",
+      "fold_roc_auc_values": "[0.8425274923382009, 0.8559145880574452, 0.833522297808012, 0.8669690098261528, 0.8313492063492064]",
+      "elapsed_seconds": 0.389
+    },
+    {
+      "config_id": "raw_2class_NegVsPos",
+      "n_classes": 2,
+      "labels": "Negative,Pleasant",
+      "n_observations": 422,
+      "n_subjects": 211,
+      "n_features": 204,
+      "n_folds": 5,
+      "balanced_accuracy_mean": 0.6918050941306755,
+      "balanced_accuracy_sd": 0.024165328026975477,
+      "accuracy_mean": 0.6918050941306755,
+      "accuracy_sd": 0.024165328026975477,
+      "macro_f1_mean": 0.6887565620331841,
+      "macro_f1_sd": 0.025237364280657863,
+      "roc_auc_mean": 0.7762267156727483,
+      "roc_auc_sd": 0.0302353455219892,
+      "fold_balanced_accuracy_values": "[0.7209302325581395, 0.6785714285714286, 0.7142857142857143, 0.6785714285714286, 0.6666666666666666]",
+      "fold_roc_auc_values": "[0.8080043266630611, 0.7545351473922902, 0.753968253968254, 0.8106575963718821, 0.753968253968254]",
+      "elapsed_seconds": 0.187
+    },
+    {
+      "config_id": "calibrated_2class_NegVsPos",
+      "n_classes": 2,
+      "labels": "Negative,Pleasant",
+      "n_observations": 422,
+      "n_subjects": 211,
+      "n_features": 204,
+      "n_folds": 5,
+      "balanced_accuracy_mean": 0.7580287929125139,
+      "balanced_accuracy_sd": 0.03974531892236662,
+      "accuracy_mean": 0.7580287929125139,
+      "accuracy_sd": 0.039745318922366636,
+      "macro_f1_mean": 0.756850049345436,
+      "macro_f1_sd": 0.04027796980102668,
+      "roc_auc_mean": 0.8582373998815319,
+      "roc_auc_sd": 0.03821749190197498,
+      "fold_balanced_accuracy_values": "[0.813953488372093, 0.7619047619047619, 0.7261904761904762, 0.7738095238095237, 0.7142857142857143]",
+      "fold_roc_auc_values": "[0.8864250946457545, 0.861111111111111, 0.8514739229024944, 0.8945578231292517, 0.7976190476190477]",
+      "elapsed_seconds": 0.139
+    }
+  ],
+  "versions": {
+    "python": "3.11.15",
+    "numpy": "2.4.4",
+    "scipy": "1.17.1",
+    "pandas": "3.0.2",
+    "sklearn": "1.8.0"
+  }
+}

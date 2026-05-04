@@ -1,0 +1,14 @@
+\begin{table}[t]
+  \centering
+  \caption{Classical ERP-feature baseline and neutral-calibration experiment. Subject-grouped 5-fold CV; logistic regression on per-channel mean amplitudes in six standard windows (P1, N1, P2, P3, early-LPP, late-LPP).}
+  \label{tab:erp_neutral_calibration}
+  \begin{tabular}{lrrlll}
+    \toprule
+      Configuration & K & N & Balanced acc.\ (\%) & ROC-AUC & Accuracy (\%) \\
+    \midrule
+      raw\_3class          & 3 &   633 &  67.15 $\pm$ 2.14 &  0.846 $\pm$ 0.015 &  67.15 $\pm$ 2.14 \\
+      raw\_2class\_NegVsPos & 2 &   422 &  69.18 $\pm$ 2.42 &  0.776 $\pm$ 0.030 &  69.18 $\pm$ 2.42 \\
+      calibrated\_2class\_NegVsPos & 2 &   422 &  75.80 $\pm$ 3.97 &  0.858 $\pm$ 0.038 &  75.80 $\pm$ 3.97 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
