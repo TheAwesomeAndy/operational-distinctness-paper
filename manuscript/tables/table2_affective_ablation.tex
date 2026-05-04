@@ -1,0 +1,22 @@
+\begin{table}[!t]
+\caption{Affective Condition Classification Across A0--A9 Configurations}
+\label{tab:affective_ablation}
+\centering
+\footnotesize
+\begin{tabular}{llcc}
+\hline
+Config. & Feature set & Balanced acc. & Macro ROC-AUC \\
+\hline
+A0 & BandPower & 0.4927 & 0.6783 \\
+A1 & $E$ & 0.4696 & 0.6460 \\
+A2 & $D$ & 0.4224 & 0.5977 \\
+A3 & $T$ & 0.3534 & 0.5270 \\
+A4 & $C$ & 0.3552 & 0.5417 \\
+A5 & $D+T$ & 0.4381 & 0.6148 \\
+A6 & $E+D$ & \textbf{0.4934} & 0.6520 \\
+A7 & $E+T$ & 0.4725 & 0.6486 \\
+A8 & $E+D+T$ & 0.4933 & \textbf{0.6549} \\
+A9 & $E+D+T+C$ & 0.4933 & 0.6542 \\
+\hline
+\end{tabular}
+\end{table}
