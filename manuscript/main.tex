@@ -333,32 +333,9 @@ The architecture pays for that commitment in two places and is paid for it in th
 \label{fig:headline}
 \end{figure*}
 
-\subsection{Claim Strength}
-Table~\ref{tab:claim_ladder} summarises what the present analyses do and do not support. Operational layer utility, feature-block validity, FDR-corrected affective inference, structure--function coupling under an electrode-permutation null, and the embodied perception--action demonstration are supported. Diagnostic biomarkers are not, because no clinical-label cell survived BH-FDR correction.
-
-\begin{table*}[!t]
-\caption{Claim-Strength Boundary for the Current Reporting Run}
-\label{tab:claim_ladder}
-\centering
-\footnotesize
-\begin{tabular}{p{0.16\textwidth}p{0.38\textwidth}p{0.34\textwidth}}
-\toprule
-Status & Evidence available & Claim supported \\
-\midrule
-Completed & A0--A9 and C1--C6 subject-safe reporting pipeline & Operational layer utility \\
-Completed & Feature-block diagnostics and CKA redundancy analysis & Nondegenerate, non-identical feature spaces \\
-Completed & Comorbidity-adjusted exploratory models & Covariate-qualified sensitivity patterns \\
-Completed & Subject-respecting permutation tests, $n_{\mathrm{perm}}=200$, BH-FDR across 30 clinical cells & Affective: 8/10 configurations $p\leq 0.005$. Clinical: no contrast survives FDR; reported as weak-signal sensitivity. \\
-Completed & 5{,}000-permutation electrode-shuffle null on $\kappa$ & Structure--function coupling rejects randomised null in 33.5\% of observations; aggregate non-significant. \\
-Completed & Closed-loop active-inference simulation across 4 fixed + 2 meta policies & Operationally distinct streams give different per-step EIG; $E+D+T$ converges fastest, $T$-only slowest. \\
-Not supported & --- & Confirmed clinical biomarkers or deployment-ready diagnosis. \\
-\bottomrule
-\end{tabular}
-\end{table*}
-
 \section{Discussion}
 \subsection{Main Finding}
-The four ARSPI-Net blocks are operationally distinct under a fixed evaluation protocol. Affective classification is strongest for embedding-containing configurations and survives subject-respecting permutation testing for 8 of 10 configurations; standalone $T$ and $C$ do not. Clinical-label sensitivity has a different layer profile in raw means and does not survive BH-FDR across the 30 clinical cells, an outcome the power calculation in Section~\ref{sec:power} predicts for a cohort of this size at these effect magnitudes. Pairwise CKA is low to moderate, and the largest pair, $\mathrm{CKA}(E,D)=0.31$, is well below the value that would mark linear redundancy. $\kappa$ rejects an electrode-randomised null in roughly one third of observations and is uncorrelated with classifier accuracy, behaving as a complementary systems-level readout. The embodied agent ranks the four feature-stream policies by per-step expected information gain in the same order as the offline ablation. The blocks behave like different signal-processing views of one EEG response.
+The four ARSPI-Net blocks are operationally distinct under a fixed evaluation protocol. Affective classification is strongest for embedding-containing configurations and survives subject-respecting permutation testing for 8 of 10 configurations; standalone $T$ and $C$ do not. Clinical-label sensitivity has a different layer profile in raw means and does not survive BH-FDR across the 30 clinical cells, an outcome the power calculation in Section~\ref{sec:power} predicts for a cohort of this size at these effect magnitudes. Pairwise CKA is low to moderate, and the largest pair, $\mathrm{CKA}(E,D)=0.31$, is well below the value that would mark linear redundancy. $\kappa$ rejects an electrode-randomised null in roughly one third of observations and is uncorrelated with classifier accuracy, behaving as a complementary systems-level readout. The embodied agent ranks the four feature-stream policies by per-step expected information gain in the same order as the offline ablation. The blocks behave like different signal-processing views of one EEG response. The analyses support claims about operational layer utility, feature-block validity, FDR-corrected affective inference, structure--function coupling against an electrode-permutation null, and the embodied perception--action ranking. They do not support diagnostic biomarker claims, because no clinical-label cell survived BH-FDR correction.
 
 \subsection{Why This Is Not Merely an Ablation Table}
 Ablation in many architecture papers is used to prove that every module raises the final number. That is not the result here. Adding $C$ to $E+D+T$ does not move the affective number. $T$ and $C$ alone are weak affective classifiers under permutation inference. Yet the clinical-label matrix has different best-fit layers for different diagnoses, $\kappa$ rejects its electrode-randomised null in a substantial subset of observations, and the embodied agent's per-step expected-information-gain ranking discriminates the streams. A block can be sub-threshold as a classifier and still operationally distinct as a measurement view, and it can carry usable structure for an embodied agent that an offline endpoint metric cannot see.
@@ -380,9 +357,6 @@ Three properties separate this study from neighbouring affective-EEG work. The c
 
 \subsection{Clinical Interpretation}
 Clinical findings are bounded. Balanced accuracies between roughly $51\%$ and $56\%$ are not diagnostic performance, and after BH-FDR across the 30-cell matrix none reach significance ($\min p_{\mathrm{BH}}=0.30$). Two readings remain plausible. The first is transdiagnostic heterogeneity: psychiatric labels may be expressed through distributed temporal, dynamical, and spatial organisations rather than one universal EEG feature space, in which case no single layer-by-diagnosis cell would cleanly separate. The second is statistical: a sample of 211 community-recruited adults with overlapping comorbidity and observed effect sizes of $\sim 5\%$ over chance is below the power threshold for FDR-corrected detection, and the present analysis fixes the next-step replication target at $N\approx 400$ per diagnosis. Both readings are compatible with the FDR null, and the layer-profile pattern is reported as a directional observation that informs the replication design.
-
-\subsection{Comparison to IEEE-Style EEG and Embodied-AI Papers}
-The manuscript follows the structure adopted in recent IEEE EEG papers: architecture, feature definitions, controlled ablation, subject-safe evaluation, multiple-comparisons-corrected inference, claim-bounded clinical discussion, and reproducibility. The contribution differs from performance-first SNN/GNN classifiers~\cite{gong2023sglnet,klepl2023ad} and multimodal biomedical models~\cite{guo2025mma}: the goal is not to claim state-of-the-art accuracy on the affective task, but to determine whether a staged neuromorphic architecture has empirically distinct measurement layers and whether those layers behave as operationally distinct sub-systems for an embodied active-inference agent~\cite{friston2010free,parr2022activeinference}.
 
 \section{Limitations}
 The clinical labels are comorbid and cannot be interpreted as disorder-specific mechanisms from these analyses alone. After BH-FDR correction across the 30 clinical contrasts no test reaches significance, and the layer-by-diagnosis pattern is reported as a weak-signal observation rather than a discovered biomarker. The power calculation in Section~\ref{sec:power} sets the replication target at $N\approx 400$ per diagnosis.
