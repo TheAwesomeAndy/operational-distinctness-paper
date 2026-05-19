@@ -8,6 +8,8 @@
 \usepackage{array}
 \usepackage{multirow}
 \usepackage{balance}
+% \todo{...} renders as bold inline marker; grep '\\todo' to find all remaining items before submission.
+\newcommand{\todo}[1]{\textbf{[TODO: #1]}}
 
 \graphicspath{{figures/source_from_dissertation/}{figures/generated/}{figures/tcds_hardening/}}
 
@@ -374,8 +376,11 @@ The embodied demonstration is a simulation, not a robotic implementation. The ag
 \section{Conclusion}
 We asked whether the four blocks of a staged neuromorphic EEG architecture do different things or just rearrange the same information. Under a fixed evaluation protocol and FDR-corrected permutation inference, eight of ten affective configurations exceed chance and standalone $T$ and $C$ do not. Clinical-label cells differ in raw means but do not survive multiple-comparisons correction across the 30-cell matrix; the present analysis reports them as weak-signal sensitivity. CKA between the blocks is low to moderate. $\kappa$ rejects an electrode-permuted null in 33.5\% of observations and behaves as a complementary systems-level readout uncorrelated with classifier accuracy. A sequential-decision simulation that treats the four streams as competing perceptual policies ranks them in the same order as the offline ablation by per-step expected information gain; the loop is closed-loop on the belief side and open-loop on the environment side, and we position it as a precursor to active inference rather than as one. The blocks are operationally distinct, and the architecture supports the brain-inspired-computing-for-embodied-AI framing on grounds of mechanism (LIF spiking, BSC$_6$ event-driven coding, tPLV connectivity, $\kappa$ coupling) and on grounds of an embodied closed-loop demonstration. Clinical claims remain bounded by the FDR result. The methodological proposal is to evaluate staged biomedical architectures not by whether each block raises endpoint accuracy, but by what each block measures, how each block behaves as a perceptual stream available to an embodied agent, and how each block deploys on neuromorphic hardware.
 
+\section*{Data and Code Availability}
+The paper-specific analysis code, figure-generation scripts, verification utilities, and reproduction map are available at \url{https://github.com/TheAwesomeAndy/operational-distinctness-paper} \todo{anonymize for review: replace with anonymous-review link in cover letter}. The dissertation-level analysis code, including the 435-test automated verification suite, \texttt{REPRODUCTION\_MAP.md}, and \texttt{VERIFICATION\_METHODOLOGY.md}, is available at \url{https://github.com/TheAwesomeAndy/dissoAdventureExperiments} \todo{anonymize for review}. The SHAPE Community dataset is access-controlled and available from the Laboratory for Clinical Affective Neuroscience at Stony Brook University, subject to approval and a data-use agreement; the reproduction package therefore documents analysis provenance but does not redistribute participant-level EEG data. Prediction-level artifacts use hashed subject identifiers, and no raw EEG, clinical metadata, or feature pickles were committed to the reporting repository.
+
 \section*{Acknowledgment}
-Prediction-level artifacts use hashed subject identifiers. No raw EEG, clinical metadata, or feature pickles were committed to the reporting repository.
+The authors thank Brady D. Nelson and the Laboratory for Clinical Affective Neuroscience at Stony Brook University for access to the SHAPE Community dataset and for clinical-context discussions. The authors thank K. Wendy Tang for doctoral advising on the dissertation work from which the ARSPI-Net architecture descends. \todo{replace with anonymized acknowledgments in submission version; restore named acknowledgments on acceptance}
 
 \balance
 \begin{thebibliography}{99}
