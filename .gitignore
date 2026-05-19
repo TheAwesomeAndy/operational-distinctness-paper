@@ -21,3 +21,6 @@ Thumbs.db
 # Generated outputs (regenerable from inputs; commit only the curated subset)
 outputs/operational_distinctness/*.csv.bak
 figures/operational_distinctness/*.png
+
+# LaTeX build artifacts
+_build/
