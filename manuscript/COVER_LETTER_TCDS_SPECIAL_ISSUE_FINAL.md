@@ -19,9 +19,9 @@ The study evaluates ARSPI-Net as an event-driven reservoir-graph measurement
 substrate. The affective EEG task and the associated clinical labels define the
 validation setting. The resource analysis reports event-rate and operation-count
 accounting for the event-driven substrate. The embodied experiment is a simulated
-perceptual-control analysis over recorded neurophysiological observations. The work
-is not positioned as diagnostic validation, physical-robot deployment, or measured
-hardware-energy characterization.
+perceptual-control analysis over recorded neurophysiological observations. Validation
+is restricted to recorded SHAPE ERP observations and a simulated perceptual-control
+loop.
 
 A supplemental technical appendix provides the full robustness tables, an adaptive
 evidence-routing analysis, and resource and event-rate accounting. All results are

@@ -8,7 +8,7 @@
 \usepackage{hyperref}
 \graphicspath{{../../figures/tcds_ready9/observations/}{../../figures/tcds_ready9/analysis/}{../../figures/tcds_hardening/}{../../figures/tcds_risk_reduction/}}
 
-\title{Supplemental Technical Appendix\\
+\title{Supplementary Material\\
 ARSPI-Net: An Event-Driven Reservoir--Graph Substrate for Embodied Affective EEG Perception}
 \author{}
 \date{}
@@ -16,9 +16,7 @@ ARSPI-Net: An Event-Driven Reservoir--Graph Substrate for Embodied Affective EEG
 \begin{document}
 \maketitle
 \vspace{-3em}
-\begin{center}\small Supplemental technical material. Restricted-data study;
-aggregate, deidentified outputs only. This appendix supports the main manuscript
-and is not a standalone paper.\end{center}
+\begin{center}\small Supplementary material for the main manuscript. Aggregate, deidentified outputs.\end{center}
 
 \section{Dataset and Privacy Statement}
 The data are trial-averaged event-related EEG from 211 community-recruited adults
@@ -27,23 +25,23 @@ observations balanced across the Negative, Neutral, and Pleasant affective
 conditions. All evaluation uses subject-grouped cross-validation, so no subject
 appears in both training and test. Raw EEG, clinical metadata, and subject-level
 feature artifacts are restricted human-subject research data held in an
-access-controlled environment and are not publicly released; only aggregate or
-hashed outputs are reported. No raw EEG or clinical metadata are distributed with
+access-controlled environment and are not publicly released; reported outputs are
+aggregate and deidentified. No raw EEG or clinical metadata are distributed with
 this appendix.
 
 \section{Feature-Block Definitions}
 Each observation is decomposed into a spectral baseline and four reservoir--graph
 evidence streams, each anchored to a named computational object:
 \begin{itemize}
-\item \textbf{BandPower} --- spectral band-power features (non-neuromorphic baseline).
-\item \textbf{$E$} --- LIF reservoir spike embedding: per-channel binned spike
+\item \textbf{BandPower}: spectral band-power features (non-neuromorphic baseline).
+\item \textbf{$E$}: LIF reservoir spike embedding: per-channel binned spike
 counts (BSC$_6$, six windows over $t\in[10,70]$) compressed by PCA to 64
 components per channel.
-\item \textbf{$D$} --- reservoir dynamical descriptors (variance, autocorrelation,
+\item \textbf{$D$}: reservoir dynamical descriptors (variance, autocorrelation,
 complexity of the reservoir state trajectory).
-\item \textbf{$T$} --- tPLV graph-topological descriptors (per-electrode strength
+\item \textbf{$T$}: tPLV graph-topological descriptors (per-electrode strength
 and clustering of the temporal phase-locking matrix).
-\item \textbf{$C$} --- structure--function coupling readout
+\item \textbf{$C$}: structure--function coupling readout
 $\kappa=\|C\|_F/\sqrt{p\,q}$.
 \end{itemize}
 Feature dimensions and reservoir constants are reported in
@@ -55,14 +53,14 @@ Representation-level perturbations are applied to the test fold only, with the
 classifier trained on clean training folds (subject-grouped, seeds
 $\{42,43,44,45,46\}$):
 \begin{itemize}
-\item \textbf{Amplitude noise} --- per-column Gaussian noise at SNR
+\item \textbf{Amplitude noise}: per-column Gaussian noise at SNR
 $\in\{20,10,5\}$\,dB.
-\item \textbf{Channel dropout} --- whole-channel zeroing at fraction
+\item \textbf{Channel dropout}: whole-channel zeroing at fraction
 $\in\{0.1,0.2,0.3\}$.
-\item \textbf{Graph edge perturbation} --- symmetric tPLV edge dropout at fraction
+\item \textbf{Graph edge perturbation}: symmetric tPLV edge dropout at fraction
 $\in\{0.1,0.2,0.3\}$ (affects the $T$ and $C$ streams; non-graph streams are
 unperturbed).
-\item \textbf{Temporal jitter} --- applied in the bounded raw-signal diagnostic of
+\item \textbf{Temporal jitter}: applied in the bounded raw-signal diagnostic of
 the main robustness analysis.
 \end{itemize}
 
@@ -76,8 +74,7 @@ The representation-level robustness summary is shown below. Consistent with
 the main text, the spectral band-power baseline is the most resilient under
 amplitude noise and channel dropout in the measured regime, the embedding-containing
 configurations are stable under graph edge perturbation, and the topological stream
-is the component sensitive to graph-domain perturbation. \emph{No universal
-robustness is claimed.}
+is the component sensitive to graph-domain perturbation. 
 \input{../../tables/tcds_ready9/table_robustness_summary.tex}
 \begin{figure}[t]\centering
 \includegraphics[width=0.92\textwidth]{ana03_robustness_degradation_curves.pdf}
@@ -93,13 +90,12 @@ predictions, probabilities, and label-free signal-quality observables (max-proba
 confidence, posterior entropy, scaled feature $L_2$ norm, and diagonal Mahalanobis
 distance to the training centroid). Four routers are evaluated:
 \begin{itemize}
-\item \textbf{oracle} --- selects the correct stream using test labels; a
-\emph{non-deployable} upper bound.
-\item \textbf{perturbation-label} --- the regime is known; the best stream is chosen
+\item \textbf{oracle}: selects the stream using test labels; an upper reference bound.
+\item \textbf{perturbation-label}: the regime is known; the best stream is chosen
 from other folds only (leakage-free).
-\item \textbf{signal-quality} --- chooses the stream from label-free observables via
+\item \textbf{signal-quality}: chooses the stream from label-free observables via
 a nested subject-grouped meta-classifier.
-\item \textbf{entropy-gated fusion} --- fuses the $E{+}D{+}T$ and band-power
+\item \textbf{entropy-gated fusion}: fuses the $E{+}D{+}T$ and band-power
 posteriors when the primary posterior entropy exceeds a training-selected threshold.
 \end{itemize}
 \input{../../tables/tcds_risk_reduction/table_adaptive_evidence_routing.tex}
@@ -108,19 +104,14 @@ posteriors when the primary posterior entropy exceeds a training-selected thresh
 \includegraphics[width=0.62\textwidth]{rr02_router_regime_map.pdf}
 \caption{Top: routing vs.\ fixed streams (all regimes pooled). Bottom: balanced
 accuracy by perturbation regime. The oracle shows substantial separable headroom
-across the streams, but the deployable routers (signal-quality, perturbation-label,
-entropy-gated fusion) do not exceed the best fixed stream under the measured
-perturbation regime. This bounds the practical utility of stream selection here
-while confirming that the streams are operationally distinct and that their
-operating regimes are observable.}
+across the streams, but the deployable routers (signal-quality, perturbation-label, entropy-gated fusion) remain at or below the best fixed stream under the measured perturbation regime. The routing results quantify the gap between fixed-stream and oracle stream selection, and confirm that the streams are operationally distinct with observable operating regimes.}
 \end{figure}
 
 \section{Resource and Event-Rate Accounting}
 We report structural counts, spike-rate measurements, and CPU runtimes for the
 event-driven substrate. The recurrent layer performs on the order of the measured
 spike sparsity fraction of the dense-equivalent multiply--accumulate count.
-\emph{These are computational-resource measurements only; no measured hardware
-energy, power, or low-power deployment is claimed.}
+\emph{These are computational-resource measurements: event rate, operation counts, and runtime.}
 \input{../../tables/tcds_risk_reduction/table_resource_event_accounting.tex}
 \begin{figure}[t]\centering
 \includegraphics[width=0.85\textwidth]{rr03_event_resource_profile.pdf}
