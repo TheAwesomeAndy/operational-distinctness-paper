@@ -255,7 +255,8 @@ def fit_logreg_fold(X_tr: np.ndarray, y_tr: np.ndarray, X_te: np.ndarray,
     sc = StandardScaler()
     Xtr = sc.fit_transform(X_tr)
     Xte = sc.transform(X_te)
-    clf = LogisticRegression(max_iter=2000, C=1.0, random_state=seed)
+    clf = LogisticRegression(max_iter=2000, C=1.0, class_weight="balanced",
+                             solver="lbfgs", random_state=seed)
     clf.fit(Xtr, y_tr)
     proba = clf.predict_proba(Xte)
     pred = clf.classes_[np.argmax(proba, axis=1)]
