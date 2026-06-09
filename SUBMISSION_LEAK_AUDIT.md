@@ -77,3 +77,34 @@ retained.
 No private data, raw EEG, feature pickles, clinical CSVs, subject IDs, or PHI are
 committed. No measured-energy, physical-robot, diagnostic-biomarker,
 universal-robustness, or deployable-routing-improvement claim was introduced.
+
+
+---
+
+## Expanded journal-voice pass (PR #11, round 3)
+
+Searched BOTH visible manuscript text AND LaTeX source-level paths in all
+submission-facing files (main, blind, arXiv, arXiv build_src, blind source
+package, supplement, cover letter).
+
+Removed/reworded: graphics path `figures/source_prior_work/` -> `figures/architecture/`
+(dir renamed, figure content unchanged); author `\thanks` statistical/clinical
+content removed; "Earlier/prior ARSPI-Net work" -> "The present study evaluates";
+"audit"/"audit protocol" -> "evaluation"; "privacy-preserving and reproducible"
+-> "aggregate, deidentified outputs under data-governance constraints"; "unusually
+clinically rich resource" -> factual description; defensive reservoir prose and
+"The price is" -> neutral scope language; "never touches a continuous neuronal
+state" -> "operates on spike-count summaries rather than membrane trajectories";
+"hardware-friendly" -> "compatible with event-counter abstractions"; presentation
+verbs (surfaces, the reading is, useful but blunt, draws on, what each choice rules
+out) -> measurement verbs; non-blind "Named acknowledgments ... restored on
+acceptance" removed; blind acknowledgment shortened to "withheld for double-blind
+review"; Data/Code Availability rewritten to journal-facing wording; supplement
+"reproduced below" -> "shown below".
+
+Final state: ALL submission-facing files clean. Legitimate retained: "reporting
+operating regimes" (verb), "re-source-figures" substring, Benjamini--Hochberg
+title "practical and powerful approach to multiple testing" (bibliography
+exception). Internal `FINAL_SUBMISSION_HANDOFF.md` retains process terms by design.
+
+Refreshed SHA256: main.pdf 68b9f4d5e980f9557190651f34a111dc...; blind 08c44fb5e40ee4f49e7c1803a7e2f519...; arxiv cb53c4c1c692073ac2b7a631b386830d...; supplement 78f53fbb3468d58a1050f0006af6a64b...

@@ -24,11 +24,11 @@ streams; no deployable routing advantage). Resource/event accounting is
 
 | File | Pages | Role | SHA256 |
 |---|---|---|---|
-| `manuscript/main.pdf` | 10 | **Non-blind submission manuscript** | `55aa52905a8085dc26d0c44764934910a913b66455339745ca8d944470912c06` |
-| `manuscript/main_blind.pdf` | 10 | **Anonymized (double-blind) manuscript** | `b3546e10c226b58d9bded5d4d1ac1020161c68c06a9dd40a8470db2e223c9cff` |
+| `manuscript/main.pdf` | 10 | **Non-blind submission manuscript** | `68b9f4d5e980f9557190651f34a111dc5100d89e9b9658c44dd404e92a8d65b1` |
+| `manuscript/main_blind.pdf` | 10 | **Anonymized (double-blind) manuscript** | `08c44fb5e40ee4f49e7c1803a7e2f519b9895cab39ac316606c060ba6f5d99f4` |
 | `manuscript/supplemental_risk_reduction/supplement.pdf` | 6 | Supplemental technical appendix | `99f3c638b97c3e5615a032ecd0c3ce4b58885312569b2fd6d4030c069eb85517` |
-| `manuscript/arxiv_preprint/main_arxiv.pdf` | 10 | arXiv preprint (non-blind) | `9bc484457fb10ecfef8a9b77ed179113de9f9fdd50da1423a876e5c22b24c5ae` |
-| `manuscript/arxiv_preprint/ARSPI-Net_arxiv_source.zip` | – | arXiv source package | `76ead8eea62d06fda237f4059230f5b384f4e46caa7650e19a57819b680878b8` |
+| `manuscript/arxiv_preprint/main_arxiv.pdf` | 10 | arXiv preprint (non-blind) | `cb53c4c1c692073ac2b7a631b386830d674c8b7f9efdf40c2ebe4f30245726e2` |
+| `manuscript/arxiv_preprint/ARSPI-Net_arxiv_source.zip` | – | arXiv source package | `9bccf27056e555d6ae3b78dfc32c4269dbf89d2c6cb40624f8ad0aa4b7bfd5e9` |
 | `manuscript/main_full_internal.pdf` | 17 | **INTERNAL record — NOT for submission** | `f3932b202633e6011240b95ddebac6e653beb08d196fa586bf82f0ae890712ea` |
 
 ScholarOne LaTeX source packages:
