@@ -143,12 +143,12 @@ where $\mathbf{p}_{\theta_a}(x_t)$ is the policy-$a$ classifier's class-probabil
 
 \section{Experimental Protocol}
 \subsection{Data, Splitting, and Privacy}
-The reporting run uses 633 subject-condition observations from 211 community-recruited adults, exactly balanced across the three affective conditions (negative, neutral, pleasant). Clinical-label analyses use 206 subjects with available SUD, MDD, PTSD, GAD, and ADHD labels. Comorbidity is the rule rather than the exception in this cohort: most subjects carry more than one label, and the analyses below use comorbidity counts as a covariate where appropriate. All prediction-level artifacts use hashed subject identifiers. Raw EEG, clinical metadata, and feature pickles are not committed to the reporting repository.
+The analysis uses 633 subject-condition observations from 211 community-recruited adults, exactly balanced across the three affective conditions (negative, neutral, pleasant). Clinical-label analyses use 206 subjects with available SUD, MDD, PTSD, GAD, and ADHD labels. Comorbidity is the rule rather than the exception in this cohort: most subjects carry more than one label, and the analyses below use comorbidity counts as a covariate where appropriate. All released artifacts use hashed subject identifiers. Raw EEG, clinical metadata, and subject-level features are restricted and not publicly released.
 
-Table~\ref{tab:protocol} summarises the protocol. The architecture-level figures of the pipeline are reproduced from prior ARSPI-Net work; the analytical figures are generated from the corrected reporting outputs.
+Table~\ref{tab:protocol} summarises the analysis protocol.
 
 \begin{table*}[!t]
-\caption{Subject-Level Reporting Protocol}
+\caption{Affective and Clinical Analysis Protocol}
 \label{tab:protocol}
 \centering
 \footnotesize
@@ -160,23 +160,22 @@ Data & 211 subjects, 633 subject-condition EEG observations & Condition-level af
 Feature diagnostics & BandPower, $E$, $D$, $T$, $C$ & Check finite values, ranks, zero fractions, constant columns & Corrected $E$ block nonzero with rank 632; all blocks nondegenerate \\
 Affective ablation & A0--A9 feature configurations & 10-fold subject-grouped CV with train-fold-only scaling & Balanced accuracy, macro ROC-AUC, macro-F1, predictions, confusion matrices \\
 Clinical sensitivity & C1--C6 subject-average features & Binary logistic readout per clinical label & Exploratory clinical-label sensitivity, not diagnostic validation \\
-Reproducibility & Reporting repository & Hashed subject IDs and manifest & No raw EEG, clinical CSV, direct IDs, or pickles committed \\
 \bottomrule
 \end{tabular}
 \end{table*}
 
-\subsection{Source Figures and New Figures}
-A prior-work source figure defines the ARSPI-Net architecture; the remaining figures are generated from the reporting outputs.
+\subsection{Architecture Overview}
+Fig.~\ref{fig:source_pipeline} shows the staged ARSPI-Net architecture.
 
 \begin{figure*}[!t]
 \centering
 \includegraphics[width=0.98\textwidth]{arch_fig_pipeline_overview.pdf}
-\caption{Source ARSPI-Net pipeline overview reproduced from prior work. The figure defines the staged architecture whose layers are ablated in this manuscript.}
+\caption{ARSPI-Net pipeline overview: the staged event-driven reservoir--graph architecture, from the per-channel LIF reservoir and BSC$_6$ event-driven code to the embedding $E$, dynamical descriptors $D$, topological descriptors $T$, and coupling readout $C$ evaluated in this work.}
 \label{fig:source_pipeline}
 \end{figure*}
 
 \subsection{Feature Blocks and Diagnostics}
-Table~\ref{tab:feature_blocks} lists the evaluated blocks. A diagnostic was run before interpretation. The corrected embedding $E$ has shape $(633,2176)$, no constant columns, zero fraction $0$, approximate standardised rank $632$, and median row norm $224.61$. The diagnostic is reported because an earlier local input file contained a zero-valued embedding tensor; the corrected pickle is used throughout.
+Table~\ref{tab:feature_blocks} lists the evaluated blocks. The embedding $E$ has shape $(633,2176)$ with full standardised rank $632$ and no constant columns.
 
 \input{tables/table1_feature_blocks.tex}
 
@@ -194,10 +193,10 @@ and the primary metric is balanced accuracy
 with $K=2$ for clinical-label sensitivity and $K=3$ for affective classification.
 
 \section{Results}
-We organise the evidence as one argument over four pillars: (A) dataset provenance and the computational objects the substrate produces; (B) the reservoir--graph mechanism ablation; (C) perturbation robustness and operating regimes; and (D) the simulated embodied affective-control loop. The primary ablation is the multi-seed mechanism ablation of Section~\ref{sec:pillarB}; an independent ten-fold permutation--FDR protocol corroborates it, and that protocol together with the secondary clinical, redundancy, and comorbidity analyses is preserved in the extended technical version, available under approved access. Every main-text quantity maps to a script, input fingerprint, output table, and manifest entry in the reproduction map.
+We organise the evidence as one argument over four pillars: (A) dataset provenance and the computational objects the substrate produces; (B) the reservoir--graph mechanism ablation; (C) perturbation robustness and operating regimes; and (D) the simulated embodied affective-control loop. The primary ablation is the multi-seed mechanism ablation of Section~\ref{sec:pillarB}; an independent ten-fold permutation--FDR protocol corroborates it, and that protocol together with the secondary clinical, redundancy, and comorbidity analyses is reported in the supplementary material.
 
 \subsection{Dataset Provenance and Observed Computational Objects}\label{sec:pillarA}
-The data are trial-averaged event-related EEG from 211 community-recruited adults (subject 127 excluded for a recording anomaly), giving 633 subject--condition observations balanced across Negative, Neutral, and Pleasant. Provenance, access conditions, and the subject-grouped split protocol are summarised in the reproducibility panel (Table~\ref{tab:reproducibility}); numerical-validity and completeness checks are recorded in the dataset quality-control summary. Subject-level data are held in a restricted research environment, and only aggregate or hashed outputs are reported.
+The data are trial-averaged event-related EEG from 211 community-recruited adults (subject 127 excluded for a recording anomaly), giving 633 subject--condition observations balanced across Negative, Neutral, and Pleasant. The evaluation uses subject-grouped cross-validation, so no subject appears in both training and test. Subject-level data are held in a restricted research environment, and only aggregate or hashed outputs are reported.
 
 Fig.~\ref{fig:reservoir_dynamics} surfaces the computational objects the substrate produces, for one exemplar per affective class: the LIF spike raster and membrane trajectory that generate the embedding $E$ (panels a--b), the per-class $34\times34$ tPLV connectivity that defines the graph block $T$ (panel c), and the BSC$_6$ projection that defines the event-driven code (panel d). Structure--function coupling is summarised by $\kappa=\|C\|_F/\sqrt{pq}$: across the 633 observations the mean is $0.250$ (sd $0.115$), and a 5{,}000-permutation electrode-shuffle null is rejected at $p<0.05$ in $33.5\%$ of observations, so a non-trivial subset of subjects show coordination above a randomised electrode labelling. Subject-mean $\kappa$ is uncorrelated with per-subject classification accuracy ($\rho=0.01$), behaving as a complementary systems-level readout rather than a proxy for predictive sufficiency.
 
@@ -220,10 +219,10 @@ The primary ablation evaluates configurations A0--A9 under subject-grouped cross
 \label{fig:ana01}
 \end{figure}
 
-The reading is operational differentiation, not classifier superiority. The embedding carries most of the affective-classification signal, but $D$, $T$, and $C$ are not linear duplicates of it---the largest pairwise centred-kernel alignment is $\mathrm{CKA}(E,D)=0.31$---and they expose dynamical, topological, and coupling structure that the embedding alone does not. Clinical labels are used only as exploratory contextual validation: per-diagnosis balanced accuracies are near chance ($0.49$--$0.53$ across SUD, MDD, PTSD, GAD, ADHD) and no contrast survives Benjamini--Hochberg correction across the 30 diagnosis$\times$configuration cells; no diagnostic or clinical-biomarker claim is made. The clinical-sensitivity, redundancy, and comorbidity-adjusted analyses are reported in full in the extended technical version, available under approved access.
+The reading is operational differentiation, not classifier superiority. The embedding carries most of the affective-classification signal, but $D$, $T$, and $C$ are not linear duplicates of it---the largest pairwise centred-kernel alignment is $\mathrm{CKA}(E,D)=0.31$---and they expose dynamical, topological, and coupling structure that the embedding alone does not. Clinical labels are used only as exploratory contextual validation: per-diagnosis balanced accuracies are near chance ($0.49$--$0.53$ across SUD, MDD, PTSD, GAD, ADHD) and no contrast survives Benjamini--Hochberg correction across the 30 diagnosis$\times$configuration cells; no diagnostic or clinical-biomarker claim is made. The clinical-sensitivity, redundancy, and comorbidity-adjusted analyses are reported in full in the supplementary material.
 
 \subsection{Perturbation Robustness and Operating Regimes}\label{sec:pillarC}
-We characterise each evidence stream under four perturbation families---temporal jitter, amplitude noise, channel dropout, and graph edge perturbation---applied at the representation level across all ten configurations, with a bounded raw-signal diagnostic (subset scope recorded in the run manifest) that recomputes a reservoir embedding within fold. Fig.~\ref{fig:ana03} reports the degradation profiles, which separate the streams by operating regime rather than by a single endpoint. Under additive amplitude noise the spectral band-power baseline is the most resilient, retaining $0.395$ balanced accuracy at $5$\,dB SNR, whereas the $E{+}D{+}T$ configuration falls toward chance ($0.341$, from a clean $0.481$); the same ordering holds under channel dropout ($0.408$ versus $0.340$ at $30\%$ dropout). Graph edge perturbation, by contrast, leaves the embedding-dominated configurations essentially unchanged ($E{+}D{+}T$: $0.481\!\to\!0.483$ at $30\%$) while degrading the topological stream ($T$: $0.355\!\to\!0.331$). The measured regime is stream-specific---band-power and embedding descriptors are comparatively robust to signal-domain corruption and the graph descriptor is sensitive to graph-domain perturbation---and no claim of universal robustness is made. A supplemental nested evidence-routing analysis further bounds this result: an oracle over the streams shows large separable headroom, but label-free stream selection does not uniformly improve over the best fixed stream under the measured perturbation regime, supporting the interpretation of the substrate as making the operating regimes observable rather than as a universally dominant classifier.
+We characterise each evidence stream under four perturbation families---temporal jitter, amplitude noise, channel dropout, and graph edge perturbation---applied at the representation level across all ten configurations, with a bounded raw-signal diagnostic (on a bounded subset) that recomputes a reservoir embedding within fold. Fig.~\ref{fig:ana03} reports the degradation profiles, which separate the streams by operating regime rather than by a single endpoint. Under additive amplitude noise the spectral band-power baseline is the most resilient, retaining $0.395$ balanced accuracy at $5$\,dB SNR, whereas the $E{+}D{+}T$ configuration falls toward chance ($0.341$, from a clean $0.481$); the same ordering holds under channel dropout ($0.408$ versus $0.340$ at $30\%$ dropout). Graph edge perturbation, by contrast, leaves the embedding-dominated configurations essentially unchanged ($E{+}D{+}T$: $0.481\!\to\!0.483$ at $30\%$) while degrading the topological stream ($T$: $0.355\!\to\!0.331$). The measured regime is stream-specific---band-power and embedding descriptors are comparatively robust to signal-domain corruption and the graph descriptor is sensitive to graph-domain perturbation---and no claim of universal robustness is made. A supplemental nested evidence-routing analysis further bounds this result: an oracle over the streams shows large separable headroom, but label-free stream selection does not uniformly improve over the best fixed stream under the measured perturbation regime, supporting the interpretation of the substrate as making the operating regimes observable rather than as a universally dominant classifier.
 
 \begin{figure*}[!t]
 \centering
@@ -232,7 +231,7 @@ We characterise each evidence stream under four perturbation families---temporal
 \label{fig:ana03}
 \end{figure*}
 
-A classical ERP-amplitude baseline (windowed $P1$--$\mathrm{LPP}$ features) provides a static discrimination anchor, reaching $67.2\%$ balanced accuracy on the three-class task and exceeding ARSPI-Net under a static readout. The classical ERP baseline provides a strong static discrimination anchor; ARSPI-Net is evaluated as a reservoir--graph measurement substrate---decomposing the response into operationally distinct, perturbation-characterised evidence streams with simulated embodied utility---rather than as a replacement for ERP amplitude features in static classification. The full static comparison is preserved in the extended technical version, available under approved access.
+A classical ERP-amplitude baseline (windowed $P1$--$\mathrm{LPP}$ features) provides a static discrimination anchor, reaching $67.2\%$ balanced accuracy on the three-class task and exceeding ARSPI-Net under a static readout. The classical ERP baseline provides a strong static discrimination anchor; ARSPI-Net is evaluated as a reservoir--graph measurement substrate---decomposing the response into operationally distinct, perturbation-characterised evidence streams with simulated embodied utility---rather than as a replacement for ERP amplitude features in static classification. The full static comparison is reported in the supplementary material.
 
 \subsection{Simulated Embodied Affective-Control}\label{sec:pillarD}\label{sec:embodied_results}
 We evaluate the substrate as the perceptual estimator for a simulated embodied agent. The agent maintains a categorical belief $b$ over the affective state, updated by sequential Bayesian accumulation of the per-policy classifier likelihood (Section~\ref{sec:mechanisms}); the environment is action-determined with transition noise, $P(s'\mid a)=(1-\epsilon)\,\mathbf{1}[s'{=}a]+\epsilon\,\mathcal{U}$. The loop is a simulation over recorded observations and is not a physical embodiment.
@@ -255,11 +254,6 @@ where $C$ is a preference distribution peaked on the target and $\hat H(s)$ is t
 \label{fig:ana07}
 \end{figure}
 
-\subsection{Reproducibility}
-Table~\ref{tab:reproducibility} is the reproducibility panel: subjects, observations, classes, channels, split protocol, feature blocks, perturbation families, seeds, closed-loop episodes, policy set, repository/upstream commits, and the restricted-data availability posture. Every main-text quantity maps to a script, input fingerprint, output table, and manifest entry in the reproduction map; the full secondary-evidence record---the ten-fold ablation, clinical and comorbidity models, redundancy analysis, per-condition $\kappa$ contrasts, and evaluation-coverage and runtime tables---is preserved as the extended technical version, available under approved access.
-
-\input{../tables/tcds_ready9/table_reproducibility_panel.tex}
-
 \section{Discussion}
 The mechanism ablation establishes operational differentiation. Embedding-containing configurations carry most of the affective-classification signal, the standalone dynamical, topological, and coupling streams are weaker classifiers yet are not linear duplicates ($\mathrm{CKA}(E,D)=0.31$) and expose structure the embedding does not, and a shuffled-label control collapses to chance. A block can be sub-threshold as a classifier and still operationally distinct as a measurement view. The brain-inspired claim rests on the named mechanisms of Section~\ref{sec:mechanisms}---LIF spiking, BSC$_6$ event-driven coding, tPLV connectivity, and $\kappa$ coupling---rather than on analogy.
 
@@ -274,7 +268,7 @@ The scope is bounded in five ways. The embodied evaluation is a closed-loop \emp
 ARSPI-Net is a brain-inspired event-driven reservoir--graph substrate that transforms affective EEG into operationally distinct evidence streams---a spike-coded embedding, dynamical descriptors, a phase-locking graph, and a structure--function coupling readout. A multi-seed mechanism ablation with negative controls separates the streams; a perturbation analysis reports their operating regimes; and a simulated embodied affective-control loop with an explicitly defined expected-free-energy controller evaluates them as perceptual channels. The streams behave as operationally distinct measurement views of one EEG response, and the substrate supports the brain-inspired-computing-for-embodied-AI framing on grounds of mechanism and of a simulated closed-loop demonstration, with clinical claims bounded and scope restricted to the measured regime.
 
 \section*{Data and Code Availability}
-The analysis code, figure-generation scripts, reproduction map, and changelog that produce every quantitative claim in this paper are maintained in the project repository (link provided under approved-access and review conditions). Raw EEG, clinical metadata, and subject-level feature artifacts are maintained in a restricted research environment. The manuscript reports aggregate, deidentified experimental outputs and methodological details sufficient for reproduction under approved data-access conditions. The SHAPE Community dataset is access-controlled and available from the Laboratory for Clinical Affective Neuroscience at Stony Brook University, subject to approval and a data-use agreement. Aggregate, deidentified results are reported; restricted subject-level data are not publicly distributed and require approved access. Committed prediction-level artifacts use hashed subject identifiers.
+The analysis code and figure-generation scripts that produce the quantitative results are maintained in the project repository (link provided under approved-access and review conditions). Raw EEG, clinical metadata, and subject-level feature artifacts are maintained in a restricted research environment. The manuscript reports aggregate, deidentified experimental outputs and methodological details sufficient for reproduction under approved data-access conditions. The SHAPE Community dataset is access-controlled and available from the Laboratory for Clinical Affective Neuroscience at Stony Brook University, subject to approval and a data-use agreement. Aggregate, deidentified results are reported; restricted subject-level data are not publicly distributed and require approved access. Committed prediction-level artifacts use hashed subject identifiers.
 
 \section*{Acknowledgment}
 The authors thank Brady D. Nelson and the Laboratory for Clinical Affective Neuroscience at Stony Brook University for access to the SHAPE Community dataset and for clinical-context discussions, and K. Wendy Tang for advising on the work from which the ARSPI-Net architecture descends. Named acknowledgments are to be anonymized for review and restored on acceptance.
