@@ -131,7 +131,7 @@ def robustness_summary():
         return False
     rep = df[df["pass"] == "representation_level"].copy()
     out = [
-        r"\begin{table}[t]\centering",
+        r"\begin{table}[t]\centering\footnotesize",
         r"\caption{Representation-level robustness summary: mean balanced accuracy "
         r"under each perturbation family for representative configurations.}",
         r"\label{tab:robustness_summary}",
@@ -154,11 +154,11 @@ def closed_loop_policy():
     if df is None:
         return False
     out = [
-        r"\begin{table}[t]\centering",
+        r"\begin{table}[t]\centering\footnotesize",
         r"\caption{Closed-loop policy comparison. Success rate (Wilson 95\% CI), "
         r"mean steps, and final posterior entropy by transition noise $\epsilon$.}",
         r"\label{tab:closed_loop_policy}",
-        r"\begin{tabular}{llrrr}", r"\toprule",
+        r"\begin{tabular}{llp{2.6cm}rr}", r"\toprule",
         r"Policy & $\epsilon$ & Success & Mean steps & Final $\mathcal{H}$ \\", r"\midrule",
     ]
     for _, r in df.iterrows():

@@ -213,27 +213,29 @@ def _clinical_sensitivity(blocks, subjects, clinical_df):
 def _write_table(summary_rows, chance):
     lines = [
         r"% Auto-generated. Mechanism ablation: A0-A9 + negative controls.",
-        r"\begin{table}[t]",
+        r"\begin{table*}[t]",
         r"\centering",
+        r"\footnotesize",
         r"\caption{Mechanism ablation under subject-grouped cross-validation. "
         r"Balanced accuracy (BA) and macro-F1 are reported as mean with a "
-        r"bootstrap 95\% interval; ROC-AUC is macro one-vs-rest. Chance BA "
+        r"bootstrap 95\% interval. Chance BA "
         rf"$=\,{chance:.3f}$. Each row reports the feature configuration, the "
         r"neural mechanism it carries, and its feature dimension.}",
         r"\label{tab:mechanism_ablation}",
-        r"\begin{tabular}{llrrrr}",
+        r"\begin{tabular}{l p{6.2cm} r r c r}",
         r"\toprule",
         r"Cfg & Mechanism & Dim & BA & 95\% CI & macro-F1 \\",
         r"\midrule",
     ]
     for r in summary_rows:
-        mech = r["neural_mechanism"].replace("&", r"\&")
+        mech = r["neural_mechanism"].replace("&", r"\&").replace("_", r"\_")
+        cfg_id = r["config"].replace("_", r"\_")
         lines.append(
-            f"{r['config']} & {mech} & {r['feature_dim']} & "
+            f"{cfg_id} & {mech} & {r['feature_dim']} & "
             f"{r['balanced_accuracy_mean']:.3f} & "
             f"[{r['balanced_accuracy_ci_lo']:.3f}, {r['balanced_accuracy_ci_hi']:.3f}] & "
             f"{r['macro_f1_mean']:.3f} \\\\")
-    lines += [r"\bottomrule", r"\end{tabular}", r"\end{table}", ""]
+    lines += [r"\bottomrule", r"\end{tabular}", r"\end{table*}", ""]
     (cfg.TABLE_DIR / "table_mechanism_ablation.tex").write_text("\n".join(lines))
 
 

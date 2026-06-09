@@ -341,11 +341,55 @@ This section reports the substrate-level evidence that supports the central clai
 \subsection{Dataset Provenance and Quality Control}
 Table~\ref{tab:dataset_provenance} records the dataset provenance and integrity as verifiable facts: source and access conditions, the included and excluded subjects, the observation and condition counts, the channel and epoch geometry, and the subject-grouped split protocol. Subject 127 is excluded for a recording anomaly, leaving 211 subjects and 633 trial-averaged observations balanced across the three affective conditions. Numerical-validity checks (finite-value fractions, channel and time-shape consistency) and raw-file completeness are summarised in the integrity figure. Subject-level data are maintained in a restricted research environment; the reported outputs are aggregate or hashed.
 
+\begin{figure}[!t]
+\centering
+\includegraphics[width=\columnwidth]{obs00_dataset_integrity_qc.pdf}
+\caption{Dataset integrity quality control: condition balance, downsampled-EEG amplitude distribution, per-channel embedding-norm consistency, and raw-file completeness. The figure plots measured integrity properties; subject identifiers are not exposed.}
+\label{fig:obs00}
+\end{figure}
+
+\subsection{Mechanism Ablation and Operational Distinctness}
+Under subject-grouped cross-validation across the recorded seeds, the evidence streams behave as operationally distinct measurement views rather than redundant relabellings. Table~\ref{tab:mechanism_ablation} reports balanced accuracy and macro-F1 for the A0--A9 configurations with bootstrap intervals, together with shuffled-label and shuffled-subject negative controls that fall to chance. Embedding-containing configurations carry most of the affective-classification signal, while the dynamical, topological, and coupling streams contribute distinct structure that the embedding alone does not expose. Figure~\ref{fig:ana01} shows the per-configuration performance against chance.
+
+\input{../tables/tcds_ready9/table_mechanism_ablation.tex}
+
+\begin{figure}[!t]
+\centering
+\includegraphics[width=\columnwidth]{ana01_mechanism_ablation_performance.pdf}
+\caption{Mechanism-ablation performance for configurations A0--A9. Balanced accuracy (with bootstrap intervals) and macro-F1 are shown against the three-class chance level. Bars summarise the measured cross-validated performance of each evidence stream and combination.}
+\label{fig:ana01}
+\end{figure}
+
 \subsection{Perturbation Robustness of the Evidence Streams}
-The evidence streams are characterised under four perturbation families---temporal jitter, amplitude noise, channel dropout, and graph edge perturbation---at the representation level across all configurations, with a bounded raw-signal diagnostic that recomputes a reservoir embedding within fold. The objective is to report the operating regime of each stream rather than a single endpoint, including any boundary at which a reservoir or graph stream degrades faster than the spectral band-power baseline.
+The evidence streams are characterised under four perturbation families---temporal jitter, amplitude noise, channel dropout, and graph edge perturbation---at the representation level across all configurations, with a bounded raw-signal diagnostic that recomputes a reservoir embedding within fold. The objective is to report the operating regime of each stream rather than a single endpoint, including any boundary at which a reservoir or graph stream degrades faster than the spectral band-power baseline. Table~\ref{tab:robustness_summary} and Figure~\ref{fig:ana03} summarise the degradation profiles; the raw-signal diagnostic is conducted on a bounded subset, with its scope recorded in the run manifest.
+
+\input{../tables/tcds_ready9/table_robustness_summary.tex}
+
+\begin{figure*}[!t]
+\centering
+\includegraphics[width=0.95\textwidth]{ana03_robustness_degradation_curves.pdf}
+\caption{Representation-level robustness degradation under amplitude noise, channel dropout, and graph edge perturbation for representative configurations. Curves report balanced accuracy as a function of perturbation level; they expose the operating regime of each evidence stream rather than a single endpoint.}
+\label{fig:ana03}
+\end{figure*}
 
 \subsection{Simulated Embodied Affective-Control Loop}
-We evaluate the substrate as a perceptual estimator inside a simulated closed-loop affective-control task. The expected-free-energy controller is defined explicitly (belief state, likelihood, transition, preferred distribution, risk and ambiguity terms, action-selection rule, and stopping criterion) and compared against passive, random, pragmatic-only, epistemic-only, and perfect-perception oracle policies under action-determined transition noise. The loop is a simulation over recorded observations and is not a physical embodiment.
+We evaluate the substrate as a perceptual estimator inside a simulated closed-loop affective-control task. The expected-free-energy controller is defined explicitly (belief state, likelihood, transition, preferred distribution, risk and ambiguity terms, action-selection rule, and stopping criterion) and compared against passive, random, pragmatic-only, epistemic-only, and perfect-perception oracle policies under action-determined transition noise. The loop is a simulation over recorded observations and is not a physical embodiment. Table~\ref{tab:closed_loop_policy} reports success rate (with Wilson intervals), mean steps, and final posterior entropy by transition noise; Figure~\ref{fig:ana07} shows success by policy, and Figure~\ref{fig:obs10} shows example belief trajectories.
+
+\input{../tables/tcds_ready9/table_closed_loop_policy.tex}
+
+\begin{figure}[!t]
+\centering
+\includegraphics[width=\columnwidth]{ana07_closed_loop_success_by_policy.pdf}
+\caption{Closed-loop success rate by policy and transition noise $\epsilon$, with Wilson 95\% intervals. The expected-free-energy and pragmatic controllers reach and confirm the target affective state, while belief-blind, random, and epistemic-only baselines do not.}
+\label{fig:ana07}
+\end{figure}
+
+\begin{figure}[!t]
+\centering
+\includegraphics[width=\columnwidth]{obs10_closed_loop_example_trajectories.pdf}
+\caption{Example closed-loop belief trajectories (simulation episodes): belief in the target state and posterior entropy over steps at two transition-noise levels. Identifiers are episode-level, not subject-level.}
+\label{fig:obs10}
+\end{figure}
 
 \subsection{Evaluation Coverage and Reproducibility}
 Table~\ref{tab:evaluation_coverage} reports the evaluation coverage of the ARSPI-Net components against the system-level evaluation requirements addressed here; it is an internal-consistency summary, not a ranking against other systems. Table~\ref{tab:reproducibility} is the reproducibility panel for the evaluation. Bounded graph observables and a runtime/resource summary supporting the reservoir--graph substrate claim are reported without any hardware-energy measurement.

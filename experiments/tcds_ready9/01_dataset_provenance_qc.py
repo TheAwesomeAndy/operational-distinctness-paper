@@ -175,11 +175,12 @@ def _write_provenance_table(n_subj, n_obs, n_cond, n_ch, n_tp):
         r"% Auto-generated dataset provenance table.",
         r"\begin{table}[t]",
         r"\centering",
+        r"\footnotesize",
         r"\caption{Dataset provenance and integrity. Source wording is reused "
         r"from the verified manuscript data-availability statement. Subject-level "
         r"data are maintained in a restricted research environment.}",
         r"\label{tab:dataset_provenance}",
-        r"\begin{tabular}{p{1.9cm}p{3.0cm}p{1.9cm}p{1.4cm}}",
+        r"\begin{tabular}{@{}p{1.5cm}p{3.0cm}p{1.8cm}p{1.2cm}@{}}",
         r"\toprule",
         r"Item & Value & Source / verification & Relevance \\",
         r"\midrule",
