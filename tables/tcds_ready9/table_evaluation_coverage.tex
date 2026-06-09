@@ -1,0 +1,15 @@
+\begin{table}[t]\centering
+\caption{Evaluation coverage of ARSPI-Net relative to system-level requirements. Rows are ARSPI-Net components; columns are evaluation requirements addressed in this paper.}
+\label{tab:evaluation_coverage}
+\begin{tabular}{lcccccc}
+\toprule
+Component & Signal & Mechanism & Perturb. & Ablation & Closed-loop & Runtime \\
+\midrule
+$E$ (reservoir embedding) & \checkmark & \checkmark & \checkmark & \checkmark & \checkmark & \checkmark \\
+$D$ (dynamical) & \checkmark & \checkmark & \checkmark & \checkmark & \checkmark & \checkmark \\
+$T$ (graph topology) & \checkmark & \checkmark & \checkmark & \checkmark & \checkmark & \checkmark \\
+$C$ (coupling) & \checkmark & \checkmark & \checkmark & \checkmark & $\cdot$ & \checkmark \\
+Closed-loop control & $\cdot$ & \checkmark & \checkmark & $\cdot$ & \checkmark & \checkmark \\
+\bottomrule
+\end{tabular}
+\end{table}

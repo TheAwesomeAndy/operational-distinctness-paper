@@ -3,6 +3,15 @@ data/
 *.pkl
 *.npz
 clinical_profile.csv
+# Ready-9 privacy safeguards (raw EEG, feature pickles, local path manifests)
+**/batch_data/
+**/batch_data_full/
+**/shape_data/
+**/raw_eeg/
+shape_features_*.pkl
+ch6_ch7_3class_features.pkl
+*_local_paths.json
+outputs/tcds_ready9/_*.log
 
 # Python
 __pycache__/
@@ -24,3 +33,9 @@ figures/operational_distinctness/*.png
 
 # LaTeX build artifacts
 _build/
+*.aux
+*.out
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+manuscript/*.log
