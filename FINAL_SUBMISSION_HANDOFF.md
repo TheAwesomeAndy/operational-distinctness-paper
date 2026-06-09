@@ -24,11 +24,11 @@ streams; no deployable routing advantage). Resource/event accounting is
 
 | File | Pages | Role | SHA256 |
 |---|---|---|---|
-| `manuscript/main.pdf` | 10 | **Non-blind submission manuscript** | `68b9f4d5e980f9557190651f34a111dc5100d89e9b9658c44dd404e92a8d65b1` |
-| `manuscript/main_blind.pdf` | 10 | **Anonymized (double-blind) manuscript** | `08c44fb5e40ee4f49e7c1803a7e2f519b9895cab39ac316606c060ba6f5d99f4` |
+| `manuscript/main.pdf` | 10 | **Non-blind submission manuscript** | `4c1f2af0986d171185bf88f85b141e0ef04076bd71a70bb4836b56566a2d64ab` |
+| `manuscript/main_blind.pdf` | 10 | **Anonymized (double-blind) manuscript** | `899b273c7ec279f44434ae551d4fea63d8c55f5ed32fa2bf5e6ebbc1d0f5d4e5` |
 | `manuscript/supplemental_risk_reduction/supplement.pdf` | 6 | Supplemental technical appendix | `99f3c638b97c3e5615a032ecd0c3ce4b58885312569b2fd6d4030c069eb85517` |
-| `manuscript/arxiv_preprint/main_arxiv.pdf` | 10 | arXiv preprint (non-blind) | `cb53c4c1c692073ac2b7a631b386830d674c8b7f9efdf40c2ebe4f30245726e2` |
-| `manuscript/arxiv_preprint/ARSPI-Net_arxiv_source.zip` | – | arXiv source package | `9bccf27056e555d6ae3b78dfc32c4269dbf89d2c6cb40624f8ad0aa4b7bfd5e9` |
+| `manuscript/arxiv_preprint/main_arxiv.pdf` | 10 | arXiv preprint (non-blind) | `14fc16e47a3cd3a04c4464f2b53e0ae6d7678ed32f148114f3a1a11424b5b52a` |
+| `manuscript/arxiv_preprint/ARSPI-Net_arxiv_source.zip` | – | arXiv source package | `416fead51955ea865e845f28b73a394fc20dae37c4fbbac5a31fa2471ac90ce8` |
 | `manuscript/main_full_internal.pdf` | 17 | **INTERNAL record — NOT for submission** | `f3932b202633e6011240b95ddebac6e653beb08d196fa586bf82f0ae890712ea` |
 
 ScholarOne LaTeX source packages:
@@ -69,8 +69,8 @@ arXiv package is prepared only — not submitted.
 ## Status
 - ScholarOne package: **prepared, not submitted.**
 - arXiv package: **prepared, not submitted.**
-- Cover letter draft: `manuscript/COVER_LETTER_TCDS_SPECIAL_ISSUE_DRAFT.md`
-  (prepared, author to finalize/sign).
+- Cover letter draft: `manuscript/COVER_LETTER_TCDS_SPECIAL_ISSUE_FINAL.md`
+  (final, author adds signature/contact).
 - Compliance: no raw EEG / feature pickles / clinical CSV / subject IDs / PHI /
   private paths committed; no measured-energy, physical-robot, diagnostic-biomarker,
   or universal-robustness claims; adaptive routing reported as bounded.

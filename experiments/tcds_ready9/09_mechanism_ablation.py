@@ -212,7 +212,6 @@ def _clinical_sensitivity(blocks, subjects, clinical_df):
 
 def _write_table(summary_rows, chance):
     lines = [
-        r"% Auto-generated. Mechanism ablation: A0-A9 + negative controls.",
         r"\begin{table*}[t]",
         r"\centering",
         r"\footnotesize",

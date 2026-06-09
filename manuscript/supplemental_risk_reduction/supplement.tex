@@ -128,22 +128,4 @@ energy, power, or low-power deployment is claimed.}
 ratio at the measured spike sparsity.}
 \end{figure}
 
-\section{Reproducibility Map}
-\begin{table}[h]\centering\footnotesize
-\caption{Risk-reduction reproducibility map.}
-\begin{tabular}{p{3.2cm} p{4.3cm} p{4.3cm}}
-\toprule
-Claim & Script & Output \\
-\midrule
-Mechanism ablation & \texttt{tcds\_ready9/09\_mechanism\_ablation.py} & \texttt{mechanism\_ablation\_summary.csv} \\
-Perturbation robustness & \texttt{tcds\_ready9/08\_signal\_robustness.py} & \texttt{robustness\_summary.csv} \\
-Adaptive evidence routing & \texttt{tcds\_risk\_reduction/01\_adaptive\_evidence\_routing.py} & \texttt{adaptive\_router\_\{metrics,summary\}.csv} \\
-Resource/event accounting & \texttt{tcds\_risk\_reduction/02\_resource\_event\_accounting.py} & \texttt{resource\_event\_\{metrics.csv,summary.json\}} \\
-\bottomrule
-\end{tabular}
-\end{table}
-The underlying EEG and clinical data are restricted human-subject research
-data and are not publicly released. Subject identifiers are hashed in all
-released artifacts.
-
 \end{document}

@@ -108,3 +108,47 @@ title "practical and powerful approach to multiple testing" (bibliography
 exception). Internal `FINAL_SUBMISSION_HANDOFF.md` retains process terms by design.
 
 Refreshed SHA256: main.pdf 68b9f4d5e980f9557190651f34a111dc...; blind 08c44fb5e40ee4f49e7c1803a7e2f519...; arxiv cb53c4c1c692073ac2b7a631b386830d...; supplement 78f53fbb3468d58a1050f0006af6a64b...
+
+
+---
+
+## Final journal-polish pass (PR #11, round 4)
+
+Searched visible text AND source-level content in all submission-facing files.
+
+Removed/reworded:
+- Non-blind + arXiv acknowledgments no longer thank coauthors: now
+  "The authors thank the SHAPE Community study participants and the Laboratory for
+  Clinical Affective Neuroscience at Stony Brook University for dataset curation
+  and documentation support." (Blind: "Acknowledgments are withheld for
+  double-blind review.")
+- Supplement: removed the "Reproducibility Map" section (script/CSV listing).
+- Cover letter: replaced the draft scaffold with a clean uploadable
+  COVER_LETTER_TCDS_SPECIAL_ISSUE_FINAL.md (no draft/notes/rules/reviewer-expertise/
+  reproducibility-map); old draft removed.
+- Tables: removed "% Auto-generated" comments from submission-facing table sources;
+  closed-loop policy labels -> EFE / Pragmatic-only / Epistemic-only / Passive /
+  Random / Oracle; robustness "Level" -> "Level (SNR dB / fraction)".
+- Main text: "sets a clear bar" -> "establishes evaluation norms"; "The reservoir
+  is not trained. The classifier on the readout side is." -> "The reservoir
+  weights are fixed; supervised training is confined to the downstream readout.";
+  cortical-microcircuit claim -> reservoir-computing-abstraction statement;
+  "bounded raw-signal diagnostic (on a bounded subset)" -> "limited raw-signal
+  diagnostic on a prespecified subset"; figure caption "degrade gracefully" ->
+  "show lower degradation across transition-noise levels", "do not match them" ->
+  "remain below the EFE and pragmatic controllers under the measured regime".
+
+Final state: ALL submission-facing files clean.
+Legitimate retained (documented):
+- "script" appears only inside "manuscript", "descriptor(s)", and "figure-generation
+  scripts" (standard data-availability language) -- no script-path/.py/.csv leaks.
+- "reporting operating regimes" (verb); "re-source-figures" substring.
+- Benjamini--Hochberg title "practical and powerful approach to multiple testing"
+  (bibliography exception).
+- "% Auto-generated" remains only in tables/operational_distinctness/* -- orphan
+  tables from the older pipeline, NOT inputted by any submission file (not submitted).
+- FINAL_SUBMISSION_HANDOFF.md is internal-only (not submitted) and retains process
+  terms by design.
+
+Refreshed SHA256: main 4c1f2af0986d171185bf88f8...; blind 899b273c7ec279f44434ae55...; arxiv 14fc16e47a3cd3a04c4464f2...; supplement f8547b573489c902b6f3c544...
+Page counts: main 10, blind 10, arXiv 10, supplement 6.
