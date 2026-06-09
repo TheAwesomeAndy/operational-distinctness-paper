@@ -25,19 +25,17 @@ develops and characterizes:
 - a simulated embodied affective-control loop driven by an explicitly defined
   expected-free-energy controller.
 
-We wish to be precise about what the paper does and does not claim:
-
-1. It is **not** a generic EEG emotion classifier; the contribution is a
-   mechanistic decomposition into operationally distinct evidence streams.
-2. It makes **no** diagnostic or clinical-biomarker validation claim; clinical
-   labels are used only as exploratory, FDR-bounded context.
-3. It makes **no** physical-robot-deployment claim; the embodied evaluation is a
-   simulation over recorded EEG.
-4. It makes **no** measured hardware-energy claim; resource accounting is
-   computational only.
-5. Its contribution is a brain-inspired signal-processing substrate that
-   transforms noisy affective EEG into structured, perturbation-characterized
-   evidence streams.
+For scientific precision, we state the scope of the submission. The manuscript
+evaluates ARSPI-Net as an event-driven reservoir–graph signal-processing substrate
+that transforms noisy affective EEG into structured, perturbation-characterized
+evidence streams. The affective EEG task and the associated clinical labels define
+the validation setting in which the substrate is characterized. The resource
+analysis reports event-rate and operation-count accounting for the event-driven
+substrate. The embodied experiment is a simulated active, perceptual-control
+analysis over recorded neurophysiological observations. Accordingly, the study is
+positioned as a brain-inspired signal-processing and embodied-perception
+contribution rather than as diagnostic validation, physical-robot deployment, or
+measured hardware-energy characterization.
 
 A supplemental technical appendix accompanies the manuscript and provides the full
 robustness tables, an adaptive evidence-routing analysis (which we report as a
