@@ -157,7 +157,7 @@ Table~\ref{tab:protocol} summarises the analysis protocol.
 Stage & Input & Operation & Output / Control \\
 \midrule
 Data & 211 subjects, 633 subject-condition EEG observations & Condition-level affective analysis; subject-level clinical analysis & Three affective classes; 206 subjects with clinical labels \\
-Feature diagnostics & BandPower, $E$, $D$, $T$, $C$ & Check finite values, ranks, zero fractions, constant columns & Corrected $E$ block nonzero with rank 632; all blocks nondegenerate \\
+Feature diagnostics & BandPower, $E$, $D$, $T$, $C$ & Check finite values, ranks, zero fractions, constant columns & Embedding $E$ nonzero with standardised rank 632; all blocks nondegenerate \\
 Affective ablation & A0--A9 feature configurations & 10-fold subject-grouped CV with train-fold-only scaling & Balanced accuracy, macro ROC-AUC, macro-F1, predictions, confusion matrices \\
 Clinical sensitivity & C1--C6 subject-average features & Binary logistic readout per clinical label & Exploratory clinical-label sensitivity, not diagnostic validation \\
 \bottomrule
