@@ -1,0 +1,22 @@
+item,value
+subjects_included,211
+observations_total,633
+conditions,3
+obs_negative,211
+obs_neutral,211
+obs_pleasant,211
+channels,34
+downsampled_timepoints,256
+embedding_nan,0
+embedding_inf,0
+bandpower_nan,0
+bandpower_inf,0
+dynamical_nan,0
+dynamical_inf,0
+topology_nan,0
+topology_inf,0
+raw_subjects_discovered,212
+raw_subjects_complete,212
+raw_missing_condition_subjects,0
+excluded_subjects,1
+excluded_subject_note,"subject 127 excluded (recording anomaly, Ch5 QC)"

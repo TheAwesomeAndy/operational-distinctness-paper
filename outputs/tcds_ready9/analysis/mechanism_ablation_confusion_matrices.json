@@ -1,0 +1,249 @@
+{
+  "provenance": {
+    "paper_repo_commit": "db49b28a02283c4121094754f2e19161b759adc5",
+    "paper_repo_branch": "submission/tcds-ready9-substrate",
+    "upstream_repo_commit": "6219ab43efca6f96f0dcad99bf6aacfc5212f738",
+    "run_profile": {
+      "profile": "submission",
+      "seeds": [
+        42,
+        43,
+        44,
+        45,
+        46
+      ],
+      "closed_loop_episodes": 1500,
+      "raw_signal_subset": 150,
+      "kappa_n_perm": 5000,
+      "n_folds_affective": 5,
+      "n_folds_clinical": 5
+    },
+    "privacy_status": "restricted (private clinical/neurophysiological data; released outputs are aggregate or deidentified)",
+    "python_version": "3.11.15",
+    "platform": "Linux-6.18.5-x86_64-with-glibc2.39",
+    "package_versions": {
+      "numpy": "2.4.6",
+      "scipy": "1.17.1",
+      "sklearn": "1.9.0",
+      "pandas": "3.0.3",
+      "matplotlib": "3.10.9"
+    },
+    "timestamp": "2026-06-09T17:29:53.036496+00:00"
+  },
+  "labels": [
+    0,
+    1,
+    2
+  ],
+  "label_names": {
+    "0": "Negative",
+    "1": "Neutral",
+    "2": "Pleasant"
+  },
+  "confusion_matrices": {
+    "A0": [
+      [
+        490,
+        241,
+        324
+      ],
+      [
+        259,
+        573,
+        223
+      ],
+      [
+        348,
+        235,
+        472
+      ]
+    ],
+    "A1": [
+      [
+        417,
+        304,
+        334
+      ],
+      [
+        261,
+        588,
+        206
+      ],
+      [
+        351,
+        245,
+        459
+      ]
+    ],
+    "A2": [
+      [
+        437,
+        280,
+        338
+      ],
+      [
+        230,
+        536,
+        289
+      ],
+      [
+        370,
+        291,
+        394
+      ]
+    ],
+    "A3": [
+      [
+        343,
+        360,
+        352
+      ],
+      [
+        347,
+        363,
+        345
+      ],
+      [
+        322,
+        315,
+        418
+      ]
+    ],
+    "A4": [
+      [
+        354,
+        468,
+        233
+      ],
+      [
+        277,
+        583,
+        195
+      ],
+      [
+        381,
+        446,
+        228
+      ]
+    ],
+    "A5": [
+      [
+        426,
+        279,
+        350
+      ],
+      [
+        236,
+        540,
+        279
+      ],
+      [
+        344,
+        289,
+        422
+      ]
+    ],
+    "A6": [
+      [
+        417,
+        287,
+        351
+      ],
+      [
+        231,
+        631,
+        193
+      ],
+      [
+        357,
+        234,
+        464
+      ]
+    ],
+    "A7": [
+      [
+        400,
+        314,
+        341
+      ],
+      [
+        262,
+        594,
+        199
+      ],
+      [
+        340,
+        240,
+        475
+      ]
+    ],
+    "A8": [
+      [
+        422,
+        288,
+        345
+      ],
+      [
+        237,
+        635,
+        183
+      ],
+      [
+        356,
+        233,
+        466
+      ]
+    ],
+    "A9": [
+      [
+        421,
+        289,
+        345
+      ],
+      [
+        236,
+        635,
+        184
+      ],
+      [
+        357,
+        232,
+        466
+      ]
+    ],
+    "CTRL_shuffled_label": [
+      [
+        326,
+        361,
+        368
+      ],
+      [
+        365,
+        377,
+        313
+      ],
+      [
+        352,
+        346,
+        357
+      ]
+    ],
+    "CTRL_shuffled_subject": [
+      [
+        401,
+        304,
+        350
+      ],
+      [
+        219,
+        629,
+        207
+      ],
+      [
+        349,
+        235,
+        471
+      ]
+    ]
+  }
+}

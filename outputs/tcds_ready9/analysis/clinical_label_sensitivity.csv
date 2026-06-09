@@ -1,0 +1,6 @@
+diagnosis,status,balanced_accuracy_mean,roc_auc_mean,n_pos,n_neg,interpretation
+SUD,evaluated,0.5267,0.5448,85,121,exploratory clinical-label sensitivity; not diagnostic validation
+MDD,evaluated,0.5238,0.5452,142,64,exploratory clinical-label sensitivity; not diagnostic validation
+PTSD,evaluated,0.5065,0.5216,82,124,exploratory clinical-label sensitivity; not diagnostic validation
+GAD,evaluated,0.4881,0.4097,60,146,exploratory clinical-label sensitivity; not diagnostic validation
+ADHD,evaluated,0.5316,0.5332,50,156,exploratory clinical-label sensitivity; not diagnostic validation

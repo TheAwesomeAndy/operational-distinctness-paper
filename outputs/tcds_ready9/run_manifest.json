@@ -1,0 +1,127 @@
+{
+  "provenance": {
+    "paper_repo_commit": "db49b28a02283c4121094754f2e19161b759adc5",
+    "paper_repo_branch": "submission/tcds-ready9-substrate",
+    "upstream_repo_commit": "6219ab43efca6f96f0dcad99bf6aacfc5212f738",
+    "run_profile": {
+      "profile": "submission",
+      "seeds": [
+        42,
+        43,
+        44,
+        45,
+        46
+      ],
+      "closed_loop_episodes": 1500,
+      "raw_signal_subset": 150,
+      "kappa_n_perm": 5000,
+      "n_folds_affective": 5,
+      "n_folds_clinical": 5
+    },
+    "privacy_status": "restricted (private clinical/neurophysiological data; released outputs are aggregate or deidentified)",
+    "python_version": "3.11.15",
+    "platform": "Linux-6.18.5-x86_64-with-glibc2.39",
+    "package_versions": {
+      "numpy": "2.4.6",
+      "scipy": "1.17.1",
+      "sklearn": "1.9.0",
+      "pandas": "3.0.3",
+      "matplotlib": "3.10.9"
+    },
+    "timestamp": "2026-06-09T17:30:37.762624+00:00"
+  },
+  "branch": "submission/tcds-ready9-substrate",
+  "run_profile": {
+    "profile": "submission",
+    "seeds": [
+      42,
+      43,
+      44,
+      45,
+      46
+    ],
+    "closed_loop_episodes": 1500,
+    "raw_signal_subset": 150,
+    "kappa_n_perm": 5000,
+    "n_folds_affective": 5,
+    "n_folds_clinical": 5
+  },
+  "phase_results": {
+    "preflight_audit": {
+      "script": "preflight_audit.py",
+      "returncode": 0,
+      "core": false
+    },
+    "feature_alignment": {
+      "script": "00_prepare_features.py",
+      "returncode": 0,
+      "core": true
+    },
+    "dataset_provenance_qc": {
+      "script": "01_dataset_provenance_qc.py",
+      "returncode": 0,
+      "core": false
+    },
+    "observation_plots": {
+      "script": "06_generate_observation_plots.py",
+      "returncode": 0,
+      "core": false
+    },
+    "signal_robustness": {
+      "script": "08_signal_robustness.py",
+      "returncode": 0,
+      "core": true
+    },
+    "mechanism_ablation": {
+      "script": "09_mechanism_ablation.py",
+      "returncode": 0,
+      "core": true
+    },
+    "closed_loop_policy": {
+      "script": "10_closed_loop_policy_hardening.py",
+      "returncode": 0,
+      "core": true
+    },
+    "graph_runtime_support": {
+      "script": "12_graph_runtime_support.py",
+      "returncode": 0,
+      "core": false
+    },
+    "analysis_plots": {
+      "script": "07_generate_analysis_plots.py",
+      "returncode": 0,
+      "core": false
+    },
+    "generate_tables": {
+      "script": "11_generate_ready9_tables.py",
+      "returncode": 0,
+      "core": true
+    }
+  },
+  "core_failed": [],
+  "submission_ready": true,
+  "input_fingerprints": {
+    "shape_features_211": {
+      "name": "shape_features_211.pkl",
+      "exists": true,
+      "size_bytes": 55967778,
+      "sha256": "d49ad55184a0fecb60f5e2b49fb56ea03f0082f2846c215f78fe2c98bb85d3f8"
+    },
+    "ch6_ch7_3class_features": {
+      "name": "ch6_ch7_3class_features.pkl",
+      "exists": true,
+      "size_bytes": 26095371,
+      "sha256": "30823e383a5a85a81dcfe56a6de8eb0dedaad0c296ec60413205cd092508f66b"
+    },
+    "clinical_profile": {
+      "name": "clinical_profile.csv",
+      "exists": true,
+      "size_bytes": 41437,
+      "sha256": "4ee9d21de9a468a9db7683cc2d0c913ce94dd021fd1a07b233fe861faddde673"
+    }
+  },
+  "n_figures": 23,
+  "skipped_nonessential": [],
+  "privacy_confirmation": "no raw EEG, feature pickles, clinical metadata, or raw subject IDs are written to committed outputs; subject identifiers are hashed",
+  "note_on_manuscript_compilation": "compiled separately; see manuscript build log / quality gate"
+}

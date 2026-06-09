@@ -1,0 +1,47 @@
+{
+  "source_script": "experiments/tcds_ready9/06_generate_observation_plots.py",
+  "figure_type": "observation",
+  "inputs": {
+    "shape_features_211": {
+      "name": "shape_features_211.pkl",
+      "exists": true,
+      "size_bytes": 55967778,
+      "sha256": "d49ad55184a0fecb60f5e2b49fb56ea03f0082f2846c215f78fe2c98bb85d3f8"
+    }
+  },
+  "provenance": {
+    "paper_repo_commit": "1aa2ad290d1b96e5c54b443b070a6592916e0b75",
+    "paper_repo_branch": "submission/tcds-ready9-substrate",
+    "upstream_repo_commit": "6219ab43efca6f96f0dcad99bf6aacfc5212f738",
+    "run_profile": {
+      "profile": "submission",
+      "seeds": [
+        42,
+        43,
+        44,
+        45,
+        46
+      ],
+      "closed_loop_episodes": 1500,
+      "raw_signal_subset": 150,
+      "kappa_n_perm": 5000,
+      "n_folds_affective": 5,
+      "n_folds_clinical": 5
+    },
+    "privacy_status": "restricted (private clinical/neurophysiological data; released outputs are aggregate or deidentified)",
+    "python_version": "3.11.15",
+    "platform": "Linux-6.18.5-x86_64-with-glibc2.39",
+    "package_versions": {
+      "numpy": "2.4.6",
+      "scipy": "1.17.1",
+      "sklearn": "1.9.0",
+      "pandas": "3.0.3",
+      "matplotlib": "3.10.9"
+    },
+    "timestamp": "2026-06-09T17:05:10.329330+00:00"
+  },
+  "data_level": "downsampled EEG (X_ds)",
+  "privacy_status": "restricted (private clinical/neurophysiological data; released outputs are aggregate or deidentified)",
+  "output_path": "figures/tcds_ready9/observations/obs03_signal_perturbation_examples.pdf",
+  "note": "representative observation; identifier hashed/omitted"
+}

@@ -1,0 +1,247 @@
+{
+  "provenance": {
+    "paper_repo_commit": "1aa2ad290d1b96e5c54b443b070a6592916e0b75",
+    "paper_repo_branch": "submission/tcds-ready9-substrate",
+    "upstream_repo_commit": "6219ab43efca6f96f0dcad99bf6aacfc5212f738",
+    "run_profile": {
+      "profile": "submission",
+      "seeds": [
+        42,
+        43,
+        44,
+        45,
+        46
+      ],
+      "closed_loop_episodes": 1500,
+      "raw_signal_subset": 150,
+      "kappa_n_perm": 5000,
+      "n_folds_affective": 5,
+      "n_folds_clinical": 5
+    },
+    "privacy_status": "restricted (private clinical/neurophysiological data; released outputs are aggregate or deidentified)",
+    "python_version": "3.11.15",
+    "platform": "Linux-6.18.5-x86_64-with-glibc2.39",
+    "package_versions": {
+      "numpy": "2.4.6",
+      "scipy": "1.17.1",
+      "sklearn": "1.9.0",
+      "pandas": "3.0.3",
+      "matplotlib": "3.10.9"
+    },
+    "timestamp": "2026-06-09T17:05:03.554422+00:00"
+  },
+  "repo": {
+    "commit": "1aa2ad290d1b96e5c54b443b070a6592916e0b75",
+    "branch": "submission/tcds-ready9-substrate",
+    "dirty": true
+  },
+  "upstream": {
+    "disso_repo_name": "dissoAdventureExperiments",
+    "disso_repo_present": true,
+    "upstream_feature_script_present": true,
+    "local_feature_script_present": true,
+    "upstream_commit": "6219ab43efca6f96f0dcad99bf6aacfc5212f738"
+  },
+  "inputs": {
+    "shape_features_211": {
+      "fingerprint": {
+        "name": "shape_features_211.pkl",
+        "exists": true,
+        "size_bytes": 55967778,
+        "sha256": "d49ad55184a0fecb60f5e2b49fb56ea03f0082f2846c215f78fe2c98bb85d3f8"
+      },
+      "present": true,
+      "keys_present": [
+        "X_ds",
+        "y",
+        "subjects",
+        "conv_feats",
+        "lsm_bsc6_pca"
+      ],
+      "keys_missing": [],
+      "shapes": {
+        "lsm_bsc6_pca": [
+          633,
+          34,
+          64
+        ],
+        "conv_feats": [
+          633,
+          34,
+          5
+        ],
+        "y": [
+          633
+        ],
+        "subjects": [
+          633
+        ]
+      },
+      "label_distribution": {
+        "0": 211,
+        "1": 211,
+        "2": 211
+      },
+      "n_observations": 633,
+      "n_unique_subjects": 211,
+      "status": "ok"
+    },
+    "ch6_ch7_3class_features": {
+      "fingerprint": {
+        "name": "ch6_ch7_3class_features.pkl",
+        "exists": true,
+        "size_bytes": 26095371,
+        "sha256": "30823e383a5a85a81dcfe56a6de8eb0dedaad0c296ec60413205cd092508f66b"
+      },
+      "present": true,
+      "keys_present": [
+        "D",
+        "D_extra",
+        "T_topo",
+        "tPLV_mats",
+        "pop_rate_ts",
+        "y",
+        "subjects",
+        "cond_names"
+      ],
+      "keys_missing": [],
+      "shapes": {
+        "D": [
+          633,
+          34,
+          7
+        ],
+        "D_extra": [
+          633,
+          34,
+          4
+        ],
+        "T_topo": [
+          633,
+          34,
+          2
+        ],
+        "tPLV_mats": [
+          633,
+          34,
+          34
+        ],
+        "pop_rate_ts": [
+          633,
+          34,
+          256
+        ],
+        "y": [
+          633
+        ],
+        "subjects": [
+          633
+        ]
+      },
+      "label_distribution": {
+        "0": 211,
+        "1": 211,
+        "2": 211
+      },
+      "n_observations": 633,
+      "n_unique_subjects": 211,
+      "status": "ok"
+    },
+    "clinical_profile": {
+      "fingerprint": {
+        "name": "clinical_profile.csv",
+        "exists": true,
+        "size_bytes": 41437,
+        "sha256": "4ee9d21de9a468a9db7683cc2d0c913ce94dd021fd1a07b233fe861faddde673"
+      },
+      "present": true,
+      "n_rows": 211,
+      "columns": [
+        "ID",
+        "MDE",
+        "MDD",
+        "Depression_Type",
+        "PDD",
+        "MDD_Recurrent",
+        "GAD",
+        "PTSD",
+        "EAT",
+        "AN",
+        "BN",
+        "BED",
+        "FEO",
+        "FEO_Subtype",
+        "ER",
+        "BEP",
+        "PDA",
+        "SAD",
+        "SP",
+        "Phobia",
+        "OCD",
+        "Mania",
+        "Mania2",
+        "Mania_Type",
+        "PSY",
+        "PSY_All",
+        "DEL",
+        "HAL",
+        "DEL_All",
+        "HAL_All",
+        "DEL_HAL",
+        "SUD",
+        "AUD",
+        "DUD",
+        "HD",
+        "MAR",
+        "ADHD",
+        "ADHD_Subtype",
+        "INT",
+        "HI",
+        "IED",
+        "age",
+        "sex",
+        "Assigned_Sex",
+        "medication_psychiatric",
+        "Psychiatric_Medication",
+        "treatment_history_psychological",
+        "handedness",
+        "Race",
+        "Ethnicity",
+        "smoking",
+        "alcohol",
+        "drugs",
+        "comorbidity"
+      ],
+      "id_column_present": true,
+      "diagnoses_present": [
+        "SUD",
+        "MDD",
+        "PTSD",
+        "GAD",
+        "ADHD"
+      ],
+      "diagnoses_missing": [],
+      "status": "ok"
+    },
+    "raw_eeg": {
+      "dir_name": "batch_data_full",
+      "present": true,
+      "n_files": 636,
+      "n_subjects_discovered": 212,
+      "n_subjects_complete": 212,
+      "n_subjects_incomplete": 0,
+      "malformed_or_unmatched_files": 0,
+      "subject_127_present": true,
+      "note": "subject 127 is excluded by the feature-extraction pipeline (Ch5 QC)",
+      "status": "ok"
+    }
+  },
+  "required_inputs_status": {
+    "shape_features_present": true,
+    "clinical_present": true,
+    "ch67_present": true,
+    "ch67_regenerable_from_raw": true,
+    "missing": [],
+    "ready_to_proceed": true
+  }
+}

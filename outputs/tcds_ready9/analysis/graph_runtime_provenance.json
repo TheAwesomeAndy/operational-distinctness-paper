@@ -1,0 +1,42 @@
+{
+  "provenance": {
+    "paper_repo_commit": "db49b28a02283c4121094754f2e19161b759adc5",
+    "paper_repo_branch": "submission/tcds-ready9-substrate",
+    "upstream_repo_commit": "6219ab43efca6f96f0dcad99bf6aacfc5212f738",
+    "run_profile": {
+      "profile": "submission",
+      "seeds": [
+        42,
+        43,
+        44,
+        45,
+        46
+      ],
+      "closed_loop_episodes": 1500,
+      "raw_signal_subset": 150,
+      "kappa_n_perm": 5000,
+      "n_folds_affective": 5,
+      "n_folds_clinical": 5
+    },
+    "privacy_status": "restricted (private clinical/neurophysiological data; released outputs are aggregate or deidentified)",
+    "python_version": "3.11.15",
+    "platform": "Linux-6.18.5-x86_64-with-glibc2.39",
+    "package_versions": {
+      "numpy": "2.4.6",
+      "scipy": "1.17.1",
+      "sklearn": "1.9.0",
+      "pandas": "3.0.3",
+      "matplotlib": "3.10.9"
+    },
+    "timestamp": "2026-06-09T17:30:32.705312+00:00"
+  },
+  "scope": "bounded graph support for the reservoir-graph substrate claim; no spectral/diffusion theory; no energy claim",
+  "inputs": {
+    "ch6_ch7_3class_features": {
+      "name": "ch6_ch7_3class_features.pkl",
+      "exists": true,
+      "size_bytes": 26095371,
+      "sha256": "30823e383a5a85a81dcfe56a6de8eb0dedaad0c296ec60413205cd092508f66b"
+    }
+  }
+}
