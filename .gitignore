@@ -39,3 +39,4 @@ _build/
 *.fdb_latexmk
 *.synctex.gz
 manuscript/*.log
+outputs/tcds_risk_reduction/_*.log

@@ -1,0 +1,23 @@
+\begin{table}[t]\centering
+\caption{Reproducibility panel for the evaluation. Subject-level data are restricted; released artifacts are aggregate or hashed.}
+\label{tab:reproducibility}
+\begin{tabular}{ll}
+\toprule
+Item & Value \\
+\midrule
+Subjects & 211 (subject 127 excluded) \\
+Observations & 633 \\
+Affective classes & 3 (Negative, Neutral, Pleasant) \\
+Channels & 34 \\
+Split protocol & subject-grouped cross-validation \\
+Feature blocks & BandPower, $E$, $D$, $T$, $C$ \\
+Perturbation types & temporal jitter, amplitude noise, channel dropout, graph \\
+Random seeds & 42, 43, 44, 45, 46 (profile: submission) \\
+Closed-loop episodes & $\geq$1500 per policy/$\epsilon$ \\
+Policy set & passive, random, pragmatic, epistemic, EFE, oracle \\
+Repo commit & \texttt{db49b28a02} \\
+Upstream commit & \texttt{6219ab43ef} \\
+Data availability & restricted; aggregate/deidentified outputs only \\
+\bottomrule
+\end{tabular}
+\end{table}

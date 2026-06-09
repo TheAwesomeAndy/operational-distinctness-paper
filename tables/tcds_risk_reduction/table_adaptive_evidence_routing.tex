@@ -1,0 +1,24 @@
+\begin{table}[t]\centering\footnotesize
+\caption{Adaptive evidence routing under perturbation. Balanced accuracy (mean over seeds$\times$folds$\times$regimes). The oracle is a non-deployable upper bound. Routers that use only label-free signal-quality observables are leakage-free under subject-grouped validation.}
+\label{tab:adaptive_routing}
+\begin{tabular}{l r r}
+\toprule
+Router / fixed stream & Balanced acc. & macro-F1 \\
+\midrule
+fixed\_A0 & 0.444 & 0.424 \\
+fixed\_A1 & 0.458 & 0.456 \\
+fixed\_A2 & 0.377 & 0.326 \\
+fixed\_A3 & 0.338 & 0.254 \\
+fixed\_A5 & 0.361 & 0.283 \\
+fixed\_A6 & 0.402 & 0.355 \\
+fixed\_A7 & 0.456 & 0.450 \\
+fixed\_A8 & 0.404 & 0.355 \\
+fixed\_A9 & 0.403 & 0.354 \\
+\midrule
+perturbation\_label & 0.465 & 0.462 \\
+signal\_quality & 0.438 & 0.435 \\
+entropy\_fusion & 0.425 &  \\
+oracle & 0.941 & 0.940 \\
+\bottomrule
+\end{tabular}
+\end{table}

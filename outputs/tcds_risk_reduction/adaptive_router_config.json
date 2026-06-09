@@ -1,0 +1,139 @@
+{
+  "provenance": {
+    "paper_repo_commit": "d6b2778500ef4744e80564c8d65951891f2586e3",
+    "paper_repo_branch": "submission/tcds-risk-reduction",
+    "upstream_repo_commit": "6219ab43efca6f96f0dcad99bf6aacfc5212f738",
+    "run_profile": {
+      "profile": "submission",
+      "seeds": [
+        42,
+        43,
+        44,
+        45,
+        46
+      ],
+      "closed_loop_episodes": 1500,
+      "raw_signal_subset": 150,
+      "kappa_n_perm": 5000,
+      "n_folds_affective": 5,
+      "n_folds_clinical": 5
+    },
+    "privacy_status": "restricted (private clinical/neurophysiological data; released outputs are aggregate or deidentified)",
+    "python_version": "3.11.15",
+    "platform": "Linux-6.18.5-x86_64-with-glibc2.39",
+    "package_versions": {
+      "numpy": "2.4.6",
+      "scipy": "1.17.1",
+      "sklearn": "1.9.0",
+      "pandas": "3.0.3",
+      "matplotlib": "3.10.9"
+    },
+    "timestamp": "2026-06-09T21:16:51.232558+00:00"
+  },
+  "streams": {
+    "A0": [
+      "BandPower"
+    ],
+    "A1": [
+      "E"
+    ],
+    "A2": [
+      "D"
+    ],
+    "A3": [
+      "T"
+    ],
+    "A5": [
+      "D",
+      "T"
+    ],
+    "A6": [
+      "E",
+      "D"
+    ],
+    "A7": [
+      "E",
+      "T"
+    ],
+    "A8": [
+      "E",
+      "D",
+      "T"
+    ],
+    "A9": [
+      "E",
+      "D",
+      "T",
+      "C"
+    ]
+  },
+  "regimes": [
+    {
+      "type": "clean",
+      "level": "clean"
+    },
+    {
+      "type": "amplitude_noise",
+      "level": 20
+    },
+    {
+      "type": "amplitude_noise",
+      "level": 10
+    },
+    {
+      "type": "amplitude_noise",
+      "level": 5
+    },
+    {
+      "type": "channel_dropout",
+      "level": 0.1
+    },
+    {
+      "type": "channel_dropout",
+      "level": 0.2
+    },
+    {
+      "type": "channel_dropout",
+      "level": 0.3
+    },
+    {
+      "type": "graph_perturbation",
+      "level": 0.1
+    },
+    {
+      "type": "graph_perturbation",
+      "level": 0.2
+    },
+    {
+      "type": "graph_perturbation",
+      "level": 0.3
+    }
+  ],
+  "seeds": [
+    42,
+    43,
+    44,
+    45,
+    46
+  ],
+  "n_folds": 5,
+  "routers": [
+    "fixed_<stream>",
+    "oracle (non-deployable upper bound)",
+    "perturbation_label (regime known; selected on other folds)",
+    "signal_quality (label-free observables; nested subject CV)",
+    "entropy_fusion (A8 primary, fuse A0 when entropy>tau)"
+  ],
+  "signal_quality_observables": [
+    "max-probability confidence",
+    "posterior entropy",
+    "scaled feature L2 norm",
+    "diagonal Mahalanobis to train centroid"
+  ],
+  "entropy_fusion_tau_candidates": [
+    0.05450106218768119,
+    0.18592912530869946,
+    0.3803332749675178,
+    0.5847817951158835
+  ]
+}

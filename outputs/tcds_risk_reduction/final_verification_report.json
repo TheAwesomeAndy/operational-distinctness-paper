@@ -1,0 +1,81 @@
+{
+  "phase": "risk_reduction_final_verification",
+  "checks": {
+    "main_manuscript": {
+      "exists": true,
+      "pages": 10,
+      "pages_le_10": true
+    },
+    "blind_manuscript": {
+      "exists": true,
+      "pages": 10,
+      "pages_le_10": true,
+      "identifiers": [],
+      "private_tokens": [],
+      "clean": true
+    },
+    "supplement": {
+      "exists": true,
+      "pages": 6,
+      "private_tokens": [],
+      "measured_energy_claim": false,
+      "public_data_claim": false,
+      "clean": true
+    },
+    "figures_tables": {
+      "figures": {
+        "rr01_adaptive_router_performance": {
+          "pdf": true,
+          "metadata": true,
+          "skip_report": false
+        },
+        "rr02_router_regime_map": {
+          "pdf": true,
+          "metadata": true,
+          "skip_report": false
+        },
+        "rr03_event_resource_profile": {
+          "pdf": true,
+          "metadata": true,
+          "skip_report": false
+        }
+      },
+      "risk_tables_present": true
+    },
+    "claim_hygiene": {
+      "hits": {},
+      "clean": true
+    },
+    "traceability": {
+      "map": {
+        "adaptive_evidence_routing": {
+          "script": "experiments/tcds_risk_reduction/01_adaptive_evidence_routing.py",
+          "outputs": [
+            "adaptive_router_metrics.csv",
+            "adaptive_router_summary.csv",
+            "adaptive_router_config.json"
+          ],
+          "table": "tables/tcds_risk_reduction/table_adaptive_evidence_routing.tex",
+          "figures": [
+            "rr01_adaptive_router_performance.pdf",
+            "rr02_router_regime_map.pdf"
+          ]
+        },
+        "resource_event_accounting": {
+          "script": "experiments/tcds_risk_reduction/02_resource_event_accounting.py",
+          "outputs": [
+            "resource_event_metrics.csv",
+            "resource_event_summary.json"
+          ],
+          "table": "tables/tcds_risk_reduction/table_resource_event_accounting.tex",
+          "figures": [
+            "rr03_event_resource_profile.pdf"
+          ]
+        }
+      },
+      "complete": true
+    }
+  },
+  "core_failures": [],
+  "passed": true
+}

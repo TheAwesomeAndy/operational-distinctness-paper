@@ -1,0 +1,5 @@
+signal_quality: 0.438 vs best fixed fixed_A1 0.458 (Δ=-0.021) -> does not improve over best fixed stream
+perturbation_label: 0.465 vs best fixed fixed_A1 0.458 (Δ=+0.007) -> improves over best fixed stream
+entropy_fusion: 0.425 vs best fixed fixed_A1 0.458 (Δ=-0.033) -> does not improve over best fixed stream
+oracle upper bound: 0.941 (non-deployable)
+CONCLUSION: The measurements support perturbation-dependent evidence routing across operationally distinct streams.

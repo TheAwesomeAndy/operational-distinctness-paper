@@ -72,3 +72,16 @@ committed.
 | ana08 | Entropy/steps by policy | `07_*` | same | simulation |
 | ana09 | Failure modes by ε | `07_*` | same | simulation |
 | ana10 | Evaluation coverage | `07_*` | static | not a ranking |
+
+---
+
+## Risk-reduction additions (branch submission/tcds-risk-reduction)
+
+| # | Claim | Script | Input | Output | Figure/Table | Private-data req. |
+|---|---|---|---|---|---|---|
+| R1 | Adaptive evidence routing under perturbation (honest null: routers do not beat best fixed stream; oracle shows separable headroom) | `experiments/tcds_risk_reduction/01_adaptive_evidence_routing.py` | regenerated feature blocks (E,D,T,C,BandPower) + tPLV | `outputs/tcds_risk_reduction/adaptive_router_{metrics,summary}.csv`, `adaptive_router_config.json` | `tables/tcds_risk_reduction/table_adaptive_evidence_routing.tex`, `figures/tcds_risk_reduction/rr01,rr02` | yes (restricted features) |
+| R2 | Perturbation-dependent stream selection bounds (signal-quality / perturbation-label / entropy-fusion routers, leakage-free, nested subject CV) | same as R1 | same | `adaptive_router_summary.csv` (per-router, per-regime) | `rr02_router_regime_map.pdf` | yes |
+| R3 | Resource / event-rate accounting (spike sparsity, event vs dense recurrent ops, runtimes; no energy claim) | `experiments/tcds_risk_reduction/02_resource_event_accounting.py` | reservoir constants + `pop_rate_ts` + feature blocks | `outputs/tcds_risk_reduction/resource_event_metrics.csv`, `resource_event_summary.json` | `tables/tcds_risk_reduction/table_resource_event_accounting.tex`, `figures/tcds_risk_reduction/rr03` | yes |
+| R4 | Supplemental evidence traceability + package verification | `experiments/tcds_risk_reduction/{00_preflight,99_verify}_*.py` | above outputs | `outputs/tcds_risk_reduction/{preflight_risk_reduction,final_verification_report}.json` | `manuscript/supplemental_risk_reduction/supplement.pdf` | n/a |
+
+All risk-reduction inputs are the restricted feature pickles / raw EEG, regenerated locally and never committed. Subject identifiers are hashed in all released artifacts.

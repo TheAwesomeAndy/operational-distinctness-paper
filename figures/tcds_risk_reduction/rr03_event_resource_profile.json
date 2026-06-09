@@ -1,0 +1,43 @@
+{
+  "provenance": {
+    "paper_repo_commit": "d6b2778500ef4744e80564c8d65951891f2586e3",
+    "paper_repo_branch": "submission/tcds-risk-reduction",
+    "upstream_repo_commit": "6219ab43efca6f96f0dcad99bf6aacfc5212f738",
+    "run_profile": {
+      "profile": "pilot",
+      "seeds": [
+        42,
+        43
+      ],
+      "closed_loop_episodes": 1000,
+      "raw_signal_subset": 60,
+      "kappa_n_perm": 1000,
+      "n_folds_affective": 5,
+      "n_folds_clinical": 5
+    },
+    "privacy_status": "restricted (private clinical/neurophysiological data; released outputs are aggregate or deidentified)",
+    "python_version": "3.11.15",
+    "platform": "Linux-6.18.5-x86_64-with-glibc2.39",
+    "package_versions": {
+      "numpy": "2.4.6",
+      "scipy": "1.17.1",
+      "sklearn": "1.9.0",
+      "pandas": "3.0.3",
+      "matplotlib": "3.10.9"
+    },
+    "timestamp": "2026-06-09T21:11:54.945443+00:00"
+  },
+  "block_dims": {
+    "BandPower": 170,
+    "E": 2176,
+    "D": 238,
+    "T": 68,
+    "C": 3
+  },
+  "event_vs_dense_ratio": 0.1443,
+  "spike_metrics": {
+    "spike_sparsity_fraction_active": 0.14434,
+    "mean_spikes_per_observation": 321612.0,
+    "mean_events_per_timestep": 1256.3
+  }
+}
