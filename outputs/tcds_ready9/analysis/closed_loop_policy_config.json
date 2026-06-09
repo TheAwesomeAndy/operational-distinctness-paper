@@ -1,0 +1,297 @@
+{
+  "provenance": {
+    "paper_repo_commit": "95affadeeb4027796c47414fdc1ba720d7ff561a",
+    "paper_repo_branch": "submission/tcds-ready9-substrate",
+    "upstream_repo_commit": "6219ab43efca6f96f0dcad99bf6aacfc5212f738",
+    "run_profile": {
+      "profile": "submission",
+      "seeds": [
+        42,
+        43,
+        44,
+        45,
+        46
+      ],
+      "closed_loop_episodes": 1500,
+      "raw_signal_subset": 150,
+      "kappa_n_perm": 5000,
+      "n_folds_affective": 5,
+      "n_folds_clinical": 5
+    },
+    "privacy_status": "restricted (private clinical/neurophysiological data; released outputs are aggregate or deidentified)",
+    "python_version": "3.11.15",
+    "platform": "Linux-6.18.5-x86_64-with-glibc2.39",
+    "package_versions": {
+      "numpy": "2.4.6",
+      "scipy": "1.17.1",
+      "sklearn": "1.9.0",
+      "pandas": "3.0.3",
+      "matplotlib": "3.10.9"
+    },
+    "timestamp": "2026-06-09T16:33:29.223813+00:00"
+  },
+  "controller": {
+    "belief_state": "categorical posterior over 3 affective states, sequential Bayesian accumulation",
+    "likelihood": "L2 logistic readout on the E+D+T substrate (ARSPI-Net perceptual estimator)",
+    "transition": "P(s'|a) = (1-eps) onehot(a) + eps uniform",
+    "preferred": "peaked on target (delta=0.02)",
+    "risk": "KL(P(s'|a) || preferred)",
+    "ambiguity": "E_{s'~P(s'|a)}[ H_hat(s') ]",
+    "efe": "risk + ambiguity",
+    "action_rule": "argmin_a EFE(a)",
+    "stopping": "b(target) >= 0.8 or 15 steps",
+    "oracle": "perfect perception upper bound (leak-free)"
+  },
+  "policies": [
+    "passive",
+    "random",
+    "pragmatic_only",
+    "epistemic_only",
+    "efe",
+    "oracle"
+  ],
+  "epsilons": [
+    0.0,
+    0.1,
+    0.2,
+    0.3,
+    0.4
+  ],
+  "episodes_per_policy_per_epsilon_target": 1500,
+  "episodes_per_fold_unit": 60,
+  "fold_units": 25,
+  "failure_modes": {
+    "random|eps=0.0": {
+      "target0->believed2": 83,
+      "target1->believed2": 81,
+      "target2->believed0": 111,
+      "target0->believed1": 98,
+      "target1->believed0": 88,
+      "target2->believed1": 108,
+      "target1->believed1": 3,
+      "target2->believed2": 5,
+      "target0->believed0": 2
+    },
+    "epistemic_only|eps=0.0": {
+      "target2->believed1": 377,
+      "target2->believed0": 18,
+      "target0->believed2": 14,
+      "target0->believed1": 317,
+      "target1->believed2": 4,
+      "target1->believed0": 9,
+      "target1->believed1": 2
+    },
+    "pragmatic_only|eps=0.0": {
+      "target2->believed0": 64,
+      "target0->believed2": 72,
+      "target1->believed2": 9,
+      "target0->believed1": 24,
+      "target1->believed0": 8,
+      "target1->believed1": 1,
+      "target2->believed2": 4,
+      "target2->believed1": 18,
+      "target0->believed0": 4
+    },
+    "efe|eps=0.0": {
+      "target2->believed0": 75,
+      "target1->believed2": 4,
+      "target0->believed2": 79,
+      "target2->believed2": 2,
+      "target2->believed1": 9,
+      "target0->believed1": 26,
+      "target1->believed0": 9,
+      "target0->believed0": 2,
+      "target1->believed1": 1
+    },
+    "random|eps=0.1": {
+      "target0->believed1": 103,
+      "target1->believed2": 81,
+      "target2->believed1": 99,
+      "target0->believed2": 85,
+      "target2->believed0": 94,
+      "target1->believed0": 93,
+      "target2->believed2": 3,
+      "target1->believed1": 5
+    },
+    "pragmatic_only|eps=0.1": {
+      "target0->believed2": 92,
+      "target0->believed1": 40,
+      "target0->believed0": 3,
+      "target2->believed0": 59,
+      "target1->believed2": 7,
+      "target2->believed1": 20,
+      "target1->believed0": 11,
+      "target2->believed2": 4
+    },
+    "epistemic_only|eps=0.1": {
+      "target0->believed1": 344,
+      "target2->believed1": 320,
+      "target0->believed2": 12,
+      "target2->believed0": 24,
+      "target1->believed0": 15,
+      "target0->believed0": 1,
+      "target2->believed2": 1,
+      "target1->believed1": 1,
+      "target1->believed2": 5
+    },
+    "efe|eps=0.1": {
+      "target0->believed2": 80,
+      "target2->believed0": 61,
+      "target1->believed1": 3,
+      "target0->believed0": 8,
+      "target1->believed2": 5,
+      "target1->believed0": 8,
+      "target2->believed1": 27,
+      "target0->believed1": 35,
+      "target2->believed2": 3
+    },
+    "passive|eps=0.1": {
+      "target0->believed0": 33,
+      "target1->believed1": 37,
+      "target2->believed2": 24
+    },
+    "epistemic_only|eps=0.2": {
+      "target0->believed1": 294,
+      "target2->believed1": 338,
+      "target0->believed2": 18,
+      "target1->believed2": 7,
+      "target2->believed0": 33,
+      "target1->believed0": 26,
+      "target1->believed1": 2,
+      "target2->believed2": 1,
+      "target0->believed0": 2
+    },
+    "efe|eps=0.2": {
+      "target0->believed1": 34,
+      "target0->believed2": 69,
+      "target1->believed0": 9,
+      "target0->believed0": 7,
+      "target2->believed0": 75,
+      "target2->believed2": 10,
+      "target2->believed1": 19,
+      "target1->believed2": 5,
+      "target1->believed1": 5
+    },
+    "random|eps=0.2": {
+      "target1->believed2": 71,
+      "target0->believed1": 103,
+      "target0->believed2": 87,
+      "target2->believed1": 112,
+      "target2->believed0": 99,
+      "target1->believed0": 94,
+      "target2->believed2": 1,
+      "target0->believed0": 4
+    },
+    "pragmatic_only|eps=0.2": {
+      "target0->believed1": 29,
+      "target2->believed0": 72,
+      "target0->believed2": 73,
+      "target1->believed2": 10,
+      "target1->believed0": 12,
+      "target2->believed2": 6,
+      "target2->believed1": 15,
+      "target0->believed0": 6,
+      "target1->believed1": 2
+    },
+    "passive|eps=0.2": {
+      "target0->believed0": 64,
+      "target2->believed2": 66,
+      "target1->believed1": 60
+    },
+    "random|eps=0.3": {
+      "target1->believed0": 94,
+      "target0->believed2": 92,
+      "target0->believed1": 105,
+      "target2->believed1": 95,
+      "target1->believed2": 95,
+      "target2->believed0": 106,
+      "target0->believed0": 10,
+      "target2->believed2": 2,
+      "target1->believed1": 1
+    },
+    "efe|eps=0.3": {
+      "target1->believed0": 20,
+      "target0->believed2": 83,
+      "target1->believed2": 11,
+      "target2->believed0": 91,
+      "target2->believed1": 26,
+      "target2->believed2": 7,
+      "target1->believed1": 3,
+      "target0->believed1": 47
+    },
+    "epistemic_only|eps=0.3": {
+      "target0->believed1": 284,
+      "target0->believed2": 24,
+      "target2->believed1": 284,
+      "target1->believed2": 8,
+      "target1->believed0": 23,
+      "target2->believed0": 41,
+      "target1->believed1": 1,
+      "target2->believed2": 1
+    },
+    "pragmatic_only|eps=0.3": {
+      "target2->believed0": 70,
+      "target0->believed2": 79,
+      "target0->believed1": 42,
+      "target2->believed1": 33,
+      "target1->believed2": 15,
+      "target2->believed2": 2,
+      "target1->believed0": 22,
+      "target1->believed1": 1,
+      "target0->believed0": 3
+    },
+    "passive|eps=0.3": {
+      "target1->believed1": 102,
+      "target0->believed0": 105,
+      "target2->believed2": 90
+    },
+    "random|eps=0.4": {
+      "target0->believed1": 101,
+      "target2->believed0": 105,
+      "target1->believed2": 82,
+      "target0->believed2": 78,
+      "target2->believed1": 102,
+      "target1->believed0": 86,
+      "target2->believed2": 5,
+      "target1->believed1": 3,
+      "target0->believed0": 1
+    },
+    "pragmatic_only|eps=0.4": {
+      "target0->believed1": 44,
+      "target0->believed2": 68,
+      "target2->believed0": 80,
+      "target1->believed2": 20,
+      "target1->believed0": 25,
+      "target2->believed1": 42,
+      "target1->believed1": 2,
+      "target2->believed2": 5,
+      "target0->believed0": 2
+    },
+    "epistemic_only|eps=0.4": {
+      "target0->believed1": 223,
+      "target2->believed1": 273,
+      "target0->believed2": 31,
+      "target2->believed2": 4,
+      "target1->believed0": 32,
+      "target1->believed2": 18,
+      "target2->believed0": 54,
+      "target0->believed0": 1
+    },
+    "efe|eps=0.4": {
+      "target0->believed2": 62,
+      "target2->believed0": 87,
+      "target1->believed0": 26,
+      "target1->believed2": 21,
+      "target1->believed1": 3,
+      "target0->believed1": 51,
+      "target0->believed0": 3,
+      "target2->believed1": 35,
+      "target2->believed2": 5
+    },
+    "passive|eps=0.4": {
+      "target2->believed2": 152,
+      "target1->believed1": 134,
+      "target0->believed0": 115
+    }
+  }
+}

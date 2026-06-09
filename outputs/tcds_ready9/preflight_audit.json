@@ -1,17 +1,20 @@
 {
   "provenance": {
-    "paper_repo_commit": "f18f2d332267f83edb09c276fb85e4264c4d195b",
+    "paper_repo_commit": "bf3a2853a42d2c15dbc2d87fc89e64fb2e560bba",
     "paper_repo_branch": "submission/tcds-ready9-substrate",
     "upstream_repo_commit": "6219ab43efca6f96f0dcad99bf6aacfc5212f738",
     "run_profile": {
-      "profile": "pilot",
+      "profile": "submission",
       "seeds": [
         42,
-        43
+        43,
+        44,
+        45,
+        46
       ],
-      "closed_loop_episodes": 1000,
-      "raw_signal_subset": 60,
-      "kappa_n_perm": 1000,
+      "closed_loop_episodes": 1500,
+      "raw_signal_subset": 150,
+      "kappa_n_perm": 5000,
       "n_folds_affective": 5,
       "n_folds_clinical": 5
     },
@@ -25,10 +28,10 @@
       "pandas": "3.0.3",
       "matplotlib": "3.10.9"
     },
-    "timestamp": "2026-06-09T14:43:07.083652+00:00"
+    "timestamp": "2026-06-09T16:07:56.366385+00:00"
   },
   "repo": {
-    "commit": "f18f2d332267f83edb09c276fb85e4264c4d195b",
+    "commit": "bf3a2853a42d2c15dbc2d87fc89e64fb2e560bba",
     "branch": "submission/tcds-ready9-substrate",
     "dirty": true
   },
@@ -44,8 +47,8 @@
       "fingerprint": {
         "name": "shape_features_211.pkl",
         "exists": true,
-        "size_bytes": 55967744,
-        "sha256": "b5ce2d542f15139bc6da9fccdfe0afa62f69b16aed90ab0b2ffd611e8a21568f"
+        "size_bytes": 55967778,
+        "sha256": "d49ad55184a0fecb60f5e2b49fb56ea03f0082f2846c215f78fe2c98bb85d3f8"
       },
       "present": true,
       "keys_present": [
@@ -86,10 +89,63 @@
     "ch6_ch7_3class_features": {
       "fingerprint": {
         "name": "ch6_ch7_3class_features.pkl",
-        "exists": false
+        "exists": true,
+        "size_bytes": 26095371,
+        "sha256": "30823e383a5a85a81dcfe56a6de8eb0dedaad0c296ec60413205cd092508f66b"
       },
-      "present": false,
-      "status": "missing"
+      "present": true,
+      "keys_present": [
+        "D",
+        "D_extra",
+        "T_topo",
+        "tPLV_mats",
+        "pop_rate_ts",
+        "y",
+        "subjects",
+        "cond_names"
+      ],
+      "keys_missing": [],
+      "shapes": {
+        "D": [
+          633,
+          34,
+          7
+        ],
+        "D_extra": [
+          633,
+          34,
+          4
+        ],
+        "T_topo": [
+          633,
+          34,
+          2
+        ],
+        "tPLV_mats": [
+          633,
+          34,
+          34
+        ],
+        "pop_rate_ts": [
+          633,
+          34,
+          256
+        ],
+        "y": [
+          633
+        ],
+        "subjects": [
+          633
+        ]
+      },
+      "label_distribution": {
+        "0": 211,
+        "1": 211,
+        "2": 211
+      },
+      "n_observations": 633,
+      "n_unique_subjects": 211,
+      "status": "ok"
     },
     "clinical_profile": {
       "fingerprint": {
@@ -183,7 +239,7 @@
   "required_inputs_status": {
     "shape_features_present": true,
     "clinical_present": true,
-    "ch67_present": false,
+    "ch67_present": true,
     "ch67_regenerable_from_raw": true,
     "missing": [],
     "ready_to_proceed": true

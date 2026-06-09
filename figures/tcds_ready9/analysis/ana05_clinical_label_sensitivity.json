@@ -1,0 +1,37 @@
+{
+  "source_script": "experiments/tcds_ready9/07_generate_analysis_plots.py",
+  "figure_type": "analysis",
+  "provenance": {
+    "paper_repo_commit": "95affadeeb4027796c47414fdc1ba720d7ff561a",
+    "paper_repo_branch": "submission/tcds-ready9-substrate",
+    "upstream_repo_commit": "6219ab43efca6f96f0dcad99bf6aacfc5212f738",
+    "run_profile": {
+      "profile": "submission",
+      "seeds": [
+        42,
+        43,
+        44,
+        45,
+        46
+      ],
+      "closed_loop_episodes": 1500,
+      "raw_signal_subset": 150,
+      "kappa_n_perm": 5000,
+      "n_folds_affective": 5,
+      "n_folds_clinical": 5
+    },
+    "privacy_status": "restricted (private clinical/neurophysiological data; released outputs are aggregate or deidentified)",
+    "python_version": "3.11.15",
+    "platform": "Linux-6.18.5-x86_64-with-glibc2.39",
+    "package_versions": {
+      "numpy": "2.4.6",
+      "scipy": "1.17.1",
+      "sklearn": "1.9.0",
+      "pandas": "3.0.3",
+      "matplotlib": "3.10.9"
+    },
+    "timestamp": "2026-06-09T16:33:34.132262+00:00"
+  },
+  "privacy_status": "restricted (private clinical/neurophysiological data; released outputs are aggregate or deidentified)",
+  "output_path": "figures/tcds_ready9/analysis/ana05_clinical_label_sensitivity.pdf"
+}

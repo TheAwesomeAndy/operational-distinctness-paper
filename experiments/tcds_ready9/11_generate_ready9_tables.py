@@ -171,9 +171,9 @@ def closed_loop_policy():
 
 
 def evaluation_coverage():
-    comps = ["$E$ (reservoir embedding)", "$D$ (dynamical)", "$T$ (graph topology)",
-             "$C$ (coupling)", "Closed-loop control"]
-    cols = ["Signal", "Mechanism", "Perturb.", "Ablation", "Closed-loop", "Runtime"]
+    comps = ["$E$ embedding", "$D$ dynamical", "$T$ topology",
+             "$C$ coupling", "Closed loop"]
+    cols = ["Sig.", "Mech.", "Pert.", "Abl.", "Loop", "Time"]
     M = [
         [1, 1, 1, 1, 1, 1],
         [1, 1, 1, 1, 1, 1],
@@ -182,12 +182,13 @@ def evaluation_coverage():
         [0, 1, 1, 0, 1, 1],
     ]
     out = [
-        r"\begin{table}[t]\centering",
+        r"\begin{table}[t]\centering\footnotesize",
         r"\caption{Evaluation coverage of ARSPI-Net relative to system-level "
         r"requirements. Rows are ARSPI-Net components; columns are evaluation "
-        r"requirements addressed in this paper.}",
+        r"requirements (Signal, Mechanism, Perturbation, Ablation, Closed-loop, "
+        r"Runtime) addressed in this paper.}",
         r"\label{tab:evaluation_coverage}",
-        r"\begin{tabular}{l" + "c" * len(cols) + r"}", r"\toprule",
+        r"\begin{tabular}{@{}l" + "c" * len(cols) + r"@{}}", r"\toprule",
         "Component & " + " & ".join(cols) + r" \\", r"\midrule",
     ]
     for name, row in zip(comps, M):

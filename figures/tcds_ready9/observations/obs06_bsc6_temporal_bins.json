@@ -1,0 +1,46 @@
+{
+  "source_script": "experiments/tcds_ready9/06_generate_observation_plots.py",
+  "figure_type": "observation",
+  "inputs": {
+    "ch6_ch7_3class_features": {
+      "name": "ch6_ch7_3class_features.pkl",
+      "exists": true,
+      "size_bytes": 26095371,
+      "sha256": "30823e383a5a85a81dcfe56a6de8eb0dedaad0c296ec60413205cd092508f66b"
+    }
+  },
+  "provenance": {
+    "paper_repo_commit": "bf3a2853a42d2c15dbc2d87fc89e64fb2e560bba",
+    "paper_repo_branch": "submission/tcds-ready9-substrate",
+    "upstream_repo_commit": "6219ab43efca6f96f0dcad99bf6aacfc5212f738",
+    "run_profile": {
+      "profile": "submission",
+      "seeds": [
+        42,
+        43,
+        44,
+        45,
+        46
+      ],
+      "closed_loop_episodes": 1500,
+      "raw_signal_subset": 150,
+      "kappa_n_perm": 5000,
+      "n_folds_affective": 5,
+      "n_folds_clinical": 5
+    },
+    "privacy_status": "restricted (private clinical/neurophysiological data; released outputs are aggregate or deidentified)",
+    "python_version": "3.11.15",
+    "platform": "Linux-6.18.5-x86_64-with-glibc2.39",
+    "package_versions": {
+      "numpy": "2.4.6",
+      "scipy": "1.17.1",
+      "sklearn": "1.9.0",
+      "pandas": "3.0.3",
+      "matplotlib": "3.10.9"
+    },
+    "timestamp": "2026-06-09T16:08:04.148156+00:00"
+  },
+  "data_level": "reservoir activity binned into 6 windows",
+  "privacy_status": "restricted (private clinical/neurophysiological data; released outputs are aggregate or deidentified)",
+  "output_path": "figures/tcds_ready9/observations/obs06_bsc6_temporal_bins.pdf"
+}
