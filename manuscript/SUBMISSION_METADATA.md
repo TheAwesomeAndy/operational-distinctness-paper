@@ -4,16 +4,35 @@ Target: **IEEE Transactions on Cognitive and Developmental Systems**, special
 issue *Brain-Inspired Computing for Embodied AI*.
 Paper type: **Regular paper, 10 pages** (within the 10-page no-overlength-charge
 base limit).
-Review mode (confirmed): **double-blind** → upload `manuscript/main_blind.pdf`.
+Review mode: **NOT verified — the author must confirm on the live ScholarOne
+portal / special-issue instructions before upload.**
+- **Default artifact:** `manuscript/main.pdf` (non-blind) — use this unless the
+  portal explicitly requires an anonymous/double-blind manuscript.
+- **Contingency artifact:** `manuscript/main_blind.pdf` + `ARSPI-Net_blind_source.zip`
+  — use only if the portal says "anonymous manuscript," "double-blind,"
+  "double-anonymous," or equivalent.
+
+> Evidence (not a substitute for the portal check): IEEE CIS pages indicate TCDS
+> moved to a **double-anonymous** review process from October 2024
+> (https://cis.ieee.org/publications/t-cognitive-and-developmental-systems).
+> If that applies to this special issue, the contingency (blind) artifact is the
+> correct upload. **Confirm on the actual ScholarOne file-upload instructions.**
+
 System name "ARSPI-Net" is retained as a technical object (not masked); mask only
-if the special-issue chairs explicitly require method/system-name masking.
+if the portal/chairs explicitly require method/system-name masking.
+
+**IEEE AI-use disclosure (author action):** IEEE policy requires that AI-generated
+text be disclosed in the Acknowledgment and that AI-assisted sections cite the AI
+system used. The author must decide whether the manuscript's preparation triggers
+this disclosure and, if so, add it to the (non-blind) camera-ready.
 
 ## Files to upload to ScholarOne
-- **Main PDF (for review):** `manuscript/main_blind.pdf` (10 pp, anonymized).
-- **LaTeX source (if source upload required):** `manuscript/submission_package_blind/`
-  — `main_blind.tex` + the five figure PDFs (flat; `\graphicspath{{./}}`).
-  IEEEtran.cls is provided by the IEEE/ScholarOne system.
-- **Do NOT upload:** `main.pdf` (non-blind), `main_full_internal.pdf` (17-page
+- **If non-blind (default):** `manuscript/main.pdf` (10 pp).
+- **If anonymous/double-blind (contingency):** `manuscript/main_blind.pdf` (10 pp)
+  + source `manuscript/submission_package_blind/` (`main_blind.tex` + five figure
+  PDFs + five table `.tex`; `\graphicspath{{./}}`). IEEEtran.cls is provided by
+  the IEEE/ScholarOne system.
+- **Never upload:** `main_full_internal.pdf` (17-page
   internal record), or any `outputs/`, `data/`, or feature artifacts.
 
 ## Portal fields
