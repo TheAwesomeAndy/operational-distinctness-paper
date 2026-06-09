@@ -1,9 +1,9 @@
 stage,seconds,note
-private_input_load,0.102,two pickles + clinical CSV
+private_input_load,0.097,two pickles + clinical CSV
 feature_block_assembly,0.0,reshape/access
 coupling_block_50obs,0.0044,kappa over 50 observations
-kappa_full_dataset,0.061,all observations
-classifier_fit_eval_1fold,0.207,"A8 substrate, L2 logistic"
+kappa_full_dataset,0.054,all observations
+classifier_fit_eval_1fold,0.289,"A8 substrate, L2 logistic"
 reservoir_neurons,256,fixed LIF reservoir per channel
 reservoir_recurrent_weights,65536,W_rec entries
 channels,34,electrodes

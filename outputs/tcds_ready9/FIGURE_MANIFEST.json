@@ -1,6 +1,6 @@
 {
   "provenance": {
-    "paper_repo_commit": "95affadeeb4027796c47414fdc1ba720d7ff561a",
+    "paper_repo_commit": "db49b28a02283c4121094754f2e19161b759adc5",
     "paper_repo_branch": "submission/tcds-ready9-substrate",
     "upstream_repo_commit": "6219ab43efca6f96f0dcad99bf6aacfc5212f738",
     "run_profile": {
@@ -28,7 +28,7 @@
       "pandas": "3.0.3",
       "matplotlib": "3.10.9"
     },
-    "timestamp": "2026-06-09T16:33:36.524233+00:00"
+    "timestamp": "2026-06-09T17:30:37.755330+00:00"
   },
   "figures": [
     {
@@ -41,7 +41,7 @@
       "manuscript_section_recommended": "Results B",
       "claim_supported": "mechanism ablation performance",
       "limitations": "bounded to the measured SHAPE ERP regime",
-      "generated_timestamp": "2026-06-09T16:33:32.666364"
+      "generated_timestamp": "2026-06-09T17:30:33.750286"
     },
     {
       "figure_id": "ana02_mechanism_functional_roles",
@@ -53,7 +53,7 @@
       "manuscript_section_recommended": "Results B",
       "claim_supported": "mechanism functional roles",
       "limitations": "bounded to the measured SHAPE ERP regime",
-      "generated_timestamp": "2026-06-09T16:33:33.498364"
+      "generated_timestamp": "2026-06-09T17:30:34.586286"
     },
     {
       "figure_id": "ana03_robustness_degradation_curves",
@@ -65,7 +65,7 @@
       "manuscript_section_recommended": "Results C",
       "claim_supported": "robustness degradation",
       "limitations": "bounded to the measured SHAPE ERP regime",
-      "generated_timestamp": "2026-06-09T16:33:33.894364"
+      "generated_timestamp": "2026-06-09T17:30:34.966286"
     },
     {
       "figure_id": "ana04_robustness_summary",
@@ -77,7 +77,7 @@
       "manuscript_section_recommended": "Results C",
       "claim_supported": "robustness summary",
       "limitations": "bounded to the measured SHAPE ERP regime",
-      "generated_timestamp": "2026-06-09T16:33:34.022364"
+      "generated_timestamp": "2026-06-09T17:30:35.086286"
     },
     {
       "figure_id": "ana05_clinical_label_sensitivity",
@@ -89,7 +89,7 @@
       "manuscript_section_recommended": "Results B",
       "claim_supported": "exploratory clinical-label sensitivity",
       "limitations": "bounded to the measured SHAPE ERP regime",
-      "generated_timestamp": "2026-06-09T16:33:34.122365"
+      "generated_timestamp": "2026-06-09T17:30:35.190286"
     },
     {
       "figure_id": "ana06_kappa_shuffle_null",
@@ -101,7 +101,7 @@
       "manuscript_section_recommended": "Results A",
       "claim_supported": "kappa shuffle-null",
       "limitations": "bounded to the measured SHAPE ERP regime",
-      "generated_timestamp": "2026-06-09T16:33:34.418365"
+      "generated_timestamp": "2026-06-09T17:30:35.490286"
     },
     {
       "figure_id": "ana07_closed_loop_success_by_policy",
@@ -113,7 +113,7 @@
       "manuscript_section_recommended": "Results D",
       "claim_supported": "closed-loop success",
       "limitations": "bounded to the measured SHAPE ERP regime",
-      "generated_timestamp": "2026-06-09T16:33:34.678365"
+      "generated_timestamp": "2026-06-09T17:30:35.750286"
     },
     {
       "figure_id": "ana08_closed_loop_entropy_steps",
@@ -125,7 +125,7 @@
       "manuscript_section_recommended": "Results D",
       "claim_supported": "closed-loop entropy and steps",
       "limitations": "bounded to the measured SHAPE ERP regime",
-      "generated_timestamp": "2026-06-09T16:33:34.962364"
+      "generated_timestamp": "2026-06-09T17:30:36.066286"
     },
     {
       "figure_id": "ana09_closed_loop_failure_modes",
@@ -137,7 +137,7 @@
       "manuscript_section_recommended": "Results D",
       "claim_supported": "closed-loop failure modes",
       "limitations": "bounded to the measured SHAPE ERP regime",
-      "generated_timestamp": "2026-06-09T16:33:35.106364"
+      "generated_timestamp": "2026-06-09T17:30:36.226286"
     },
     {
       "figure_id": "ana10_evaluation_coverage",
@@ -149,7 +149,7 @@
       "manuscript_section_recommended": "Discussion",
       "claim_supported": "evaluation coverage",
       "limitations": "bounded to the measured SHAPE ERP regime",
-      "generated_timestamp": "2026-06-09T16:33:35.214364"
+      "generated_timestamp": "2026-06-09T17:30:36.334286"
     },
     {
       "figure_id": "ana11_graph_perturbation_support",
@@ -161,7 +161,7 @@
       "manuscript_section_recommended": "Discussion",
       "claim_supported": "bounded graph support",
       "limitations": "bounded to the measured SHAPE ERP regime",
-      "generated_timestamp": "2026-06-09T16:33:31.490365"
+      "generated_timestamp": "2026-06-09T17:30:32.598286"
     },
     {
       "figure_id": "ana12_pipeline_runtime_resource",
@@ -173,7 +173,7 @@
       "manuscript_section_recommended": "Discussion",
       "claim_supported": "runtime/resource support",
       "limitations": "bounded to the measured SHAPE ERP regime",
-      "generated_timestamp": "2026-06-09T16:33:31.594364"
+      "generated_timestamp": "2026-06-09T17:30:32.694286"
     },
     {
       "figure_id": "obs00_dataset_integrity_qc",
@@ -185,7 +185,7 @@
       "manuscript_section_recommended": "Results A",
       "claim_supported": "dataset integrity and provenance",
       "limitations": "bounded to the measured SHAPE ERP regime",
-      "generated_timestamp": "2026-06-09T16:07:59.410399"
+      "generated_timestamp": "2026-06-09T17:05:06.670321"
     },
     {
       "figure_id": "obs01_erp_condition_grand_average",
@@ -197,7 +197,7 @@
       "manuscript_section_recommended": "Results A",
       "claim_supported": "observed ERP morphology",
       "limitations": "bounded to the measured SHAPE ERP regime",
-      "generated_timestamp": "2026-06-09T16:08:01.786399"
+      "generated_timestamp": "2026-06-09T17:05:09.066321"
     },
     {
       "figure_id": "obs02_channel_time_variability",
@@ -209,7 +209,7 @@
       "manuscript_section_recommended": "Results A",
       "claim_supported": "channel x time variability",
       "limitations": "bounded to the measured SHAPE ERP regime",
-      "generated_timestamp": "2026-06-09T16:08:02.690399"
+      "generated_timestamp": "2026-06-09T17:05:09.974321"
     },
     {
       "figure_id": "obs03_signal_perturbation_examples",
@@ -221,7 +221,7 @@
       "manuscript_section_recommended": "Results C",
       "claim_supported": "perturbation examples",
       "limitations": "bounded to the measured SHAPE ERP regime",
-      "generated_timestamp": "2026-06-09T16:08:03.054399"
+      "generated_timestamp": "2026-06-09T17:05:10.318321"
     },
     {
       "figure_id": "obs04_reservoir_spike_raster",
@@ -233,7 +233,7 @@
       "manuscript_section_recommended": "Results A",
       "claim_supported": "observed reservoir spike behavior",
       "limitations": "bounded to the measured SHAPE ERP regime",
-      "generated_timestamp": "2026-06-09T16:08:03.766399"
+      "generated_timestamp": "2026-06-09T17:05:11.030321"
     },
     {
       "figure_id": "obs05_population_rate_by_condition",
@@ -245,7 +245,7 @@
       "manuscript_section_recommended": "Results A",
       "claim_supported": "observed population-rate behavior",
       "limitations": "bounded to the measured SHAPE ERP regime",
-      "generated_timestamp": "2026-06-09T16:08:03.902400"
+      "generated_timestamp": "2026-06-09T17:05:11.166321"
     },
     {
       "figure_id": "obs06_bsc6_temporal_bins",
@@ -257,7 +257,7 @@
       "manuscript_section_recommended": "Results A",
       "claim_supported": "BSC6 temporal coding",
       "limitations": "bounded to the measured SHAPE ERP regime",
-      "generated_timestamp": "2026-06-09T16:08:04.138399"
+      "generated_timestamp": "2026-06-09T17:05:11.398321"
     },
     {
       "figure_id": "obs07_feature_block_distributions",
@@ -269,7 +269,7 @@
       "manuscript_section_recommended": "Results A",
       "claim_supported": "feature-block distributions",
       "limitations": "bounded to the measured SHAPE ERP regime",
-      "generated_timestamp": "2026-06-09T16:08:04.798399"
+      "generated_timestamp": "2026-06-09T17:05:12.054321"
     },
     {
       "figure_id": "obs08_tplv_adjacency_matrices",
@@ -281,7 +281,7 @@
       "manuscript_section_recommended": "Results A",
       "claim_supported": "observed tPLV graph structure",
       "limitations": "bounded to the measured SHAPE ERP regime",
-      "generated_timestamp": "2026-06-09T16:08:05.054399"
+      "generated_timestamp": "2026-06-09T17:05:12.310321"
     },
     {
       "figure_id": "obs09_kappa_observation",
@@ -293,7 +293,7 @@
       "manuscript_section_recommended": "Results A",
       "claim_supported": "observed structure-function coupling",
       "limitations": "bounded to the measured SHAPE ERP regime",
-      "generated_timestamp": "2026-06-09T16:08:05.298399"
+      "generated_timestamp": "2026-06-09T17:05:12.554321"
     },
     {
       "figure_id": "obs10_closed_loop_example_trajectories",
@@ -305,7 +305,7 @@
       "manuscript_section_recommended": "Results D",
       "claim_supported": "closed-loop belief trajectories",
       "limitations": "bounded to the measured SHAPE ERP regime",
-      "generated_timestamp": "2026-06-09T16:08:06.086399"
+      "generated_timestamp": "2026-06-09T17:05:13.134321"
     }
   ]
 }

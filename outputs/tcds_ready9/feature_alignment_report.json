@@ -1,17 +1,20 @@
 {
   "provenance": {
-    "paper_repo_commit": "dff9715aa86a32f2dc4fc05ac13065b4491d5dab",
+    "paper_repo_commit": "1aa2ad290d1b96e5c54b443b070a6592916e0b75",
     "paper_repo_branch": "submission/tcds-ready9-substrate",
     "upstream_repo_commit": "6219ab43efca6f96f0dcad99bf6aacfc5212f738",
     "run_profile": {
-      "profile": "pilot",
+      "profile": "submission",
       "seeds": [
         42,
-        43
+        43,
+        44,
+        45,
+        46
       ],
-      "closed_loop_episodes": 1000,
-      "raw_signal_subset": 60,
-      "kappa_n_perm": 1000,
+      "closed_loop_episodes": 1500,
+      "raw_signal_subset": 150,
+      "kappa_n_perm": 5000,
       "n_folds_affective": 5,
       "n_folds_clinical": 5
     },
@@ -25,7 +28,7 @@
       "pandas": "3.0.3",
       "matplotlib": "3.10.9"
     },
-    "timestamp": "2026-06-09T16:37:44.783769+00:00"
+    "timestamp": "2026-06-09T17:05:05.085901+00:00"
   },
   "inputs": {
     "shape_features_211": {

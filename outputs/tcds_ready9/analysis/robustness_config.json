@@ -1,6 +1,6 @@
 {
   "provenance": {
-    "paper_repo_commit": "95affadeeb4027796c47414fdc1ba720d7ff561a",
+    "paper_repo_commit": "db49b28a02283c4121094754f2e19161b759adc5",
     "paper_repo_branch": "submission/tcds-ready9-substrate",
     "upstream_repo_commit": "6219ab43efca6f96f0dcad99bf6aacfc5212f738",
     "run_profile": {
@@ -28,7 +28,7 @@
       "pandas": "3.0.3",
       "matplotlib": "3.10.9"
     },
-    "timestamp": "2026-06-09T16:31:42.721765+00:00"
+    "timestamp": "2026-06-09T17:28:44.079742+00:00"
   },
   "representation_level": {
     "configs": [

@@ -10,7 +10,7 @@
     }
   },
   "provenance": {
-    "paper_repo_commit": "bf3a2853a42d2c15dbc2d87fc89e64fb2e560bba",
+    "paper_repo_commit": "1aa2ad290d1b96e5c54b443b070a6592916e0b75",
     "paper_repo_branch": "submission/tcds-ready9-substrate",
     "upstream_repo_commit": "6219ab43efca6f96f0dcad99bf6aacfc5212f738",
     "run_profile": {
@@ -38,7 +38,7 @@
       "pandas": "3.0.3",
       "matplotlib": "3.10.9"
     },
-    "timestamp": "2026-06-09T16:08:03.776210+00:00"
+    "timestamp": "2026-06-09T17:05:11.040071+00:00"
   },
   "data_level": "reservoir recomputed from X_ds",
   "privacy_status": "restricted (private clinical/neurophysiological data; released outputs are aggregate or deidentified)",

@@ -2,7 +2,7 @@
   "source_script": "experiments/tcds_ready9/07_generate_analysis_plots.py",
   "figure_type": "analysis",
   "provenance": {
-    "paper_repo_commit": "95affadeeb4027796c47414fdc1ba720d7ff561a",
+    "paper_repo_commit": "db49b28a02283c4121094754f2e19161b759adc5",
     "paper_repo_branch": "submission/tcds-ready9-substrate",
     "upstream_repo_commit": "6219ab43efca6f96f0dcad99bf6aacfc5212f738",
     "run_profile": {
@@ -30,7 +30,7 @@
       "pandas": "3.0.3",
       "matplotlib": "3.10.9"
     },
-    "timestamp": "2026-06-09T16:33:34.032224+00:00"
+    "timestamp": "2026-06-09T17:30:35.093242+00:00"
   },
   "privacy_status": "restricted (private clinical/neurophysiological data; released outputs are aggregate or deidentified)",
   "output_path": "figures/tcds_ready9/analysis/ana04_robustness_summary.pdf"
