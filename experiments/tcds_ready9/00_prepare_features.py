@@ -33,6 +33,41 @@ from experiments.tcds_ready9 import config as cfg  # noqa: E402
 from experiments.tcds_ready9 import common_ready9 as cr  # noqa: E402
 
 
+def _maybe_regenerate_embedding() -> bool:
+    """Regenerate lsm_bsc6_pca in place if the shipped pickle holds the all-zero
+    placeholder embedding. Reuses ``prepare_inputs/extract_ch5_features.py``
+    (reservoir BSC6 + PCA from X_ds). The regenerated embedding stays local and
+    must not be committed. Returns True if the embedding is usable afterwards.
+    """
+    try:
+        with open(cfg.SHAPE_FILE, "rb") as f:
+            ch5 = pickle.load(f)
+    except Exception as e:
+        print(f"[prepare] cannot read shape features: {e}", file=sys.stderr)
+        return False
+    E = np.asarray(ch5.get("lsm_bsc6_pca"))
+    if E.size and not np.allclose(E, 0.0):
+        return True  # already populated
+    script = cfg.ROOT / "prepare_inputs" / "extract_ch5_features.py"
+    if not script.exists():
+        print("[prepare] embedding is a zero placeholder and the regeneration "
+              "script is unavailable.", file=sys.stderr)
+        return False
+    print("[prepare] embedding is an all-zero placeholder; regenerating "
+          "lsm_bsc6_pca locally (kept private/uncommitted)...")
+    env = dict(os.environ)
+    env["ARSPI_CH5_FILE"] = str(cfg.SHAPE_FILE)
+    proc = subprocess.run([sys.executable, str(script),
+                           "--input", str(cfg.SHAPE_FILE),
+                           "--output", str(cfg.SHAPE_FILE)],
+                          env=env, cwd=str(_REPO_ROOT))
+    if proc.returncode != 0:
+        return False
+    with open(cfg.SHAPE_FILE, "rb") as f:
+        E2 = np.asarray(pickle.load(f).get("lsm_bsc6_pca"))
+    return bool(E2.size and not np.allclose(E2, 0.0))
+
+
 def _regenerate_ch67() -> bool:
     """Invoke the local feature-extraction script to produce the ch67 pickle.
 
@@ -80,6 +115,15 @@ def _write_alignment_error(reasons: list[str]) -> None:
 
 
 def main() -> int:
+    # 0. Ensure the reservoir embedding is populated (not the zero placeholder).
+    if not _maybe_regenerate_embedding():
+        _write_alignment_error([
+            "lsm_bsc6_pca embedding is an all-zero placeholder and could not be "
+            "regenerated locally; downstream classification would be invalid."
+        ])
+        print("[prepare] FAILED to obtain a valid embedding.", file=sys.stderr)
+        return 1
+
     # 1. Ensure the ch67 pickle exists (regenerate locally if needed).
     if not cfg.CH67_FILE.exists():
         ok = _regenerate_ch67()
