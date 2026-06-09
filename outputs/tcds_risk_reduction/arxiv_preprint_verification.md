@@ -7,8 +7,8 @@
 - privacy scan clean: True
 - source hits: none
 - pdf hits: none
-- main_arxiv.pdf sha256: fdbe77196673271a568185ac8488a3297a56e021a4ce7a12bc98dbea3fa478e3
-- ARSPI-Net_arxiv_source.zip sha256: bc5214d127f4ff6dd936da330a17b0ff20145ae2e65b854839bd7dc30b630233
+- main_arxiv.pdf sha256: 5cbe0e0258f07440c08e2284aa3ca4690f73a8d623b75eab084197163cdcb175
+- ARSPI-Net_arxiv_source.zip sha256: b1dc9272c087056c6568decfeac7d5aa1e37f46f5f2d0c12983cb1e3eb09eeba
 
 ## Included files
 - ana01_mechanism_ablation_performance.pdf
@@ -21,7 +21,6 @@
 - table_closed_loop_policy.tex
 - table_mechanism_ablation.tex
 - table_neural_mechanisms.tex
-- table_reproducibility_panel.tex
 
 ## Missing files (must be empty)
 - none

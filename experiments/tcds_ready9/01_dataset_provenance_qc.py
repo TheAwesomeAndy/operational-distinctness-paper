@@ -172,7 +172,6 @@ def _write_provenance_table(n_subj, n_obs, n_cond, n_ch, n_tp):
         ("Privacy rule", "aggregate/hashed outputs; subject-level data restricted", "package policy", "data governance"),
     ]
     lines = [
-        r"% Auto-generated dataset provenance table.",
         r"\begin{table}[t]",
         r"\centering",
         r"\footnotesize",

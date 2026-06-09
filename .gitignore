@@ -40,3 +40,7 @@ _build/
 *.synctex.gz
 manuscript/*.log
 outputs/tcds_risk_reduction/_*.log
+manuscript/arxiv_preprint/build_src/*.aux
+manuscript/arxiv_preprint/build_src/*.log
+manuscript/arxiv_preprint/build_src/*.out
+manuscript/arxiv_preprint/build_src/*.pdf

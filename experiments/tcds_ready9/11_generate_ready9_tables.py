@@ -136,7 +136,7 @@ def robustness_summary():
         r"under each perturbation family for representative configurations.}",
         r"\label{tab:robustness_summary}",
         r"\begin{tabular}{llrr}", r"\toprule",
-        r"Config & Perturbation & Level & BA \\", r"\midrule",
+        r"Config & Perturbation & Level (SNR dB / fraction) & BA \\", r"\midrule",
     ]
     for conf in ["A0", "A1", "A2", "A3", "A8"]:
         sub = rep[rep["config"] == conf]
@@ -147,6 +147,11 @@ def robustness_summary():
     out += [r"\bottomrule", r"\end{tabular}", r"\end{table}", ""]
     _write("table_robustness_summary.tex", out)
     return True
+
+
+_POLICY_LABEL = {"efe": "EFE", "pragmatic_only": "Pragmatic-only",
+                 "epistemic_only": "Epistemic-only", "passive": "Passive",
+                 "random": "Random", "oracle": "Oracle"}
 
 
 def closed_loop_policy():
@@ -162,7 +167,7 @@ def closed_loop_policy():
         r"Policy & $\epsilon$ & Success & Mean steps & Final $\mathcal{H}$ \\", r"\midrule",
     ]
     for _, r in df.iterrows():
-        out.append(f"{r['policy'].replace('_',' ')} & {r['epsilon']} & "
+        out.append(f"{_POLICY_LABEL.get(r['policy'], r['policy'])} & {r['epsilon']} & "
                    f"{r['success_rate']:.3f} [{r['success_ci_lo']:.3f}, {r['success_ci_hi']:.3f}] & "
                    f"{r['mean_steps']:.2f} & {r['final_entropy_mean']:.3f} \\\\")
     out += [r"\bottomrule", r"\end{tabular}", r"\end{table}", ""]
