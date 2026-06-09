@@ -1,0 +1,19 @@
+\begin{table}[t]\centering\footnotesize
+\caption{Resource and event-rate accounting for the event-driven substrate. Structural counts, spike-rate measurements, and CPU runtimes; these are not measured hardware-energy results.}
+\label{tab:resource_event}
+\begin{tabular}{l r}
+\toprule
+Quantity & Value \\
+\midrule
+Reservoir neurons / channel & 256 \\
+Channels & 34 \\
+Recurrent weights / channel & 65,536 \\
+Embedding $E$ dimension & 2176 \\
+PCA projection weights & 3,342,336 \\
+Spike sparsity (fraction active) & 0.14434 \\
+Mean spikes / observation & 321612.0 \\
+Recurrent ops vs dense & 0.1443 \\
+Classifier predict (64 obs), s & 0.00112 \\
+\bottomrule
+\end{tabular}
+\end{table}

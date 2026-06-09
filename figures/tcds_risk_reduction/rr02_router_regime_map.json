@@ -1,0 +1,92 @@
+{
+  "provenance": {
+    "paper_repo_commit": "d6b2778500ef4744e80564c8d65951891f2586e3",
+    "paper_repo_branch": "submission/tcds-risk-reduction",
+    "upstream_repo_commit": "6219ab43efca6f96f0dcad99bf6aacfc5212f738",
+    "run_profile": {
+      "profile": "submission",
+      "seeds": [
+        42,
+        43,
+        44,
+        45,
+        46
+      ],
+      "closed_loop_episodes": 1500,
+      "raw_signal_subset": 150,
+      "kappa_n_perm": 5000,
+      "n_folds_affective": 5,
+      "n_folds_clinical": 5
+    },
+    "privacy_status": "restricted (private clinical/neurophysiological data; released outputs are aggregate or deidentified)",
+    "python_version": "3.11.15",
+    "platform": "Linux-6.18.5-x86_64-with-glibc2.39",
+    "package_versions": {
+      "numpy": "2.4.6",
+      "scipy": "1.17.1",
+      "sklearn": "1.9.0",
+      "pandas": "3.0.3",
+      "matplotlib": "3.10.9"
+    },
+    "timestamp": "2026-06-09T21:16:52.001928+00:00"
+  },
+  "rows": [
+    "fixed_A0",
+    "fixed_A1",
+    "fixed_A3",
+    "fixed_A8",
+    "perturbation_label",
+    "signal_quality",
+    "oracle"
+  ],
+  "cols": [
+    "clean",
+    "amplitude_noise",
+    "channel_dropout",
+    "graph_perturbation"
+  ],
+  "matrix": [
+    [
+      0.4851,
+      0.4252,
+      0.4063,
+      0.4851
+    ],
+    [
+      0.4626,
+      0.4568,
+      0.4535,
+      0.4626
+    ],
+    [
+      0.355,
+      0.343,
+      0.3332,
+      0.3323
+    ],
+    [
+      0.4813,
+      0.366,
+      0.3397,
+      0.4799
+    ],
+    [
+      0.4755,
+      0.4615,
+      0.4498,
+      0.4806
+    ],
+    [
+      0.5011,
+      0.4268,
+      0.4165,
+      0.4216
+    ],
+    [
+      0.9036,
+      0.9685,
+      0.9707,
+      0.8967
+    ]
+  ]
+}
