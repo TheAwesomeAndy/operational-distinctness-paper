@@ -32,7 +32,7 @@
 \maketitle
 
 \begin{abstract}
-We present ARSPI-Net (Affective Reservoir--Spike Processing and Inference Network), a brain-inspired event-driven reservoir--graph substrate that transforms noisy affective electroencephalography (EEG) into a set of operationally distinct neural evidence streams and evaluates those streams as perceptual channels for a simulated embodied agent. The substrate is anchored in concrete neural mechanisms: a fixed leaky integrate-and-fire (LIF) spiking reservoir, a binned spike-count (BSC$_6$) event-driven code, an electrode-level temporal phase-locking (tPLV) graph, and a structure--function coupling readout $\kappa=\|C\|_F/\sqrt{p\,q}$. These produce four evidence streams: a spike-coded embedding $E$, dynamical descriptors $D$, graph-topological descriptors $T$, and a coupling block $C$. On 633 trial-averaged subject--condition observations from 211 adults under subject-grouped cross-validation across five seeds, a mechanism ablation with negative controls separates the streams: balanced accuracy is highest for the embedding-containing configurations ($E{+}D{+}T$, $0.481$) and the band-power baseline ($0.485$), the standalone $D$, $T$, and $C$ streams are lower but above the three-class chance level, and a shuffled-label control collapses to chance; an independent permutation--FDR protocol corroborates the ordering. The streams are not linear duplicates (largest $\mathrm{CKA}(E,D)=0.31$), and a $5{,}000$-permutation electrode-shuffle null on $\kappa$ is rejected in $33.5\%$ of observations. We characterise the streams under four perturbation families---temporal jitter, amplitude noise, channel dropout, and graph edge perturbation---and report their operating regimes rather than a single endpoint. Finally, an explicitly defined expected-free-energy controller uses the substrate as a perceptual estimator in a simulated closed-loop affective-control task with action-determined transition noise; against passive, random, pragmatic-only, epistemic-only, and perfect-perception oracle policies, the controller reaches and confirms a target affective state but shows no advantage over pragmatic control, an operating-regime result. Clinical labels are used only as exploratory contextual validation and are bounded by a false-discovery-rate result; no diagnostic claim is made. All results are restricted to the measured SHAPE ERP regime and are not a universal claim about EEG graph neural networks.
+We present ARSPI-Net (Affective Reservoir--Spike Processing and Inference Network), a brain-inspired event-driven reservoir--graph substrate that transforms noisy affective electroencephalography (EEG) into a set of operationally distinct neural evidence streams and evaluates those streams as perceptual channels for a simulated embodied agent. The substrate is anchored in concrete neural mechanisms: a fixed leaky integrate-and-fire (LIF) spiking reservoir, a binned spike-count (BSC$_6$) event-driven code, an electrode-level temporal phase-locking (tPLV) graph, and a structure--function coupling readout $\kappa = \|C\|_F/\sqrt{p\,q}$. These produce four evidence streams: a spike-coded embedding $E$, dynamical descriptors $D$, graph-topological descriptors $T$, and a coupling block $C$. We treat EEG/ERP as the partially observed output of a biological dynamical system and ask whether $E$, $D$, $T$, and $C$ are operationally distinct---empirically non-equivalent under a fixed evaluation protocol---rather than redundant relabellings of one response. On 633 trial-averaged subject-condition observations from 211 adults under subject-grouped cross-validation, a mechanism ablation separates the streams: subject-respecting permutation tests place 8 of 10 configurations above chance, including BandPower (49.27\%), $E$ (46.96\%), $E+D$ (49.34\%), and $E+D+T+C$ (49.33\%), while standalone $T$ and $C$ do not raise endpoint accuracy yet carry distinct topological and coupling structure. A 5{,}000-permutation electrode-shuffle null on $\kappa$ is rejected in 33.5\% of observations (mean $\kappa = 0.250$, sd $0.115$). We characterise the streams under four perturbation families---temporal jitter, amplitude noise, channel dropout, and graph edge perturbation---and report their operating regimes rather than a single endpoint. Finally, an explicitly defined expected-free-energy controller uses the substrate as a perceptual estimator in a simulated closed-loop affective-control task with action-determined transition noise; the controller is compared against passive, random, pragmatic-only, epistemic-only, and perfect-perception oracle policies. Clinical labels are used only as exploratory validation structure and are bounded by a false-discovery-rate result; no diagnostic claim is made. The result is restricted to the measured SHAPE ERP regime and should not be read as a universal claim about EEG graph neural networks.
 \end{abstract}
 
 \begin{IEEEkeywords}
@@ -225,10 +225,121 @@ and the primary metric is balanced accuracy
 with $K=2$ for clinical-label sensitivity and $K=3$ for affective classification.
 
 \section{Results}
-We organise the evidence as one argument over four pillars: (A) dataset provenance and the computational objects the substrate produces; (B) the reservoir--graph mechanism ablation; (C) perturbation robustness and operating regimes; and (D) the simulated embodied affective-control loop. The primary ablation is the multi-seed mechanism ablation of Section~\ref{sec:pillarB}; an independent ten-fold permutation--FDR protocol corroborates it, and that protocol together with the secondary clinical, redundancy, and comorbidity analyses is preserved in the supplementary technical version. Every main-text quantity maps to a script, input fingerprint, output table, and manifest entry in the reproduction map.
+\subsection{Affective Ablation: Embedding-Containing Combinations Are Strongest}
+Table~\ref{tab:affective_ablation} and Fig.~\ref{fig:affective_dual} report the corrected A0--A9 ablation. $E$ alone reaches 46.96\% balanced accuracy and 0.6460 macro ROC-AUC. $E+D$ has the highest balanced accuracy at 49.34\%; $E+D+T$ has the highest macro ROC-AUC among ARSPI-Net configurations at 0.6549. The band-power baseline remains competitive at 49.27\% balanced accuracy and 0.6783 macro ROC-AUC.
 
-\subsection{Dataset Provenance and Observed Computational Objects}\label{sec:pillarA}
-The data are trial-averaged event-related EEG from 211 community-recruited adults (subject 127 excluded for a recording anomaly), giving 633 subject--condition observations balanced across Negative, Neutral, and Pleasant. Provenance, access conditions, and the subject-grouped split protocol are summarised in the reproducibility panel (Table~\ref{tab:reproducibility}); numerical-validity and completeness checks are shown in Fig.~\ref{fig:obs00}. Subject-level data are held in a restricted research environment, and only aggregate or hashed outputs are reported.
+\input{tables/table2_affective_ablation.tex}
+
+\begin{figure*}[!t]
+\centering
+\includegraphics[width=0.98\textwidth]{fig04_affective_ablation_dual_metric.pdf}
+\caption{Affective ablation results. Embedding-containing configurations give the strongest ARSPI-Net balanced accuracies and remain comparable to the band-power baseline.}
+\label{fig:affective_dual}
+\end{figure*}
+
+\begin{figure}[!t]
+\centering
+\includegraphics[width=\columnwidth]{fig05_embedding_additive_utility.pdf}
+\caption{Embedding-centred additive utility for the affective task. Adding $D$ to $E$ gives the largest gain; adding $C$ to $E+D+T$ does not improve balanced accuracy.}
+\label{fig:additive}
+\end{figure}
+
+The ablation does not support a claim that every layer raises endpoint accuracy. It supports a target-dependent reading: affective separability is most accessible when the reservoir embedding is combined with dynamical or topological descriptors, and adding the coupling block on top does not move the affective number further.
+
+\subsection{Permutation-FDR Inference}\label{sec:fdr_results}
+Affective-task significance was assessed with a parallelised condition-permutation test that respects subject grouping ($n_{\mathrm{perm}}=200$, drawn within-subject so the inter-subject covariance is preserved). Eight of the ten configurations exceeded the null at the resolution limit of the test ($p \leq 0.005$): A0 (BandPower), A1 ($E$), A2 ($D$), A5 ($D+T$), A6 ($E+D$), A7 ($E+T$), A8 ($E+D+T$), and A9 ($E+D+T+C$). Two configurations did not reach significance: A3 ($T$ alone, $p=0.174$) and A4 ($C$ alone, $p=0.169$). $T$ and $C$ are not standalone affective classifiers under this readout, yet they contribute when combined with $E$ or $D$ and they show target-dependent utility on the clinical labels.
+
+For clinical-label sensitivity, the 30 diagnosis $\times$ configuration tests were combined under Benjamini--Hochberg FDR correction~\cite{benjamini1995fdr}. The minimum BH-adjusted $p$-value across the 30 tests is $0.30$ (ADHD $\times E$ and ADHD $\times E+D+T$, both with raw $p \leq 0.020$); no clinical contrast survives FDR correction at $\alpha=0.05$. Three contrasts had raw $p < 0.05$ (ADHD $\times E$, ADHD $\times E+D+T$, SUD $\times E+D+T$), but they are not interpreted as confirmed signal under multiple-comparisons correction. The full inference is recorded in the clinical-inference output table.
+
+\subsection{Power-Bounded Reading of the Clinical Null}\label{sec:power}
+The clinical null deserves a power-bounded reading rather than a flat dismissal. Observed clinical balanced accuracies range from approximately 51\% to 56\%. For a binary balanced-accuracy effect of 5\% over chance, an a-priori power calculation in the spirit of Cohen~\cite{cohen1988power} indicates roughly 380--400 trials per class are needed for $\alpha=0.05$ detection at $80\%$ power, before multiple-comparisons correction. The per-diagnosis cell sizes here range from approximately 30 to 110 positives, so the 30-cell BH null is the expected outcome for a cohort of this size at the observed effect sizes. The point of the inference table is that the clinical layer-profile pattern is the kind of weak directional signal one would expect from a sample of 211 community-recruited adults with overlapping comorbidity, not a deployment-ready biomarker. A confirmatory replication at $N\sim 400$ per diagnosis is what the present analysis pre-registers as the next step.
+
+\subsection{Clinical-Label Sensitivity: Best Layers Depend on Diagnosis}
+Clinical-label sensitivity has a different layer profile than the affective task. Table~\ref{tab:clinical_best} reports the best configuration per diagnosis and Table~\ref{tab:clinical_matrix} gives the full matrix. SUD peaks in $E+D+T$, MDD in $E$, PTSD in $D+T$, GAD in $T$, and ADHD in $D+T$.
+
+\input{tables/table3_clinical_best.tex}
+\input{tables/table4_clinical_matrix.tex}
+
+\begin{figure*}[!t]
+\centering
+\includegraphics[width=0.90\textwidth]{fig06_clinical_sensitivity_heatmap.pdf}
+\caption{Exploratory clinical-label sensitivity heatmap. Stars mark the best balanced-accuracy configuration per diagnosis. The matrix does not establish biomarkers.}
+\label{fig:clinical_heatmap}
+\end{figure*}
+
+\begin{figure}[!t]
+\centering
+\includegraphics[width=\columnwidth]{fig07_clinical_best_layer_dual_metric.pdf}
+\caption{Best clinical-label configuration per diagnosis. The best layer combination varies across labels, supporting target-dependent layer utility.}
+\label{fig:clinical_best_fig}
+\end{figure}
+
+The absolute clinical numbers are modest. The highest cell is 56.46\% balanced accuracy for SUD using $E+D+T$. Read together with Section~\ref{sec:fdr_results} and the power calculation in Section~\ref{sec:power}, this is weak-signal sensitivity, not diagnostic detection.
+
+\subsection{Comorbidity-Adjusted Exploratory Models}
+Exploratory comorbidity-adjusted logistic models included layer score, other diagnoses, comorbidity count, age, sex, and assigned sex where available. Selected rows are in Table~\ref{tab:adjusted}. ADHD shows the clearest adjusted pattern: $E$ has uncorrected layer-score $p=0.0432$ and $E+D+T$ has $p=0.0094$. SUD has an uncorrected topological association with negative coefficient. These associations guide interpretation only; they do not survive the multiple-comparisons correction reported in Section~\ref{sec:fdr_results}.
+
+\input{tables/table6_adjusted.tex}
+
+\subsection{Layer Redundancy}
+Pairwise CKA values are low to moderate. The largest is $\mathrm{CKA}(E,D)=0.3058$. The remainder are $\mathrm{CKA}(E,T)=0.0299$, $\mathrm{CKA}(E,C)=0.0738$, $\mathrm{CKA}(D,T)=0.0174$, $\mathrm{CKA}(D,C)=0.1858$, and $\mathrm{CKA}(T,C)=0.0314$. The blocks are not linear duplicates of one another. CCA saturates for several pairs, which is expected in high-dimensional low-sample regimes; CKA and ridge cross-predictability are the more conservative redundancy indicators.
+
+\input{tables/table5_redundancy.tex}
+
+\begin{figure}[!t]
+\centering
+\includegraphics[width=\columnwidth]{fig08_layer_redundancy_cka.pdf}
+\caption{CKA redundancy matrix. Low-to-moderate values indicate that the feature families are not trivial linear duplicates.}
+\label{fig:cka}
+\end{figure}
+
+\subsection{Reservoir Dynamics and Neural Coding}\label{sec:reservoir_dynamics}
+Fig.~\ref{fig:reservoir_dynamics} surfaces the substrate underlying $E$ for three exemplar (subject, condition) pairs, one per affective class. Panel (a) plots the LIF spike raster for a representative channel with the encoding window $t\in[10,70]$ shaded; spike density is approximately $13\%$ of cells active per timestep, corresponding to roughly $8{,}200$--$8{,}600$ spikes per exemplar. Panel (b) plots the corresponding membrane-potential heatmap, showing the leak--integrate--reset dynamics that drive emission. Panel (c) shows the per-class average $34\times34$ tPLV matrix across all 211 subjects, with non-trivial off-diagonal structure for every condition. Panel (d) projects the BSC$_6$ embedding into PC1 and PC2 ($36.6\%$ and $7.9\%$ explained variance) and overlays the three exemplars; the projection separates the conditions only weakly, in line with the moderate ablation result for $E$ alone.
+
+\begin{figure*}[!t]
+\centering
+\includegraphics[width=0.98\textwidth]{fig_reservoir_dynamics.pdf}
+\caption{Reservoir dynamics underlying ARSPI-Net. (a) LIF spike rasters for one exemplar per affective class on a representative channel; the BSC$_6$ encoding window $t\in[10,70]$ is shaded. (b) Membrane-potential heatmaps for the same exemplars. (c) Per-class average $34\times34$ tPLV connectivity matrices across all 211 subjects. (d) BSC$_6$ PCA projection (PC1 vs PC2) coloured by class with the three exemplars marked.}
+\label{fig:reservoir_dynamics}
+\end{figure*}
+
+\subsection{Structure--Function Coupling $\kappa$}\label{sec:kappa_results}
+We computed $\kappa$ for every observation with a 5{,}000-permutation electrode-shuffle null. The mean $\kappa$ across 633 observations is $0.250$ (sd $0.115$, range $[0.05, 0.66]$). The electrode-permuted null is rejected at $p<0.05$ in $33.5\%$ of observations, indicating that a non-trivial subset of subjects show structure--function coordination above what a randomised electrode labelling would predict. Per-condition paired Wilcoxon tests show weak trends only: Negative vs Neutral $p=0.069$, Neutral vs Pleasant $p=0.085$, Negative vs Pleasant indistinguishable. Per-diagnosis Mann--Whitney $U$ tests on subject-mean $\kappa$, BH-adjusted across the five diagnoses, are all non-significant (smallest $p_{\mathrm{BH}}=0.75$). Subject-mean $\kappa$ is uncorrelated with each subject's per-fold accuracy on A6 ($\rho=0.014$, $p=0.85$). $\kappa$ behaves as a complementary systems-level readout, not as a proxy for predictive sufficiency. Fig.~\ref{fig:kappa} reports the per-condition violins, the per-diagnosis contrasts, the $\kappa$-vs-A6 scatter, and the observed-vs-null $\kappa$ relationship.
+
+\begin{figure*}[!t]
+\centering
+\includegraphics[width=0.98\textwidth]{fig_kappa_distributions.pdf}
+\caption{Structure--function coupling $\kappa$. (a) Violin plots of $\kappa$ per affective condition. (b) Per-diagnosis $\kappa$ contrast (positive minus negative); none significant under BH-FDR. (c) Per-subject mean $\kappa$ vs per-subject A6 ($E+D$) accuracy ($\rho=0.01$). (d) Observed $\kappa$ vs the electrode-shuffled null mean; markers above the $y=x$ line have observation-level $p<0.05$ ($33.5\%$ of observations).}
+\label{fig:kappa}
+\end{figure*}
+
+\subsection{Sequential Evidence Accumulation Simulation}\label{sec:embodied_results}
+We simulated an embodied perceptual agent under five-fold subject-grouped cross-validation. The agent observes $T=10$ trials drawn with replacement from a held-out subject. At each step it picks one of four feature-stream policies, $a\in\{E, D, T, E+D+T\}$, and updates its Dirichlet posterior under~\eqref{eq:dirichlet_update}. Six meta-policies are compared: the four fixed feature-stream policies, a uniform-random meta-policy, and a greedy expected-information-gain meta-policy that selects the policy with the largest predictive-distribution KL update at each step. Final posterior predictive entropies (mean across 211 held-out subjects) rank the policies as $E+D+T$ ($0.931$ nats), $E$ ($0.938$), $D$ ($0.957$), greedy-EIG ($1.024$), random ($1.026$), and $T$ ($1.075$). The full $E+D+T$ stream reduces entropy fastest and reaches the highest final modal-class accuracy ($0.450$). The topological-only stream is the slowest. The greedy meta-policy does not match the strongest fixed policy because the topological-only classifier produces confidently mis-calibrated probability vectors that maximise instantaneous KL while degrading convergence, a known failure mode of naive expected-information-gain action selection that motivates calibration-aware extensions for hardware deployment. Fig.~\ref{fig:embodied} shows per-step entropy curves, cumulative information gain, final-decision accuracies, and the action mix selected by the greedy meta-policy.
+
+\begin{figure*}[!t]
+\centering
+\includegraphics[width=0.98\textwidth]{fig_embodied_loop.pdf}
+\caption{Sequential evidence accumulation simulation. (a) Posterior predictive entropy vs step under each policy (shaded $\pm$ sd across 211 held-out subjects); the dotted line marks the uniform prior $H=\log 3$. (b) Cumulative information gain. (c) Final-decision accuracy (modal class) after $T=10$ steps; the dashed line marks chance. (d) Action mix selected by the greedy expected-information-gain meta-policy. The loop is closed-loop on the belief side and open-loop on the environment side.}
+\label{fig:embodied}
+\end{figure*}
+
+\subsection{Headline Comparison vs Classical ERP Baseline}\label{sec:headline_comparison}
+Fig.~\ref{fig:headline} reports ARSPI-Net configurations, the BandPower control, and a classical ERP feature baseline (windowed amplitudes for $P1, N1, P2, P3, \mathrm{LPP}_{\text{early}}$) under the same subject-grouped cross-validation. The ERP baseline reaches $67.2\%$ balanced accuracy and $\AUC=0.85$ on the three-class affective task, exceeding ARSPI-Net under this readout. The comparison is informative, but it is not a like-for-like one. The ERP feature set is hand-built around a hypothesis: the IAPS affective response is encoded in five named components whose latency windows are known a-priori and whose polarities are taught by prior literature. ARSPI-Net's reservoir is fixed before any class label is observed, and its blocks measure four different things, none of which are tuned to the affective task.
+
+The architecture pays for that commitment in two places and is paid for it in three. It pays in raw three-class accuracy on this dataset and in the inability to claim affective-component specificity in the readout. It is paid first in per-diagnosis layer-profile structure that the ERP feature set cannot in principle express, because the ERP windows assume an affective response and have no representation of inter-electrode synchrony or structure--function coupling. It is paid second in the embodied closed-loop ranking, in which the four ARSPI-Net streams produce different per-step entropy-reduction rates that order the streams in the same way as the offline ablation, an order that is not visible in a single ERP scalar. And it is paid third in implementability on event-driven neuromorphic hardware, which a windowed amplitude readout does not support without re-extracting the underlying spike-like events. The headline number is reported here so that readers see the absolute frame. The contribution this paper claims is the audit, not endpoint supremacy.
+
+\begin{figure*}[!t]
+\centering
+\includegraphics[width=0.98\textwidth]{fig_headline_comparison.pdf}
+\caption{Headline comparison. ARSPI-Net configurations, the BandPower control, and the classical ERP baseline under matched subject-grouped cross-validation. Numerical AUCs are annotated next to each bar. Chance is marked in red.}
+\label{fig:headline}
+\end{figure*}
+
+\section{Dataset Provenance, Robustness, and Simulated Control}\label{sec:hardening}
+This section reports the substrate-level evidence that supports the central claim: dataset provenance and quality control, the perturbation robustness of the evidence streams, and the simulated embodied affective-control loop. The aggregate outputs, figures, and tables underlying every statement here are produced by a single reproducible pipeline and are mapped to their source scripts and input fingerprints in the accompanying reproduction map.
+
+\subsection{Dataset Provenance and Quality Control}
+Table~\ref{tab:dataset_provenance} records the dataset provenance and integrity as verifiable facts: source and access conditions, the included and excluded subjects, the observation and condition counts, the channel and epoch geometry, and the subject-grouped split protocol. Subject 127 is excluded for a recording anomaly, leaving 211 subjects and 633 trial-averaged observations balanced across the three affective conditions. Numerical-validity checks (finite-value fractions, channel and time-shape consistency) and raw-file completeness are summarised in the integrity figure. Subject-level data are maintained in a restricted research environment; the reported outputs are aggregate or hashed.
 
 \begin{figure}[!t]
 \centering
@@ -237,17 +348,8 @@ The data are trial-averaged event-related EEG from 211 community-recruited adult
 \label{fig:obs00}
 \end{figure}
 
-Fig.~\ref{fig:reservoir_dynamics} surfaces the computational objects the substrate produces, for one exemplar per affective class: the LIF spike raster and membrane trajectory that generate the embedding $E$ (panels a--b), the per-class $34\times34$ tPLV connectivity that defines the graph block $T$ (panel c), and the BSC$_6$ projection that defines the event-driven code (panel d). Structure--function coupling is summarised by $\kappa=\|C\|_F/\sqrt{pq}$: across the 633 observations the mean is $0.250$ (sd $0.115$), and a 5{,}000-permutation electrode-shuffle null is rejected at $p<0.05$ in $33.5\%$ of observations, so a non-trivial subset of subjects show coordination above a randomised electrode labelling. Subject-mean $\kappa$ is uncorrelated with per-subject classification accuracy ($\rho=0.01$), behaving as a complementary systems-level readout rather than a proxy for predictive sufficiency.
-
-\begin{figure*}[!t]
-\centering
-\includegraphics[width=0.98\textwidth]{fig_reservoir_dynamics.pdf}
-\caption{Computational objects produced by the substrate. (a) LIF spike rasters for one exemplar per affective class on a representative channel; the BSC$_6$ encoding window $t\in[10,70]$ is shaded. (b) Membrane-potential heatmaps for the same exemplars. (c) Per-class average $34\times34$ tPLV connectivity matrices across all 211 subjects. (d) BSC$_6$ PCA projection (PC1 vs PC2) coloured by class with the three exemplars marked.}
-\label{fig:reservoir_dynamics}
-\end{figure*}
-
-\subsection{Reservoir--Graph Mechanism Ablation}\label{sec:pillarB}
-The primary ablation evaluates configurations A0--A9 under subject-grouped cross-validation across five seeds, with bootstrap intervals and two negative controls (Table~\ref{tab:mechanism_ablation}, Fig.~\ref{fig:ana01}). Balanced accuracy is highest for the spectral band-power baseline (A0, $0.485$) and the embedding-containing configurations ($E{+}D{+}T$ $0.481$, $E{+}D{+}T{+}C$ $0.481$, $E{+}D$ $0.478$, $E$ $0.463$); the standalone dynamical, topological, and coupling streams are lower ($D$ $0.432$, $C$ $0.368$, $T$ $0.355$) but remain above the three-class chance level of $0.333$. The shuffled-label control collapses to chance ($0.335$), confirming the protocol. An independent ten-fold permutation--FDR protocol corroborates the ordering: eight of ten configurations exceed a subject-respecting permutation null, with standalone $T$ and $C$ the two that do not.
+\subsection{Mechanism Ablation and Operational Distinctness}
+Under subject-grouped cross-validation across the recorded seeds, the evidence streams behave as operationally distinct measurement views rather than redundant relabellings. Table~\ref{tab:mechanism_ablation} reports balanced accuracy and macro-F1 for the A0--A9 configurations with bootstrap intervals, together with shuffled-label and shuffled-subject negative controls that fall to chance. Embedding-containing configurations carry most of the affective-classification signal, while the dynamical, topological, and coupling streams contribute distinct structure that the embedding alone does not expose. Figure~\ref{fig:ana01} shows the per-configuration performance against chance.
 
 \input{../tables/tcds_ready9/table_mechanism_ablation.tex}
 
@@ -258,10 +360,10 @@ The primary ablation evaluates configurations A0--A9 under subject-grouped cross
 \label{fig:ana01}
 \end{figure}
 
-The reading is operational differentiation, not classifier superiority. The embedding carries most of the affective-classification signal, but $D$, $T$, and $C$ are not linear duplicates of it---the largest pairwise centred-kernel alignment is $\mathrm{CKA}(E,D)=0.31$---and they expose dynamical, topological, and coupling structure that the embedding alone does not. Clinical labels are used only as exploratory contextual validation: per-diagnosis balanced accuracies are near chance ($0.49$--$0.53$ across SUD, MDD, PTSD, GAD, ADHD) and no contrast survives Benjamini--Hochberg correction across the 30 diagnosis$\times$configuration cells; no diagnostic or clinical-biomarker claim is made. The clinical-sensitivity, redundancy, and comorbidity-adjusted analyses are reported in full in the supplementary technical version.
+\subsection{Perturbation Robustness of the Evidence Streams}
+The evidence streams are characterised under four perturbation families---temporal jitter, amplitude noise, channel dropout, and graph edge perturbation---at the representation level across all configurations, with a bounded raw-signal diagnostic that recomputes a reservoir embedding within fold. The objective is to report the operating regime of each stream rather than a single endpoint, including any boundary at which a reservoir or graph stream degrades faster than the spectral band-power baseline. Table~\ref{tab:robustness_summary} and Figure~\ref{fig:ana03} summarise the degradation profiles; the raw-signal diagnostic is conducted on a bounded subset, with its scope recorded in the run manifest.
 
-\subsection{Perturbation Robustness and Operating Regimes}\label{sec:pillarC}
-We characterise each evidence stream under four perturbation families---temporal jitter, amplitude noise, channel dropout, and graph edge perturbation---applied at the representation level across all ten configurations, with a bounded raw-signal diagnostic (subset scope recorded in the run manifest) that recomputes a reservoir embedding within fold. Fig.~\ref{fig:ana03} reports the degradation profiles. The objective is to report the operating regime of each stream rather than a single endpoint: the embedding-containing configurations retain the most discriminative information under amplitude noise and channel dropout, while the graph-derived stream degrades fastest under graph edge perturbation, locating the boundary at which topological evidence becomes unreliable.
+\input{../tables/tcds_ready9/table_robustness_summary.tex}
 
 \begin{figure*}[!t]
 \centering
@@ -270,44 +372,35 @@ We characterise each evidence stream under four perturbation families---temporal
 \label{fig:ana03}
 \end{figure*}
 
-A classical ERP-amplitude baseline (windowed $P1$--$\mathrm{LPP}$ features) provides a static discrimination anchor, reaching $67.2\%$ balanced accuracy on the three-class task and exceeding ARSPI-Net under a static readout. The classical ERP baseline provides a strong static discrimination anchor; ARSPI-Net is evaluated as a reservoir--graph measurement substrate---decomposing the response into operationally distinct, perturbation-characterised evidence streams with simulated embodied utility---rather than as a replacement for ERP amplitude features in static classification. The full static comparison is preserved in the supplementary technical version.
-
-\subsection{Simulated Embodied Affective-Control}\label{sec:pillarD}\label{sec:embodied_results}
-We evaluate the substrate as the perceptual estimator for a simulated embodied agent. The agent maintains a categorical belief $b$ over the affective state, updated by sequential Bayesian accumulation of the per-policy classifier likelihood (Section~\ref{sec:mechanisms}); the environment is action-determined with transition noise, $P(s'\mid a)=(1-\epsilon)\,\mathbf{1}[s'{=}a]+\epsilon\,\mathcal{U}$. The loop is a simulation over recorded observations and is not a physical embodiment.
-
-Open-loop, the four streams act as competing observation channels. Under sequential evidence accumulation (Fig.~\ref{fig:embodied}), final posterior entropy ranks them $E{+}D{+}T$ ($0.931$ nats, fastest) $<E$ ($0.938$) $<D$ ($0.957$) $<$ random ($1.026$) $<T$ ($1.075$, slowest)---the same ordering as the offline ablation, so the streams' offline sufficiency and their value as perceptual channels agree.
-
-\begin{figure*}[!t]
-\centering
-\includegraphics[width=0.98\textwidth]{fig_embodied_loop.pdf}
-\caption{Open-loop sequential evidence accumulation. (a) Posterior predictive entropy vs step under each policy (shaded $\pm$ sd across 211 held-out subjects); the dotted line marks the uniform prior $H=\log 3$. (b) Cumulative information gain. (c) Final-decision accuracy (modal class) after $T=10$ steps; the dashed line marks chance. (d) Action mix of the greedy expected-information-gain meta-policy. The agent's posterior updates over time while its actions do not modify the stimulus stream.}
-\label{fig:embodied}
-\end{figure*}
-
-Closed-loop, the agent must drive the environment to a target affective state and confirm it. An expected-free-energy (EFE) controller selects the action minimising
-\begin{equation}
-\mathrm{EFE}(a)=\underbrace{\mathrm{KL}\!\big(P(s'\mid a)\,\|\,C\big)}_{\text{risk}}+\underbrace{\mathbb{E}_{s'\sim P(\cdot\mid a)}\big[\hat H(s')\big]}_{\text{ambiguity}},
-\label{eq:efe}
-\end{equation}
-where $C$ is a preference distribution peaked on the target and $\hat H(s)$ is the expected observation-posterior entropy for state $s$ estimated on the training fold; the agent stops when $b(\text{target})\geq 0.8$. It is compared against passive (belief-blind), random, pragmatic-only (risk term only), epistemic-only (ambiguity term only), and a perfect-perception oracle, over $1{,}500$ episodes per policy at each transition-noise level $\epsilon$ (Table~\ref{tab:closed_loop_policy}, Fig.~\ref{fig:ana07}). The oracle bounds success at $1.000$. The EFE and pragmatic controllers reach and confirm the target ($0.862$ and $0.864$ at $\epsilon=0$; $0.805$ and $0.808$ at $\epsilon=0.4$), while belief-blind control degrades fastest with transition noise ($1.000\!\to\!0.733$) and the random and epistemic-only baselines stay low. The EFE controller shows no advantage over pragmatic-only control: under an action-determined transition the epistemic term carries little marginal utility, and the gap to the oracle quantifies the cost of single-trial perceptual unreliability. This is an operating-regime result, not a controller-superiority claim.
+\subsection{Simulated Embodied Affective-Control Loop}
+We evaluate the substrate as a perceptual estimator inside a simulated closed-loop affective-control task. The expected-free-energy controller is defined explicitly (belief state, likelihood, transition, preferred distribution, risk and ambiguity terms, action-selection rule, and stopping criterion) and compared against passive, random, pragmatic-only, epistemic-only, and perfect-perception oracle policies under action-determined transition noise. The loop is a simulation over recorded observations and is not a physical embodiment. Table~\ref{tab:closed_loop_policy} reports success rate (with Wilson intervals), mean steps, and final posterior entropy by transition noise; Figure~\ref{fig:ana07} shows success by policy, and Figure~\ref{fig:obs10} shows example belief trajectories.
 
 \input{../tables/tcds_ready9/table_closed_loop_policy.tex}
 
 \begin{figure}[!t]
 \centering
 \includegraphics[width=\columnwidth]{ana07_closed_loop_success_by_policy.pdf}
-\caption{Closed-loop success rate by policy and transition noise $\epsilon$, with Wilson 95\% intervals. The expected-free-energy and pragmatic controllers reach and confirm the target affective state and degrade gracefully; belief-blind, random, and epistemic-only baselines do not match them.}
+\caption{Closed-loop success rate by policy and transition noise $\epsilon$, with Wilson 95\% intervals. The expected-free-energy and pragmatic controllers reach and confirm the target affective state, while belief-blind, random, and epistemic-only baselines do not.}
 \label{fig:ana07}
 \end{figure}
 
-\subsection{Reproducibility}
-Table~\ref{tab:reproducibility} is the reproducibility panel: subjects, observations, classes, channels, split protocol, feature blocks, perturbation families, seeds, closed-loop episodes, policy set, repository/upstream commits, and the restricted-data availability posture. Every main-text quantity maps to a script, input fingerprint, output table, and manifest entry in the reproduction map; the full secondary-evidence record---the ten-fold ablation, clinical and comorbidity models, redundancy analysis, per-condition $\kappa$ contrasts, and evaluation-coverage and runtime tables---is preserved as the supplementary technical version.
+\begin{figure}[!t]
+\centering
+\includegraphics[width=\columnwidth]{obs10_closed_loop_example_trajectories.pdf}
+\caption{Example closed-loop belief trajectories (simulation episodes): belief in the target state and posterior entropy over steps at two transition-noise levels. Identifiers are episode-level, not subject-level.}
+\label{fig:obs10}
+\end{figure}
 
+\subsection{Evaluation Coverage and Reproducibility}
+Table~\ref{tab:evaluation_coverage} reports the evaluation coverage of the ARSPI-Net components against the system-level evaluation requirements addressed here; it is an internal-consistency summary, not a ranking against other systems. Table~\ref{tab:reproducibility} is the reproducibility panel for the evaluation. Bounded graph observables and a runtime/resource summary supporting the reservoir--graph substrate claim are reported without any hardware-energy measurement.
+
+\input{../tables/tcds_ready9/table_dataset_provenance.tex}
+\input{../tables/tcds_ready9/table_evaluation_coverage.tex}
 \input{../tables/tcds_ready9/table_reproducibility_panel.tex}
 
 \section{Discussion}
 \subsection{Main Finding}
-The four ARSPI-Net blocks are operationally distinct under a fixed evaluation protocol. Affective classification is strongest for embedding-containing configurations and survives subject-respecting permutation testing for 8 of 10 configurations; standalone $T$ and $C$ do not. Clinical-label sensitivity has a different layer profile in raw means and does not survive BH-FDR across the 30 clinical cells, an outcome a power calculation predicts for a cohort of this size at these effect magnitudes. Pairwise CKA is low to moderate, and the largest pair, $\mathrm{CKA}(E,D)=0.31$, is well below the value that would mark linear redundancy. $\kappa$ rejects an electrode-randomised null in roughly one third of observations and is uncorrelated with classifier accuracy, behaving as a complementary systems-level readout. The embodied agent ranks the four feature-stream policies by per-step expected information gain in the same order as the offline ablation. The blocks behave like different signal-processing views of one EEG response. The analyses support claims about operational layer utility, feature-block validity, FDR-corrected affective inference, structure--function coupling against an electrode-permutation null, and the embodied perception--action ranking. They do not support diagnostic or clinical-biomarker claims, because no clinical-label cell survived BH-FDR correction.
+The four ARSPI-Net blocks are operationally distinct under a fixed evaluation protocol. Affective classification is strongest for embedding-containing configurations and survives subject-respecting permutation testing for 8 of 10 configurations; standalone $T$ and $C$ do not. Clinical-label sensitivity has a different layer profile in raw means and does not survive BH-FDR across the 30 clinical cells, an outcome the power calculation in Section~\ref{sec:power} predicts for a cohort of this size at these effect magnitudes. Pairwise CKA is low to moderate, and the largest pair, $\mathrm{CKA}(E,D)=0.31$, is well below the value that would mark linear redundancy. $\kappa$ rejects an electrode-randomised null in roughly one third of observations and is uncorrelated with classifier accuracy, behaving as a complementary systems-level readout. The embodied agent ranks the four feature-stream policies by per-step expected information gain in the same order as the offline ablation. The blocks behave like different signal-processing views of one EEG response. The analyses support claims about operational layer utility, feature-block validity, FDR-corrected affective inference, structure--function coupling against an electrode-permutation null, and the embodied perception--action ranking. They do not support diagnostic or clinical-biomarker claims, because no clinical-label cell survived BH-FDR correction.
 
 \subsection{Why This Is Not Merely an Ablation Table}
 Ablation in many architecture papers is used to prove that every module raises the final number. That is not the result here. Adding $C$ to $E+D+T$ does not move the affective number. $T$ and $C$ alone are weak affective classifiers under permutation inference. Yet the clinical-label matrix has different best-fit layers for different diagnoses, $\kappa$ rejects its electrode-randomised null in a substantial subset of observations, and the embodied agent's per-step expected-information-gain ranking discriminates the streams. A block can be sub-threshold as a classifier and still operationally distinct as a measurement view, and it can carry usable structure for an embodied agent that an offline endpoint metric cannot see.
@@ -333,7 +426,7 @@ Clinical findings are bounded. Balanced accuracies between roughly $51\%$ and $5
 \section{Limitations}
 The scope of this paper is bounded in five specific ways. The embodied evaluation is a closed-loop \emph{simulation} over recorded EEG observations; it is not physical robot embodiment and not live deployment. The clinical analysis is exploratory validation structure only and is not diagnostic validation; no biomarker claim is made. The runtime and resource figures are wall-clock and structural; hardware energy is not measured and no low-power wearable deployment is claimed. The dataset is a private, access-controlled clinical resource, which limits public benchmarking and external replication to approved-access conditions. Finally, all quantitative results are restricted to the measured SHAPE ERP regime and should not be read as universal claims about EEG graph neural networks. The remaining paragraphs detail these bounds.
 
-The clinical labels are comorbid and cannot be interpreted as disorder-specific mechanisms from these analyses alone. After BH-FDR correction across the 30 clinical contrasts no test reaches significance, and the layer-by-diagnosis pattern is reported as a weak-signal observation rather than a discovered biomarker. A power calculation (supplementary technical version) sets the replication target at $N\approx 400$ per diagnosis.
+The clinical labels are comorbid and cannot be interpreted as disorder-specific mechanisms from these analyses alone. After BH-FDR correction across the 30 clinical contrasts no test reaches significance, and the layer-by-diagnosis pattern is reported as a weak-signal observation rather than a discovered biomarker. The power calculation in Section~\ref{sec:power} sets the replication target at $N\approx 400$ per diagnosis.
 
 The cohort is cross-sectional and adult. The data span community-recruited participants in a single age band and the analysis is not longitudinal. Architectural maturation, plasticity-driven adaptation, and developmental questions that would otherwise be in scope for a TCDS submission are not addressed by these data and are explicitly excluded from the claims here.
 
