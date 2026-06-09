@@ -44,6 +44,9 @@ def _read(name):
 def _save(fig, fid):
     fig.savefig(cfg.FIG_ANA_DIR / f"{fid}.pdf", bbox_inches="tight")
     plt.close(fig)
+    stale = A / f"{fid}_SKIPPED.md"
+    if stale.exists():
+        stale.unlink()
     cr.write_json(cfg.FIG_ANA_DIR / f"{fid}.json", {
         "source_script": "experiments/tcds_ready9/07_generate_analysis_plots.py",
         "figure_type": "analysis", "provenance": cr.base_provenance(),

@@ -57,6 +57,10 @@ def _skip(fig_id, reason):
 def _save(fig, fig_id):
     fig.savefig(cfg.FIG_OBS_DIR / f"{fig_id}.pdf", bbox_inches="tight")
     plt.close(fig)
+    # Clear any stale skip report from a prior partial run.
+    stale = cfg.OBS_OUT_DIR / f"{fig_id}_SKIPPED.md"
+    if stale.exists():
+        stale.unlink()
     print(f"[obs] wrote {fig_id}.pdf")
 
 
