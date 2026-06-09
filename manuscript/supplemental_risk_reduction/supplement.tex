@@ -24,10 +24,7 @@ The data are trial-averaged event-related EEG from 211 community-recruited adult
 observations balanced across the Negative, Neutral, and Pleasant affective
 conditions. All evaluation uses subject-grouped cross-validation, so no subject
 appears in both training and test. Raw EEG, clinical metadata, and subject-level
-feature artifacts are restricted human-subject research data held in an
-access-controlled environment and are not publicly released; reported outputs are
-aggregate and deidentified. No raw EEG or clinical metadata are distributed with
-this appendix.
+feature artifacts are restricted human-subject research data held in an access-controlled environment; reported outputs are aggregate and deidentified.
 
 \section{Feature-Block Definitions}
 Each observation is decomposed into a spectral baseline and four reservoir--graph
@@ -60,7 +57,7 @@ $\in\{0.1,0.2,0.3\}$.
 \item \textbf{Graph edge perturbation}: symmetric tPLV edge dropout at fraction
 $\in\{0.1,0.2,0.3\}$ (affects the $T$ and $C$ streams; non-graph streams are
 unperturbed).
-\item \textbf{Temporal jitter}: applied in the bounded raw-signal diagnostic of
+\item \textbf{Temporal jitter}: applied in the limited raw-signal diagnostic of
 the main robustness analysis.
 \end{itemize}
 

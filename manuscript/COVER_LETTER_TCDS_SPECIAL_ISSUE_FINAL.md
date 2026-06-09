@@ -26,7 +26,7 @@ loop.
 A supplemental technical appendix provides the full robustness tables, an adaptive
 evidence-routing analysis, and resource and event-rate accounting. All results are
 restricted to the measured study ERP regime. The underlying EEG and clinical
-metadata are restricted human-subject research data and are not publicly released;
+metadata remain access-controlled;
 the manuscript reports aggregate, deidentified outputs with methodological detail
 sufficient for evaluation under approved data-access conditions.
 
