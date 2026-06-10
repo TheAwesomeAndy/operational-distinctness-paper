@@ -41,6 +41,5 @@ preprint posting is an author-side decision per the target policy; if added it m
 not imply AI authorship. Record the decision here before posting.
 
 ## Status note used
-"This manuscript is a preprint and has not been certified by peer review."
 (Do not use "accepted", "in press", "published", "under review", "IEEE-approved
 version", or "publisher version".)
