@@ -41,6 +41,7 @@ _build/
 manuscript/*.log
 manuscript/**/*.log
 outputs/tcds_risk_reduction/_*.log
+manuscript/submission_package_blind/main_blind.pdf
 manuscript/arxiv_preprint/build_src/*.aux
 manuscript/arxiv_preprint/build_src/*.log
 manuscript/arxiv_preprint/build_src/*.out
