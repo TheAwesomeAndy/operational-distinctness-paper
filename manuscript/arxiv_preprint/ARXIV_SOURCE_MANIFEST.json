@@ -33,9 +33,5 @@
     "source_hits": {},
     "pdf_hits": [],
     "clean": true
-  },
-  "checksums_sha256": {
-    "main_arxiv.pdf": "aaa97af317c80e4986f978e1d28e432f8177889ec4e498e2f8c052ff9919d6b2",
-    "ARSPI-Net_arxiv_source.zip": "8025495eb3d200097b6e04bcfc62c7d5a889bf67745a4bf4fc7c084697f1cd85"
   }
 }
