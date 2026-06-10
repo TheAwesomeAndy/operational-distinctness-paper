@@ -171,17 +171,11 @@ def main() -> int:
                                "feature pickles", "clinical_profile.csv", ".git"],
         "privacy_scan": {"source_hits": scan_hits, "pdf_hits": pdf_hits,
                          "clean": (not scan_hits and not pdf_hits)},
-        "checksums_sha256": {
-            "main_arxiv.pdf": _sha(ARX / "main_arxiv.pdf") if compiled else None,
-            "ARSPI-Net_arxiv_source.zip": _sha(zip_path),
-        },
     }
     (ARX / "ARXIV_SOURCE_MANIFEST.json").write_text(json.dumps(manifest, indent=2))
 
     # verification report
     report = dict(manifest)
-    report["main_pdf_checksum"] = manifest["checksums_sha256"]["main_arxiv.pdf"]
-    report["source_zip_checksum"] = manifest["checksums_sha256"]["ARSPI-Net_arxiv_source.zip"]
     (OUT / "arxiv_preprint_verification.json").write_text(json.dumps(report, indent=2))
     md = [
         "# arXiv preprint package - verification report", "",
@@ -190,9 +184,7 @@ def main() -> int:
         f"- overfull boxes > 50pt: {len(overfull_big)}",
         f"- privacy scan clean: {manifest['privacy_scan']['clean']}",
         f"- source hits: {scan_hits or 'none'}",
-        f"- pdf hits: {pdf_hits or 'none'}",
-        f"- main_arxiv.pdf sha256: {report['main_pdf_checksum']}",
-        f"- ARSPI-Net_arxiv_source.zip sha256: {report['source_zip_checksum']}", "",
+        f"- pdf hits: {pdf_hits or 'none'}", "",
         "## Included files", *[f"- {f}" for f in sorted(set(included))],
         "", "## Missing files (must be empty)", *([f"- {m}" for m in missing] or ["- none"]),
         "", "## Author metadata placeholders still needing author input",

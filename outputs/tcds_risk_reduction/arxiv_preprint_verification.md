@@ -7,8 +7,6 @@
 - privacy scan clean: True
 - source hits: none
 - pdf hits: none
-- main_arxiv.pdf sha256: 4738a539126c8cdcf3389be0f8eec5f114b0c46e0bc14a7387de3135d7653410
-- ARSPI-Net_arxiv_source.zip sha256: 00bf1e77f6d400f3f247cbe738917e7654e7488eb9a4b4dbfeb2ebf94a62a750
 
 ## Included files
 - ana01_mechanism_ablation_performance.pdf
