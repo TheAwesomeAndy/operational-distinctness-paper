@@ -9,7 +9,7 @@
 \graphicspath{{../../figures/tcds_ready9/observations/}{../../figures/tcds_ready9/analysis/}{../../figures/tcds_hardening/}{../../figures/tcds_risk_reduction/}}
 
 \title{Supplementary Material\\
-ARSPI-Net: An Event-Driven Reservoir--Graph Substrate for Embodied Affective EEG Perception}
+ARSPI-Net: An Event-Driven Reservoir-Graph Substrate for Embodied Affective EEG Perception}
 \author{}
 \date{}
 
@@ -20,14 +20,14 @@ ARSPI-Net: An Event-Driven Reservoir--Graph Substrate for Embodied Affective EEG
 
 \section{Dataset and Privacy Statement}
 The data are trial-averaged event-related EEG from 211 community-recruited adults
-(subject 127 excluded for a recording anomaly), giving 633 subject--condition
+(subject 127 excluded for a recording anomaly), giving 633 subject-condition
 observations balanced across the Negative, Neutral, and Pleasant affective
 conditions. All evaluation uses subject-grouped cross-validation, so no subject
 appears in both training and test. Raw EEG, clinical metadata, and subject-level
 feature artifacts are restricted human-subject research data held in an access-controlled environment; reported outputs are aggregate and deidentified.
 
 \section{Feature-Block Definitions}
-Each observation is decomposed into a spectral baseline and four reservoir--graph
+Each observation is decomposed into a spectral baseline and four reservoir-graph
 evidence streams, each anchored to a named computational object:
 \begin{itemize}
 \item \textbf{BandPower}: spectral band-power features (non-neuromorphic baseline).
@@ -38,7 +38,7 @@ components per channel.
 complexity of the reservoir state trajectory).
 \item \textbf{$T$}: tPLV graph-topological descriptors (per-electrode strength
 and clustering of the temporal phase-locking matrix).
-\item \textbf{$C$}: structure--function coupling readout
+\item \textbf{$C$}: structure-function coupling readout
 $\kappa=\|C\|_F/\sqrt{p\,q}$.
 \end{itemize}
 Feature dimensions and reservoir constants are reported in
@@ -62,7 +62,7 @@ the main robustness analysis.
 \end{itemize}
 
 \section{Mechanism Ablation Details}
-The full A0--A9 mechanism ablation with bootstrap intervals and shuffled-label /
+The full A0 to A9 mechanism ablation with bootstrap intervals and shuffled-label /
 shuffled-subject negative controls is shown below.
 \input{../../tables/tcds_ready9/table_mechanism_ablation.tex}
 
@@ -107,7 +107,7 @@ across the streams, but the deployable routers (signal-quality, perturbation-lab
 \section{Resource and Event-Rate Accounting}
 We report structural counts, spike-rate measurements, and CPU runtimes for the
 event-driven substrate. The recurrent layer performs on the order of the measured
-spike sparsity fraction of the dense-equivalent multiply--accumulate count.
+spike sparsity fraction of the dense-equivalent multiply-accumulate count.
 \emph{These are computational-resource measurements: event rate, operation counts, and runtime.}
 \input{../../tables/tcds_risk_reduction/table_resource_event_accounting.tex}
 \begin{figure}[t]\centering
