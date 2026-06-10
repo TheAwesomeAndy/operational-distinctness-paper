@@ -1,7 +1,7 @@
 Dear Editors,
 
-We submit our manuscript, "ARSPI-Net: An Event-Driven Reservoir-Graph Substrate
-for Embodied Affective EEG Perception," for consideration in the Special Issue on
+We submit our manuscript, "ARSPI-Net: An Event-Driven Reservoir-Graph Substrate for Affective EEG
+Perception in Simulated Embodied Control," for consideration in the Special Issue on
 Brain-Inspired Computing for Embodied AI.
 
 The manuscript develops and evaluates a brain-inspired signal-processing substrate
@@ -15,13 +15,9 @@ operating regimes, and assess their utility as perceptual channels in a simulate
 embodied affective-control loop driven by an explicitly defined expected-free-energy
 controller.
 
-The study evaluates ARSPI-Net as an event-driven reservoir-graph measurement
-substrate. The affective EEG task and the associated clinical labels define the
-validation setting. The resource analysis reports event-rate and operation-count
-accounting for the event-driven substrate. The embodied experiment is a simulated
-perceptual-control analysis over recorded neurophysiological observations. Validation
-is restricted to recorded SHAPE ERP observations and a simulated perceptual-control
-loop.
+The submission evaluates ARSPI-Net as an event-driven reservoir-graph measurement
+substrate for affective EEG, with validation restricted to recorded SHAPE ERP
+observations and a simulated embodied-control loop.
 
 A supplemental technical appendix provides the full robustness tables, an adaptive
 evidence-routing analysis, and resource and event-rate accounting. All results are

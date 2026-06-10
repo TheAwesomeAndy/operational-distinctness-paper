@@ -23,7 +23,7 @@
 
 \begin{document}
 
-\title{ARSPI-Net: An Event-Driven Reservoir-Graph Substrate for Embodied Affective EEG Perception}
+\title{ARSPI-Net: An Event-Driven Reservoir-Graph Substrate for Affective EEG Perception in Simulated Embodied Control}
 
 \author{Anonymous Author(s)\\\textit{Submitted for double-blind review}}
 
@@ -39,6 +39,8 @@ EEG, neuromorphic computing, spiking neural networks, liquid state machines, res
 
 \section{Introduction}
 EEG offers millisecond-scale access to neural activity, but scalp recordings are noisy, indirect, and subject-dependent. For an embodied agent that must perceive and act on affective state, the central engineering problem is the extraction of usable neural evidence from this partially observed, nonstationary signal. We treat the affective event-related potential (ERP) as the output of a biological dynamical system and ask how an event-driven, brain-inspired substrate can transform it into evidence streams whose reliability can be measured under perturbation and used to drive perception under uncertainty. This is a neuromorphic signal-processing question rather than a question of psychology or diagnosis. A single endpoint classifier leaves open which part of a staged substrate carries the signal, how that signal degrades under realistic measurement perturbations, and whether two intermediate representations measure the same response under different names.
+
+This work does not propose ARSPI-Net as a superior static affective-EEG classifier. A conventional ERP-amplitude baseline is retained as a reference and achieves higher three-class balanced accuracy under a static readout. ARSPI-Net is evaluated instead as a reservoir-graph measurement substrate: it decomposes the response into spike-coded, dynamical, graph-topological, and structure-function evidence streams; measures their perturbation-dependent operating regimes; and tests their utility as perceptual channels in a simulated embodied-control loop.
 
 Compact convolutional baselines such as EEGNet~\cite{lawhern2018eegnet}, EEG graph networks~\cite{klepl2024gnn,klepl2023ad}, spiking-graph hybrids~\cite{gong2023sglnet}, and multimodal attention models~\cite{guo2025mma,chiang2023depression} are evaluated through cross-subject protocols, ablations, and module-level metrics rather than one accuracy number. ARSPI-Net (Affective Reservoir-Spike Processing and Inference Network), a staged neuromorphic architecture for clinical affective EEG~\cite{lane2023arspi,lane2024arspi}, is evaluated here under that standard.
 
@@ -229,7 +231,7 @@ We characterise each evidence stream under four perturbation families (temporal 
 \label{fig:ana03}
 \end{figure*}
 
-A classical ERP-amplitude baseline (windowed $P1$ to $\mathrm{LPP}$ features) reaches $67.2\%$ balanced accuracy on the three-class task, exceeding ARSPI-Net under a static readout. ARSPI-Net is evaluated as a reservoir-graph measurement substrate that decomposes the response into operationally distinct, perturbation-characterised evidence streams with simulated embodied utility, complementary to ERP amplitude features in static classification. The full static comparison is reported in the supplementary material.
+A classical ERP-amplitude baseline (windowed $P1$ to $\mathrm{LPP}$ features) reaches $67.2\%$ balanced accuracy on the three-class task, exceeding ARSPI-Net under a static readout. This comparison anchors the endpoint-classification trade-off: ARSPI-Net is not optimized as a static classifier, but as a reservoir-graph measurement substrate that exposes operationally distinct, perturbation-characterised evidence streams with simulated embodied-control utility. The full static comparison is reported in the supplementary material.
 
 \subsection{Simulated Embodied Affective-Control}\label{sec:pillarD}\label{sec:embodied_results}
 We evaluate the substrate as the perceptual estimator for a simulated embodied agent. The agent maintains a categorical belief $b$ over the affective state, updated by sequential Bayesian accumulation of the per-policy classifier likelihood (Section~\ref{sec:mechanisms}); the environment is action-determined with transition noise, $P(s'\mid a)=(1-\epsilon)\,\mathbf{1}[s'{=}a]+\epsilon\,\mathcal{U}$. The loop is evaluated as a simulation over recorded observations.
@@ -260,7 +262,11 @@ Perturbation robustness locates a stream-specific operating regime rather than a
 The simulated embodied-control result establishes that the substrate functions as a usable perceptual estimator: an expected-free-energy controller reaches and confirms a target affective state and maintains higher success rates with transition noise, bounded above by a perfect-perception oracle. Under an action-determined transition the epistemic term adds limited marginal utility, so the expected-free-energy controller matches pragmatic control, and the oracle gap quantifies the cost of single-trial perceptual unreliability. The loop is a sequential-decision precursor to active inference~\cite{friston2010free,parr2022activeinference}, closed-loop on the belief side and open-loop on the environment side, evaluated as a simulation over recorded observations.
 
 \section{Limitations}
-The embodied evaluation is a closed-loop \emph{simulation} over recorded EEG observations, and all results are specific to the measured ERP regime. The clinical analysis is exploratory and bounded by a Benjamini-Hochberg false-discovery-rate result, and the access-controlled dataset limits public benchmarking. The static ERP-amplitude baseline attains higher three-class accuracy; the contribution of this work is the substrate's operationally distinct, perturbation-characterised evidence streams and their simulated embodied utility.
+The embodied evaluation is a closed-loop simulation over recorded EEG observations. The agent updates beliefs and selects policies sequentially, but the environment is not a physical robot and the EEG stream is not acquired online. The result therefore supports simulated perceptual-control utility, not deployed robotic embodiment.
+
+All measurements are restricted to the measured ERP regime. The access-controlled dataset limits direct public benchmarking, but it provides the properties required for this study: a 211-subject affective ERP cohort, clinically annotated metadata, balanced subject-condition observations, and subject-grouped validation. Public emotion-EEG datasets such as SEED or DEAP support different benchmarking questions, but they do not replace the clinically annotated measured ERP regime evaluated here.
+
+The clinical-label analyses are exploratory. Near-chance performance across SUD, MDD, PTSD, GAD, and ADHD is consistent with the cohort structure: comorbidity is common, diagnostic labels are overlapping, and the substrate was designed to measure affective ERP evidence streams rather than to validate diagnostic biomarkers. The false-discovery-rate result therefore bounds the clinical interpretation rather than weakening the engineering contribution.
 
 \section{Conclusion}
 ARSPI-Net is a brain-inspired event-driven reservoir-graph substrate that transforms affective EEG into operationally distinct evidence streams: a spike-coded embedding, dynamical descriptors, a phase-locking graph, and a structure-function coupling readout. A multi-seed mechanism ablation with negative controls separates the streams; a perturbation analysis reports their operating regimes; and a simulated embodied affective-control loop with an explicitly defined expected-free-energy controller evaluates them as perceptual channels. The streams behave as operationally distinct measurement views of one EEG response, and the substrate supports the brain-inspired-computing-for-embodied-AI framing on grounds of mechanism and of a simulated closed-loop demonstration, with clinical claims bounded and scope restricted to the measured regime.
