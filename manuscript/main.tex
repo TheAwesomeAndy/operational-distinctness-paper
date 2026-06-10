@@ -54,7 +54,7 @@ The dataset comprises a 211-subject affective EEG cohort with five overlapping p
 This paper contributes four technical elements. First, it specifies an event-driven reservoir-graph substrate in which each evidence stream is anchored to a named neural mechanism (LIF spiking, BSC$_6$ event-driven coding, tPLV connectivity, and $\kappa$ structure-function coupling), with an explicit mathematical observable for each. Second, it establishes the operational distinctness of the streams through a mechanism ablation (A0 to A9) with negative controls, distinguishing predictive utility (whether a stream raises endpoint accuracy) from measurement utility (whether a stream exposes structure the others omit). Third, it quantifies the perturbation robustness of the streams under temporal jitter, amplitude noise, channel dropout, and graph edge perturbation, reporting operating regimes rather than a single endpoint. Fourth, it evaluates the streams as perceptual channels for a simulated embodied affective-control loop driven by an explicitly defined expected-free-energy controller, compared against passive, random, pragmatic-only, epistemic-only, and oracle baselines. Throughout, dataset provenance and quality control are reported, clinical labels are used only as exploratory validation bounded by a false-discovery-rate result, and results are reported as aggregate, deidentified outputs under data-governance constraints.
 
 \section{Related Work}
-Brain-inspired computing treats biophysical neuron and synapse models as a computational substrate rather than an analogy. The leaky integrate-and-fire neuron is an idealised reduction of the Hodgkin-Huxley membrane~\cite{hodgkin1952quantitative}; liquid state machines~\cite{maass2002liquid} and echo state networks~\cite{jaeger2001echo} use a fixed recurrent reservoir as a high-dimensional projection for simple readouts~\cite{lukosevicius2009reservoir}, and event-driven substrates such as Loihi~\cite{davies2018loihi} and SpiNNaker~\cite{furber2014spinnaker} run these primitives natively. Graph neural networks model EEG as electrode graphs but diverge in node features, graph construction, and readout~\cite{klepl2024gnn}, and spiking-graph hybrids add event-based temporal computation~\cite{gong2023sglnet}. ARSPI-Net departs from end-to-end EEG classifiers by treating the reservoir as a fixed nonlinear measurement operator whose outputs feed several downstream descriptors rather than one classification head.
+Brain-inspired computing treats biophysical neuron and synapse models as a computational substrate rather than an analogy. The leaky integrate-and-fire neuron is an idealized reduction of the Hodgkin-Huxley membrane~\cite{hodgkin1952quantitative}; liquid state machines~\cite{maass2002liquid} and echo state networks~\cite{jaeger2001echo} use a fixed recurrent reservoir as a high-dimensional projection for simple readouts~\cite{lukosevicius2009reservoir}, and event-driven substrates such as Loihi~\cite{davies2018loihi} and SpiNNaker~\cite{furber2014spinnaker} run these primitives natively. Graph neural networks model EEG as electrode graphs but diverge in node features, graph construction, and readout~\cite{klepl2024gnn}, and spiking-graph hybrids add event-based temporal computation~\cite{gong2023sglnet}. ARSPI-Net departs from end-to-end EEG classifiers by treating the reservoir as a fixed nonlinear measurement operator whose outputs feed several downstream descriptors rather than one classification head.
 
 This paper adopts the standard EEG-evaluation practice of cross-subject protocols, controlled ablation, and claim-bounded clinical discussion~\cite{lawhern2018eegnet,craik2019deep,gong2023sglnet,guo2025mma}, and additionally evaluates the architecture as competing perceptual policies for a simulated embodied agent, closer to active-inference accounts of perception-action~\cite{friston2010free,parr2022activeinference,pezzulo2015active}. The present study evaluates whether the four feature families behave as operationally distinct measurement layers and as perceptual channels under perturbation and embodied control.
 
@@ -77,7 +77,7 @@ with spike emission
 \mathbf{z}_{t+1}=H(\mathbf{u}_{t+1}-\theta),
 \label{eq:spike}
 \end{equation}
-where $H(\cdot)$ is the Heaviside step function, $\beta=0.05$ is the membrane decay, $\theta=0.5$ is the threshold, $W_{in}$ and $W_{rec}$ are Xavier-initialised input and recurrent matrices, and the reservoir size is $N_{\text{res}}=256$. The recurrent matrix is rescaled so that its largest eigenvalue magnitude is $0.9$. Spike counts are pooled into $n_{\text{bins}}=6$ non-overlapping windows over the response interval $t\in[10,70]$ to form the BSC$_6$ feature, and the per-channel BSC$_6$ vector is PCA-compressed to 64 components. The full embedding for a subject-condition observation is
+where $H(\cdot)$ is the Heaviside step function, $\beta=0.05$ is the membrane decay, $\theta=0.5$ is the threshold, $W_{in}$ and $W_{rec}$ are Xavier-initialized input and recurrent matrices, and the reservoir size is $N_{\text{res}}=256$. The recurrent matrix is rescaled so that its largest eigenvalue magnitude is $0.9$. Spike counts are pooled into $n_{\text{bins}}=6$ non-overlapping windows over the response interval $t\in[10,70]$ to form the BSC$_6$ feature, and the per-channel BSC$_6$ vector is PCA-compressed to 64 components. The full embedding for a subject-condition observation is
 \begin{equation}
 E_s^{(c)}=\left[h_1\|h_2\|\cdots\|h_{34}\right]\in\mathbb{R}^{2176},
 \label{eq:E}
@@ -85,7 +85,7 @@ E_s^{(c)}=\left[h_1\|h_2\|\cdots\|h_{34}\right]\in\mathbb{R}^{2176},
 where $h_v\in\mathbb{R}^{64}$ is the channel-level embedding.
 
 \subsection{Dynamical, Topological, and Coupling Blocks}
-The dynamical block $D$ contains reservoir-response descriptors per channel. The topological block $T$ summarises electrode-level connectivity as a temporal phase-locking matrix and reduces it to two per-electrode summaries (mean strength and clustering). For per-channel matrices $D_s\in\mathbb{R}^{34\times p}$ and $T_s\in\mathbb{R}^{34\times q}$, the rank-correlation coupling matrix is
+The dynamical block $D$ contains reservoir-response descriptors per channel. The topological block $T$ summarizes electrode-level connectivity as a temporal phase-locking matrix and reduces it to two per-electrode summaries (mean strength and clustering). For per-channel matrices $D_s\in\mathbb{R}^{34\times p}$ and $T_s\in\mathbb{R}^{34\times q}$, the rank-correlation coupling matrix is
 \begin{equation}
 K_s = \mathrm{corr}_{\rho}(D_s,T_s) \in \mathbb{R}^{p\times q}
 \end{equation}
@@ -102,7 +102,7 @@ For families $L_i,L_j\in\{E,D,T,C\}$ and target $Y$, the performance contrast is
 \Delta_{ij}(Y)=\mathcal{M}(f(L_i),Y)-\mathcal{M}(f(L_j),Y),
 \label{eq:contrast}
 \end{equation}
-with $\mathcal{M}$ either balanced accuracy or ROC-AUC and $f$ a fixed L2-regularised logistic readout. The incremental utility relative to a baseline $L_b$ is
+with $\mathcal{M}$ either balanced accuracy or ROC-AUC and $f$ a fixed L2-regularized logistic readout. The incremental utility relative to a baseline $L_b$ is
 \begin{equation}
 \Gamma_i(Y|L_b)=\mathcal{M}(f([L_b\|L_i]),Y)-\mathcal{M}(f(L_b),Y).
 \label{eq:increment}
@@ -116,7 +116,7 @@ with $X_c$ and $Y_c$ column-centered~\cite{kornblith2019similarity}.
 
 \section{Brain-Inspired Mechanisms and Embodied Interpretation}\label{sec:mechanisms}
 
-The blocks of ARSPI-Net each have a named neural correlate. This section states the correlate, the implementation choice, and its scope, so that the architecture is described as a sequence of physiologically motivated transformations rather than a stack of feature extractors. Table~\ref{tab:neural_mechanisms} summarises the mapping from each neural principle to its ARSPI-Net implementation, the computational object it produces, the observable it exposes, and its relevance to an embodied agent.
+The blocks of ARSPI-Net each have a named neural correlate. This section states the correlate, the implementation choice, and its scope, so that the architecture is described as a sequence of physiologically motivated transformations rather than a stack of feature extractors. Table~\ref{tab:neural_mechanisms} summarizes the mapping from each neural principle to its ARSPI-Net implementation, the computational object it produces, the observable it exposes, and its relevance to an embodied agent.
 
 \input{../tables/tcds_ready9/table_neural_mechanisms.tex}
 
@@ -128,7 +128,7 @@ The fixed-reservoir design follows the reservoir-computing abstraction~\cite{luk
 \subsection{BSC$_6$ as an Event-Driven Code}
 The embedding $E$ in~\eqref{eq:E} is built from binned spike counts over $n_{\text{bins}}=6$ windows of the post-stimulus interval $t\in[10,70]$. BSC$_6$ has three relevant properties. First, it is event-driven. The representation is read from spikes rather than membrane traces; the readout operates on spike-count summaries rather than membrane trajectories. Second, the encoding window starts a small distance after stimulus onset and ends well before the stimulus offset, covering the temporal interval where ERP components such as P200, N200, and the early portion of P300 are expressed. The bins are coarse enough to be robust to small temporal jitter but fine enough to preserve coarse temporal structure within the response. Third, the format is compatible with event-counter abstractions used in neuromorphic systems: spike counts over fixed time windows correspond to on-chip event-counter operations on Loihi~\cite{davies2018loihi} and SpiNNaker~\cite{furber2014spinnaker}, and binned spike-count classifiers have been shown to support unsupervised digit recognition~\cite{diehl2015unsupervised}. PCA compression to 64 per channel gives a fixed-length representation that the downstream readout consumes without retraining the reservoir.
 
-\subsection{tPLV Connectivity as Cortical Network Organisation}
+\subsection{tPLV Connectivity as Cortical Network Organization}
 The topological block $T$ is derived from per-observation $34\times34$ temporal phase-locking value matrices~\cite{lachaux1999plv}. PLV measures inter-electrode phase consistency across trials and is one of the standard tools in EEG functional connectivity. Computed within the event-related response window, tPLV captures the connectivity that is in force during the task rather than during rest, mitigating the stationarity concerns that follow from full-trace PLV estimates. The matrix is reduced to two per-electrode summaries, mean strength and clustering. Both belong to the established graph-theoretic vocabulary of brain network analysis~\cite{bullmore2009complex}, and both have a direct biological reading: strength tracks how synchronized an electrode is with the rest of the head, while clustering tracks whether its synchronized neighbors are themselves synchronized. The reduction loses information by design. We trade pairwise resolution for a per-channel descriptor compatible with the embedding shape used by the other blocks.
 
 \subsection{Structure-Function Coupling $\kappa$}
@@ -146,7 +146,7 @@ where $\mathbf{p}_{\theta_a}(x_t)$ is the policy-$a$ classifier's class-probabil
 \subsection{Data, Splitting, and Privacy}
 The analysis uses 633 subject-condition observations from 211 community-recruited adults, exactly balanced across the three affective conditions (negative, neutral, pleasant). Clinical-label analyses use 206 subjects with available SUD, MDD, PTSD, GAD, and ADHD labels. Comorbidity is the rule rather than the exception in this cohort: most subjects carry more than one label, and the analyses below use comorbidity counts as a covariate where appropriate. Subject-level data are restricted; reported outputs are aggregate and deidentified. Raw EEG, clinical metadata, and subject-level features remain access-controlled.
 
-Table~\ref{tab:protocol} summarises the analysis protocol.
+Table~\ref{tab:protocol} summarizes the analysis protocol.
 
 \begin{table*}[!t]
 \caption{Affective and Clinical Analysis Protocol}
@@ -181,7 +181,7 @@ Table~\ref{tab:feature_blocks} lists the evaluated blocks. The embedding $E$ has
 \input{tables/table1_feature_blocks.tex}
 
 \subsection{Ablation Matrices}
-Affective classification used the A0 to A9 configurations. The classifier is L2-regularised logistic regression with train-fold-only standardisation under a 10-fold StratifiedGroupKFold subject separation. Clinical-label sensitivity used the C1 to C6 configurations at the subject level with the same logistic readout. Linear separability is the deliberate choice, because operational distinctness is a property of the feature spaces under a fixed read-out, not of an unconstrained nonlinear endpoint model. The optimization is
+Affective classification used the A0 to A9 configurations. The classifier is L2-regularized logistic regression with train-fold-only standardization under a 10-fold StratifiedGroupKFold subject separation. Clinical-label sensitivity used the C1 to C6 configurations at the subject level with the same logistic readout. Linear separability is the deliberate choice, because operational distinctness is a property of the feature spaces under a fixed read-out, not of an unconstrained nonlinear endpoint model. The optimization is
 \begin{equation}
 \hat{\theta}=\arg\min_{\theta}\left[-\sum_{i=1}^{n}\log p_{\theta}(y_i|x_i)+\lambda\|\theta\|_2^2\right]
 \label{eq:logreg}
@@ -194,12 +194,12 @@ and the primary metric is balanced accuracy
 with $K=2$ for clinical-label sensitivity and $K=3$ for affective classification.
 
 \section{Results}
-We organise the evidence as one argument over four pillars: (A) dataset provenance and the computational objects the substrate produces; (B) the reservoir-graph mechanism ablation; (C) perturbation robustness and operating regimes; and (D) the simulated embodied affective-control loop. The primary ablation is the multi-seed mechanism ablation of Section~\ref{sec:pillarB}; an independent ten-fold permutation-FDR protocol corroborates it, and that protocol together with the secondary clinical, redundancy, and comorbidity analyses is reported in the supplementary material.
+We organize the evidence as one argument over four pillars: (A) dataset provenance and the computational objects the substrate produces; (B) the reservoir-graph mechanism ablation; (C) perturbation robustness and operating regimes; and (D) the simulated embodied affective-control loop. The primary ablation is the multi-seed mechanism ablation of Section~\ref{sec:pillarB}; an independent ten-fold permutation-FDR protocol corroborates it, and that protocol together with the secondary clinical, redundancy, and comorbidity analyses is reported in the supplementary material.
 
 \subsection{Dataset Provenance and Observed Computational Objects}\label{sec:pillarA}
 The data are trial-averaged event-related EEG from 211 community-recruited adults (subject 127 excluded for a recording anomaly), giving 633 subject-condition observations balanced across Negative, Neutral, and Pleasant. The evaluation uses subject-grouped cross-validation, so each subject appears in either the training or the test partition of a fold. Subject-level data are restricted; reported outputs are aggregate and deidentified.
 
-Fig.~\ref{fig:reservoir_dynamics} shows the computational objects the substrate produces, for one exemplar per affective class: the LIF spike raster and membrane trajectory that generate the embedding $E$ (panels a and b), the per-class $34\times34$ tPLV connectivity that defines the graph block $T$ (panel c), and the BSC$_6$ projection that defines the event-driven code (panel d). Structure-function coupling is summarised by $\kappa=\|C\|_F/\sqrt{pq}$: across the 633 observations the mean is $0.250$ (sd $0.115$), and a 5{,}000-permutation electrode-shuffle null is rejected at $p<0.05$ in $33.5\%$ of observations, so a non-trivial subset of subjects show coordination above a randomized electrode labeling. Subject-mean $\kappa$ is uncorrelated with per-subject classification accuracy ($\rho=0.01$), behaving as a complementary systems-level readout rather than a proxy for predictive sufficiency.
+Fig.~\ref{fig:reservoir_dynamics} shows the computational objects the substrate produces, for one exemplar per affective class: the LIF spike raster and membrane trajectory that generate the embedding $E$ (panels a and b), the per-class $34\times34$ tPLV connectivity that defines the graph block $T$ (panel c), and the BSC$_6$ projection that defines the event-driven code (panel d). Structure-function coupling is summarized by $\kappa=\|C\|_F/\sqrt{pq}$: across the 633 observations the mean is $0.250$ (sd $0.115$), and a 5{,}000-permutation electrode-shuffle null is rejected at $p<0.05$ in $33.5\%$ of observations, so a non-trivial subset of subjects show coordination above a randomized electrode labeling. Subject-mean $\kappa$ is uncorrelated with per-subject classification accuracy ($\rho=0.01$), behaving as a complementary systems-level readout rather than a proxy for predictive sufficiency.
 
 \begin{figure*}[!t]
 \centering
@@ -216,7 +216,7 @@ The primary ablation evaluates configurations A0 to A9 under subject-grouped cro
 \begin{figure}[!t]
 \centering
 \includegraphics[width=\columnwidth]{ana01_mechanism_ablation_performance.pdf}
-\caption{Mechanism-ablation performance for configurations A0 to A9. Balanced accuracy (with bootstrap intervals) and macro-F1 are shown against the three-class chance level. Bars summarise the measured cross-validated performance of each evidence stream and combination.}
+\caption{Mechanism-ablation performance for configurations A0 to A9. Balanced accuracy (with bootstrap intervals) and macro-F1 are shown against the three-class chance level. Bars summarize the measured cross-validated performance of each evidence stream and combination.}
 \label{fig:ana01}
 \end{figure}
 
@@ -246,7 +246,7 @@ We evaluate the substrate as the perceptual estimator for a simulated embodied a
 
 Open-loop, the four streams act as competing observation channels: under sequential evidence accumulation their final posterior entropy ranks them $E{+}D{+}T$ (fastest, $0.931$ nats) $<E<D<$ random $<T$ (slowest, $1.075$), the same ordering as the offline ablation, so offline sufficiency and perceptual-channel value agree.
 
-Closed-loop, the agent must drive the environment to a target affective state and confirm it. An expected-free-energy (EFE) controller selects the action $a^\star=\arg\min_a\mathrm{EFE}(a)$ minimising
+Closed-loop, the agent must drive the environment to a target affective state and confirm it. An expected-free-energy (EFE) controller selects the action $a^\star=\arg\min_a\mathrm{EFE}(a)$ minimizing
 \begin{equation}
 \mathrm{EFE}(a)=\underbrace{\mathrm{KL}\!\big(P(s'\mid a)\,\|\,C\big)}_{\text{risk}}+\underbrace{\mathbb{E}_{s'\sim P(\cdot\mid a)}\big[\hat H(s')\big]}_{\text{ambiguity}},
 \label{eq:efe}
