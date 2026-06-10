@@ -25,7 +25,7 @@
 
 \title{ARSPI-Net: An Event-Driven Reservoir--Graph Substrate for Embodied Affective EEG Perception}
 
-\author{Andrew A. Lane, K. Wendy Tang, and Brady D. Nelson\thanks{This manuscript is a preprint and has not been certified by peer review.}}
+\author{Andrew A. Lane, K. Wendy Tang, and Brady D. Nelson}
 
 \maketitle
 
@@ -40,7 +40,7 @@ EEG, neuromorphic computing, spiking neural networks, liquid state machines, res
 \section{Introduction}
 EEG offers millisecond-scale access to neural activity, but scalp recordings are noisy, indirect, and subject-dependent. For an embodied agent that must perceive and act on affective state, the central engineering problem is the extraction of usable neural evidence from this partially observed, nonstationary signal. We treat the affective event-related potential (ERP) as the output of a biological dynamical system and ask how an event-driven, brain-inspired substrate can transform it into evidence streams whose reliability can be measured under perturbation and used to drive perception under uncertainty. This is a neuromorphic signal-processing question rather than a question of psychology or diagnosis. A single endpoint classifier leaves open which part of a staged substrate carries the signal, how that signal degrades under realistic measurement perturbations, and whether two intermediate representations measure the same response under different names.
 
-Recent IEEE biomedical work establishes evaluation norms. Compact convolutional baselines such as EEGNet~\cite{lawhern2018eegnet}, EEG graph networks~\cite{klepl2024gnn,klepl2023ad}, spiking--graph hybrids~\cite{gong2023sglnet}, and multimodal attention models~\cite{guo2025mma,chiang2023depression} are evaluated through cross-subject protocols, ablations, and module-level metrics rather than one accuracy number. ARSPI-Net (Affective Reservoir-Spike Processing and Inference Network), a staged neuromorphic architecture for clinical affective EEG, is evaluated here under that standard.
+Recent IEEE biomedical work establishes evaluation norms. Compact convolutional baselines such as EEGNet~\cite{lawhern2018eegnet}, EEG graph networks~\cite{klepl2024gnn,klepl2023ad}, spiking--graph hybrids~\cite{gong2023sglnet}, and multimodal attention models~\cite{guo2025mma,chiang2023depression} are evaluated through cross-subject protocols, ablations, and module-level metrics rather than one accuracy number. ARSPI-Net (Affective Reservoir-Spike Processing and Inference Network), a staged neuromorphic architecture for clinical affective EEG~\cite{lane2023arspi,lane2024arspi}, is evaluated here under that standard.
 
 ARSPI-Net produces four feature families per observation: a reservoir spike embedding $E$, dynamical descriptors $D$, electrode-level topological descriptors $T$, and structure--function coupling descriptors $C$. The present study asks a structural question about these four feature families. Do $E$, $D$, $T$, and $C$ behave as different measurements, or are they redundant relabellings of the same response?
 
@@ -308,6 +308,8 @@ The authors thank the SHAPE Community study participants and the Laboratory for 
 \bibitem{diehl2015unsupervised} P. U. Diehl and M. Cook, ``Unsupervised learning of digit recognition using spike-timing-dependent plasticity,'' \emph{Frontiers in Computational Neuroscience}, vol. 9, Art. no. 99, 2015.
 \bibitem{davies2018loihi} M. Davies \emph{et al.}, ``Loihi: A neuromorphic manycore processor with on-chip learning,'' \emph{IEEE Micro}, vol. 38, no. 1, pp. 82--99, 2018.
 \bibitem{furber2014spinnaker} S. B. Furber, F. Galluppi, S. Temple, and L. A. Plana, ``The SpiNNaker project,'' \emph{Proceedings of the IEEE}, vol. 102, no. 5, pp. 652--665, 2014.
+\bibitem{lane2023arspi} A. Lane, W. Tang, and B. Nelson, ``Towards ARSPI-Net: Development of an efficient hybrid deep learning framework,'' in \emph{Proc. IEEE Long Island Systems, Applications and Technology Conf. (LISAT)}, Old Westbury, NY, USA, 2023, pp. 1--8.
+\bibitem{lane2024arspi} A. Lane, W. Tang, and B. Nelson, ``Towards ARSPI-Net: Advancing EEG feature extraction with neuromorphic algorithms,'' in \emph{Proc. IEEE Long Island Systems, Applications and Technology Conf. (LISAT)}, Holtsville, NY, USA, 2024, pp. 1--8.
 \end{thebibliography}
 
 \end{document}
