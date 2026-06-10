@@ -235,7 +235,14 @@ We characterize each evidence stream under four perturbation families (temporal 
 A classical ERP-amplitude baseline (windowed $P1$ to $\mathrm{LPP}$ features) reaches $67.2\%$ balanced accuracy on the three-class task, exceeding ARSPI-Net under a static readout. This comparison anchors the endpoint-classification trade-off: ARSPI-Net is not optimized as a static classifier, but as a reservoir-graph measurement substrate that exposes operationally distinct, perturbation-characterized evidence streams with simulated embodied-control utility. The full static comparison is reported in the supplementary material.
 
 \subsection{Simulated Embodied Affective-Control}\label{sec:pillarD}\label{sec:embodied_results}
-We evaluate the substrate as the perceptual estimator for a simulated embodied agent. The agent maintains a categorical belief $b$ over the affective state, updated by sequential Bayesian accumulation of the per-policy classifier likelihood (Section~\ref{sec:mechanisms}); the environment is action-determined with transition noise, $P(s'\mid a)=(1-\epsilon)\,\mathbf{1}[s'{=}a]+\epsilon\,\mathcal{U}$. The loop is evaluated as a simulation over recorded observations.
+We evaluate the substrate as the perceptual estimator for a simulated embodied agent. The agent maintains a categorical belief $b$ over the affective state, updated by sequential Bayesian accumulation of the per-policy classifier likelihood (Section~\ref{sec:mechanisms}); the environment is action-determined with transition noise, $P(s'\mid a)=(1-\epsilon)\,\mathbf{1}[s'{=}a]+\epsilon\,\mathcal{U}$. The loop is evaluated as a simulation over recorded observations. Fig.~\ref{fig:embodied_loop} summarizes the perception-action cycle and the risk-ambiguity decomposition of the controller.
+
+\begin{figure*}[!t]
+\centering
+\includegraphics[width=0.80\textwidth]{fig_embodied_loop.pdf}
+\caption{Simulated embodied perception-action loop. The held-out environment emits an observation $x_t$; the ARSPI-Net substrate updates a Dirichlet belief $b(s)$ over the affective state from the four perceptual channels; the expected-free-energy controller selects $a^\star=\arg\min_a\mathrm{EFE}(a)$ under a risk (pragmatic, toward target) plus ambiguity (epistemic, resolve uncertainty) decomposition and acts on the environment until $b(\text{target})\geq 0.8$. Under the action-determined transition the epistemic term adds limited marginal utility, so the controller matches pragmatic-only control. The loop is closed on the belief side and open on the environment side, evaluated as a simulation over recorded observations.}
+\label{fig:embodied_loop}
+\end{figure*}
 
 Open-loop, the four streams act as competing observation channels: under sequential evidence accumulation their final posterior entropy ranks them $E{+}D{+}T$ (fastest, $0.931$ nats) $<E<D<$ random $<T$ (slowest, $1.075$), the same ordering as the offline ablation, so offline sufficiency and perceptual-channel value agree.
 
