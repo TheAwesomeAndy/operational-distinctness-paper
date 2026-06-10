@@ -1,142 +1,79 @@
-# Operational Distinctness in Staged Neuromorphic Architectures
+# ARSPI-Net: an event-driven reservoir–graph substrate for affective EEG
 
-Support scripts for the manuscript
+This repository holds the manuscript, analysis code, figures, tables, and aggregate
+results for the paper:
 
-> **Operational Distinctness in Staged Neuromorphic Architectures: A Layer
-> Ablation Analysis of Clinical EEG**
+**ARSPI-Net: An Event-Driven Reservoir-Graph Substrate for Affective EEG Perception
+in Simulated Embodied Control**
 
-This repository **does not** run the ARSPI-Net feature extraction. It
-consumes the feature pickles produced by the main
-[`dissoAdventureExperiments`](../dissoAdventureExperiments) repository
-and emits paper-ready metrics, figures, and LaTeX tables.
-
-No new science is introduced. No new architectures. No new feature
-definitions.
-
----
+ARSPI-Net is a staged neuromorphic pipeline that converts affective event-related
+EEG into four evidence streams — a spiking-reservoir embedding (E), dynamical
+descriptors (D), a temporal phase-locking graph (T), and a structure–function
+coupling readout (C) — and evaluates them through a mechanism ablation, a
+perturbation-robustness analysis, and a simulated embodied perceptual-control loop.
 
 ## Layout
 
 ```
-experiments/operational_distinctness/
-├── config.py                              # paths + constants
-├── common.py                              # data loading, feature blocks, helpers
-├── 01_affective_ablation_metrics.py       # A0–A9 metrics, predictions, confusion matrices
-├── 02_clinical_sensitivity_metrics.py     # C1–C6 clinical-label sensitivity
-├── 03_generate_submission_figures.py      # fig1–fig5 PDFs
-├── 04_generate_submission_tables.py       # table1–table4 LaTeX
-├── 05_optional_permutation_fdr.py         # permutation tests + BH-FDR
-├── 06_optional_comorbidity_adjustment.py  # comorbidity-adjusted layer scores
-├── 07_optional_layer_redundancy.py        # CKA, CCA, ridge cross-predictability
-└── run_all.py                             # orchestrator + run_manifest.json
+manuscript/                 LaTeX source, compiled PDFs, references, cover letter
+  main.tex / main.pdf         submission manuscript (non-blind)
+  main_blind.tex / .pdf       anonymized version (for double-blind venues)
+  supplemental_risk_reduction/  supplementary material (supplement.tex / .pdf)
+  submission_package_blind/   self-contained anonymized source bundle
+  COVER_LETTER_*.md           cover letter
+  references.bib              bibliography
+  data_public/                aggregate, de-identified result tables for the figures
+  scripts/                    figure-generation helpers
 
-prepare_inputs/                       # how to (re)generate the input pickles on a clean machine
-├── README.md                            # raw-EEG layout, env vars, runtime, runbook
-└── extract_ch67_features.py             # env-var-driven Ch6/Ch7 feature extraction
+experiments/                analysis pipelines (run on the restricted feature inputs)
+  operational_distinctness/   layer-ablation analysis (the original study)
+  tcds_ready9/                primary pipeline: provenance and QC, mechanism
+                              ablation, perturbation robustness, closed-loop
+                              control, and figure/table generation
+  tcds_risk_reduction/        adaptive evidence routing and resource/event-rate
+                              accounting
+  tcds_hardening/             supporting analyses: ERP baseline, kappa coupling,
+                              reservoir-dynamics and summary figures
 
-outputs/operational_distinctness/    # CSVs + JSONs (manifest, predictions, metrics)
-figures/operational_distinctness/    # fig1–fig5 PDFs
-tables/operational_distinctness/     # table1–table4 .tex
-data/                                # (gitignored) drop point for the three input files
+prepare_inputs/             feature-extraction scripts (reservoir embedding and the
+                            dynamical / topological features from the recordings)
+
+figures/  tables/  outputs/  generated figures, LaTeX tables, and aggregate result
+                             files (CSV / JSON), grouped by analysis
+
+prior_paper/                the earlier layer-ablation manuscript this work builds on
 ```
 
-> **Cloud / fresh-machine setup:** see [`prepare_inputs/README.md`](prepare_inputs/README.md)
-> for the exact runbook to (re)generate `ch6_ch7_3class_features.pkl` from
-> raw EEG, where to source `shape_features_211.pkl`, and where to drop
-> `clinical_profile.csv`.
+## Data availability
 
----
+The raw EEG and clinical metadata are restricted human-subject research data and
+are not publicly distributed. They are available from the Laboratory for Clinical
+Affective Neuroscience at Stony Brook University subject to approval and a data-use
+agreement. Only aggregate, de-identified outputs are included in this repository.
 
-## Inputs
+## Reproducing the analysis
 
-Three files, produced by the main feature pipeline:
+The pipelines read the restricted feature inputs and emit the figures, tables, and
+result files. Input locations are resolved from environment variables
+(`ARSPI_SHAPE_FEATURES`, `ARSPI_CH67_FEATURES`, `ARSPI_CLINICAL_FILE`,
+`ARSPI_RAW_EEG_DIR`); see `experiments/tcds_ready9/config.py`.
 
-| File | Source script | Notes |
-| --- | --- | --- |
-| `shape_features_211.pkl`            | `chapter5Experiments/run_chapter5_experiments.py`            | E + BandPower features |
-| `ch6_ch7_3class_features.pkl`        | `experiments/ch6_ch7_3class/ch6_ch7_01_feature_extraction.py` | D + T + per-observation arrays for C |
-| `clinical_profile.csv`               | source dataset                                                | binary diagnosis indicators |
-
-`config.py` resolves these in this order:
-
-1. The env vars `ARSPI_CH5_FILE`, `ARSPI_CH67_FILE`, `ARSPI_CLINICAL_FILE`.
-2. The local `data/` directory inside this repo.
-3. The sibling `dissoAdventureExperiments/` checkout, if it lives next
-   to this repo (default on the author's machine).
-
----
-
-## How to run
-
-```bash
-# Required pipeline (scripts 01–04 + manifest):
-python experiments/operational_distinctness/run_all.py
-
-# Required + optional hardening (scripts 05–07):
-python experiments/operational_distinctness/run_all.py --include-optional
+```
+conda env create -f environment.yml        # or: pip install -r requirements.txt
+python experiments/tcds_ready9/run_ready9.py
 ```
 
-Or run individual stages:
+The manuscript compiles with `pdflatex` (IEEEtran document class, inline
+bibliography):
 
-```bash
-python experiments/operational_distinctness/01_affective_ablation_metrics.py
-python experiments/operational_distinctness/02_clinical_sensitivity_metrics.py
-python experiments/operational_distinctness/03_generate_submission_figures.py
-python experiments/operational_distinctness/04_generate_submission_tables.py
+```
+cd manuscript && pdflatex main.tex && pdflatex main.tex
 ```
 
----
+## Earlier ARSPI-Net work
 
-## Outputs (paper-ready)
-
-| File | Produced by |
-| --- | --- |
-| `outputs/.../affective_ablation_metrics.csv`         | 01 |
-| `outputs/.../affective_predictions.csv`              | 01 |
-| `outputs/.../affective_confusion_matrices.json`      | 01 |
-| `outputs/.../clinical_sensitivity_metrics.csv`       | 02 |
-| `outputs/.../clinical_predictions.csv`               | 02 |
-| `outputs/.../clinical_confusion_matrices.json`       | 02 |
-| `figures/.../fig1_arspinet_layer_decomposition.pdf`  | 03 |
-| `figures/.../fig2_operational_distinctness_framework.pdf` | 03 |
-| `figures/.../fig3_affective_ablation_metrics.pdf`    | 03 |
-| `figures/.../fig4_clinical_sensitivity_heatmap.pdf`  | 03 |
-| `figures/.../fig5_clinical_best_layer_summary.pdf`   | 03 |
-| `tables/.../table1_feature_blocks.tex`               | 04 |
-| `tables/.../table2_affective_ablation.tex`           | 04 |
-| `tables/.../table3_clinical_sensitivity.tex`         | 04 |
-| `tables/.../table4_full_clinical_matrix.tex`         | 04 |
-| `outputs/.../affective_inference.csv`                | 05 (optional) |
-| `outputs/.../clinical_inference.csv`                 | 05 (optional) |
-| `outputs/.../comorbidity_adjusted.csv`               | 06 (optional) |
-| `outputs/.../layer_redundancy.csv`                   | 07 (optional) |
-| `outputs/.../run_manifest.json`                      | run_all.py |
-
----
-
-## PHI / privacy
-
-Subject IDs are replaced with the first 16 hex chars of
-`SHA-256(str(subject_id))` in every committed artifact. Raw subject
-IDs, names, DOB, MRN, addresses, clinical notes, and session dates are
-**never** written to any output file.
-
-The `data/` directory is gitignored. Do **not** commit the input
-pickles or `clinical_profile.csv`.
-
----
-
-## Scientific framing
-
-The clinical analysis is *clinical-label sensitivity*, not diagnostic
-validation. Use:
-
-- weak clinical-label sensitivity
-- exploratory clinical structure
-- layer-specific sensitivity pattern
-
-Avoid:
-
-- diagnostic biomarker
-- clinical detection
-- proves disorder-specific phenotype
+- A. Lane, W. Tang, and B. Nelson, "Towards ARSPI-Net: Development of an efficient
+  hybrid deep learning framework," IEEE Long Island Systems, Applications and
+  Technology Conference (LISAT), 2023.
+- A. Lane, W. Tang, and B. Nelson, "Towards ARSPI-Net: Advancing EEG feature
+  extraction with neuromorphic algorithms," IEEE LISAT, 2024.
