@@ -41,5 +41,5 @@ Branch: `submission/tcds-cogneuro-bci-2026` · Preservation tag (pre-retargeting
 ## ScholarOne
 - [x] Manuscript type: "SI: Cognitive Neuroscience Meets Brain-Computer Interfaces: From Neural Decoding to Function Augmentation".
 - [x] Correct title.
-- [x] Upload set (initial submission): manuscript PDF (`main_blind.pdf` if double-anonymous review is required, else `main.pdf`), `supplement.pdf`, cover letter. LaTeX source bundle only if requested.
-- [ ] Confirm the SI review-anonymity policy (single- vs double-anonymous) before choosing the manuscript PDF.
+- [x] Upload set (initial submission, single-blind): `main.pdf`, `supplement.pdf`, cover letter. Blind `main_blind.pdf` and the LaTeX source bundle are backup artifacts, supplied only if requested.
+- [x] SI review-anonymity policy confirmed: **single-blind** → default upload is the non-blind `main.pdf`.

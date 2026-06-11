@@ -23,13 +23,13 @@ closed-loop adaptive BCI simulation that accumulates neural evidence over record
   hardware-energy efficiency.
 
 ## Initial-submission upload set (PDFs + cover letter; LaTeX source only if requested)
-- **Manuscript PDF:** `manuscript/main_blind.pdf` if the special issue requires double-anonymous
-  review; otherwise `manuscript/main.pdf`. Both are compiled and committed. Confirm the SI
-  review-anonymity policy before choosing.
+IEEE TCDS uses **single-blind** review, so the non-blind manuscript is the default upload.
+- **Manuscript PDF (default):** `manuscript/main.pdf`
 - **Supplement PDF:** `manuscript/supplemental_risk_reduction/supplement.pdf`
 - **Cover letter:** `manuscript/COVER_LETTER_TCDS_COGNEURO_BCI_FINAL.md`
-- **LaTeX source bundle** (`manuscript/submission_package_blind/`) is retargeted and kept ready only
-  if ScholarOne requests source files.
+- **Backup artifacts (not the default package):** `manuscript/main_blind.pdf` and the
+  `manuscript/submission_package_blind/` source bundle — supplied only if ScholarOne unexpectedly
+  requests anonymized files or LaTeX source.
 
 ## Repository state
 - **Branch:** `submission/tcds-cogneuro-bci-2026` (pull request into `main`)
