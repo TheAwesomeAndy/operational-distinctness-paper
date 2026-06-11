@@ -27,7 +27,7 @@
 
 % ---- cycle nodes (clockwise): env -> perception -> efe -> env ----
 \node[env]  (env)  at (0,3.4)    {Environment\\[1pt]{\scriptsize held-out subject, affective state $s_t$}\\[-1pt]{\scriptsize action-determined transition}};
-\node[perc] (perc) at (7.4,3.4)  {Perceptual estimator\\[1pt]{\scriptsize ARSPI-Net substrate $\rightarrow$ belief $b(s)$}\\[-1pt]{\scriptsize Dirichlet update\ $\boldsymbol{\alpha}\!\leftarrow\!\boldsymbol{\alpha}\!+\!\mathbf{p}_{\theta}(x_t)$}};
+\node[perc] (perc) at (7.4,3.4)  {Neural decoder\\[1pt]{\scriptsize ARSPI-Net substrate $\rightarrow$ belief $b(s)$}\\[-1pt]{\scriptsize Dirichlet update\ $\boldsymbol{\alpha}\!\leftarrow\!\boldsymbol{\alpha}\!+\!\mathbf{p}_{\theta}(x_t)$}};
 \node[efe]  (efe)  at (3.7,-0.4) {EFE controller\ \ $a^\star=\arg\min_a\mathrm{EFE}(a)$\\[2pt]{\footnotesize $\mathrm{EFE}(a)=\underbrace{\text{risk}}_{\text{pragmatic: toward target}}+\underbrace{\text{ambiguity}}_{\text{epistemic: resolve uncertainty}}$}};
 
 % ---- loop arrows ----
@@ -35,12 +35,12 @@
 \draw[flow] (perc) to[bend left=14] node[right,font=\scriptsize,align=left,pos=0.55]{belief $b(s)$} (efe);
 \draw[flow] (efe) to[bend left=14] node[left,font=\scriptsize,align=center,pos=0.5]{action $a$\\{\scriptsize until $b(\text{target})\!\ge\!0.8$}} (env);
 
-% ---- perceptual channels feeding the estimator ----
+% ---- neural evidence streams feeding the decoder ----
 \node[mini,fill=eF,draw=eL] (mE) at (10.9,4.15){E};
 \node[mini,fill=dF,draw=dL] (mD) at (10.9,3.45){D};
 \node[mini,fill=tF,draw=tL] (mT) at (10.9,2.75){T};
 \node[mini,fill=cF,draw=cL] (mC) at (10.9,2.05){C};
-\node[font=\scriptsize,align=center,text=black!60] at (10.9,4.9){perceptual channels};
+\node[font=\scriptsize,align=center,text=black!60] at (10.9,4.9){neural evidence streams};
 \coordinate (mrail) at (9.95,3.1);
 \draw[line width=0.85pt,draw=arr] (9.95,4.15) -- (9.95,2.05);
 \draw[line width=0.85pt,draw=arr] (mE.west) -- (mE.west -| mrail);
