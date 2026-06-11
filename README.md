@@ -1,16 +1,16 @@
-# ARSPI-Net: an event-driven reservoir–graph substrate for affective EEG
+# ARSPI-Net: a neuromorphic reservoir–graph substrate for affective ERP decoding
 
 This repository holds the manuscript, analysis code, figures, tables, and aggregate
 results for the paper:
 
-**ARSPI-Net: An Event-Driven Reservoir-Graph Substrate for Affective EEG Perception
-in Simulated Embodied Control**
+**ARSPI-Net: A Neuromorphic Reservoir-Graph Substrate for Affective ERP Decoding
+and Closed-Loop Neural Evidence Accumulation**
 
 ARSPI-Net is a staged neuromorphic pipeline that converts affective event-related
 EEG into four evidence streams — a spiking-reservoir embedding (E), dynamical
 descriptors (D), a temporal phase-locking graph (T), and a structure–function
 coupling readout (C) — and evaluates them through a mechanism ablation, a
-perturbation-robustness analysis, and a simulated embodied perceptual-control loop.
+perturbation-robustness analysis, and a closed-loop adaptive BCI simulation over recorded ERP observations.
 
 ## Layout
 
