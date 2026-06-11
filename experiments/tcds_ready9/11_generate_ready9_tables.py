@@ -43,7 +43,7 @@ def _write(name, lines):
 def neural_mechanisms():
     rows = [
         ("Event-driven coding", "BSC$_6$ binning", "temporal-bin spike-count vector",
-         "bin evidence", "sparse perceptual observation"),
+         "bin evidence", "sparse spike-coded observation"),
         ("Recurrent cortical dynamics", "LIF reservoir", "reservoir state trajectory",
          "embedding $E$", "nonlinear temporal transformation"),
         ("Temporal state statistics", "descriptor block $D$", "trajectory descriptors",
@@ -52,8 +52,8 @@ def neural_mechanisms():
          "topology descriptors $T$", "spatial dependency"),
         ("Structure-function coupling", "$\\kappa$", "coupling readout",
          "shuffle-null significance", "systems-level coordination"),
-        ("Embodied perception", "posterior update + policy", "belief state",
-         "entropy, success, steps", "closed-loop perceptual utility"),
+        ("Closed-loop evidence accumulation", "posterior update + policy", "belief state",
+         "entropy, success, steps", "closed-loop evidence-accumulation utility"),
     ]
     out = [
         r"\begin{table*}[t]\centering",
@@ -63,7 +63,7 @@ def neural_mechanisms():
         r"\begin{tabular}{p{2.6cm}p{2.2cm}p{2.8cm}p{3.0cm}p{3.0cm}}",
         r"\toprule",
         r"Neural principle & Implementation & Computational object & Measured "
-        r"observable & Relevance to embodied AI \\",
+        r"observable & Relevance to neural decoding \\",
         r"\midrule",
     ]
     for r in rows:
