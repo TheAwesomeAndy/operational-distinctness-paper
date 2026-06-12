@@ -13,6 +13,17 @@ phase-locking graph, and a structure-function coupling readout transform each af
 observation into four named neural evidence streams: a spike-coded embedding E, dynamical
 descriptors D, graph-topological descriptors T, and a structure-function coupling block C.
 
+Fit with this journal. IEEE Transactions on Affective Computing has long established affective EEG as
+a core physiological substrate — through benchmark physiological-affect datasets such as DEAP,
+continuous and time-resolved affect detection, evidence of stable spatiotemporal affective EEG
+structure across sessions and subjects, and graph- and connectivity-based affective EEG modelling.
+Our manuscript extends that line into a neuromorphic reservoir–graph setting: rather than adding
+another endpoint emotion-recognition score, it characterizes how affective ERP information is
+partitioned across temporal, dynamical, graph-topological, and structure-function coupling
+observables, how those streams degrade under perturbation, and how they support uncertainty-aware
+evidence accumulation — a measurement-and-dynamics direction that is, to our knowledge, largely
+absent from current affective-computing EEG work.
+
 Operational distinctness of the evidence streams. The paper's central question is whether E, D, T,
 and C behave as different affective measurements or as redundant relabelings of one response.
 Under subject-grouped cross-validation with negative controls and false-discovery-rate control, we
