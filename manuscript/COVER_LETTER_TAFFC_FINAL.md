@@ -13,6 +13,14 @@ phase-locking graph, and a structure-function coupling readout transform each af
 observation into four named neural evidence streams: a spike-coded embedding E, dynamical
 descriptors D, graph-topological descriptors T, and a structure-function coupling block C.
 
+Fit with this journal. The manuscript is aligned with a clear IEEE Transactions on Affective
+Computing trajectory: benchmark physiological-affect datasets (DEAP, MAHNOB-HCI), continuous affect
+modeling, temporally stable EEG affect signatures, graph- and connectivity-based EEG analysis,
+cross-subject robustness, and continuous-label affective dynamics. ARSPI-Net extends this trajectory
+by introducing a neuromorphic reservoir–graph framework for spatiotemporal characterization of
+affective EEG dynamics, with perturbation and closed-loop analyses presented as physiological
+measurement rather than static classifier superiority or clinical validation.
+
 Operational distinctness of the evidence streams. The paper's central question is whether E, D, T,
 and C behave as different affective measurements or as redundant relabelings of one response.
 Under subject-grouped cross-validation with negative controls and false-discovery-rate control, we
