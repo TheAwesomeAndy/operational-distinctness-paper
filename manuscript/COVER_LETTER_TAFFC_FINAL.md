@@ -16,7 +16,8 @@ descriptors D, graph-topological descriptors T, and a structure-function couplin
 Fit with this journal. The manuscript is aligned with a clear IEEE Transactions on Affective
 Computing trajectory: benchmark physiological-affect datasets (DEAP, MAHNOB-HCI), continuous affect
 modeling, temporally stable EEG affect signatures, graph- and connectivity-based EEG analysis,
-cross-subject robustness, and continuous-label affective dynamics. ARSPI-Net extends this trajectory
+cross-subject robustness, sparse-sensor EEG reconstruction, neural-encoding and physiological-biomarker
+measurement, and continuous-label affective dynamics. ARSPI-Net extends this trajectory
 by introducing a neuromorphic reservoir–graph framework for spatiotemporal characterization of
 affective EEG dynamics, with perturbation and closed-loop analyses presented as physiological
 measurement rather than static classifier superiority or clinical validation.
