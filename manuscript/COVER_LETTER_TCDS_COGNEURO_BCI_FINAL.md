@@ -1,34 +1,48 @@
-Dear Editors,
+Dear Prof. Huajin Tang, Editor-in-Chief, and the Guest Editors of the Special Issue
+"Cognitive Neuroscience Meets Brain-Computer Interfaces: From Neural Decoding to Function
+Augmentation,"
 
-We submit our manuscript, "ARSPI-Net: A Neuromorphic Reservoir-Graph Substrate for
-Affective ERP Decoding and Closed-Loop Neural Evidence Accumulation," for consideration
-in the Special Issue "Cognitive Neuroscience Meets Brain-Computer Interfaces: From Neural
-Decoding to Function Augmentation."
+We submit our manuscript, "ARSPI-Net: A Neuromorphic Reservoir-Graph Substrate for Affective
+ERP Decoding and Closed-Loop Neural Evidence Accumulation," for consideration in the special
+issue.
 
-ARSPI-Net is a neuromorphic reservoir-graph substrate for affective event-related potential
-(ERP) decoding. It treats the electroencephalogram as a noisy, partially observed output of a
-biological dynamical system and transforms each affective ERP observation into a set of
-operationally distinct neural evidence streams, each anchored to a concrete mechanism: a fixed
-leaky integrate-and-fire spiking reservoir, a binned spike-count event-driven code, an
-electrode-level temporal phase-locking graph, and a structure-function coupling readout. The
-contribution is a signal-processing and neural-decoding substrate, not a static-classifier
-leaderboard result: a conventional ERP-amplitude baseline remains stronger for static endpoint
-classification, and we report this trade-off explicitly.
+Fit with the special issue. The special issue concerns where cognitive neuroscience and
+brain-computer interfaces meet at neural decoding, and ARSPI-Net sits precisely at that
+interface. The paper addresses neural decoding, electrophysiological evidence extraction,
+perturbation robustness, and closed-loop adaptive BCI simulation: it treats the affective
+event-related potential (ERP) as a noisy, partially observed output of a biological dynamical
+system, decodes it into operationally distinct neural evidence streams, characterizes how those
+streams degrade under temporal, amplitude, spatial, and graph perturbation, and accumulates them
+with an explicitly defined expected-free-energy controller in a closed-loop adaptive BCI
+simulation. Recent neuromorphic EEG/BCI work in the Transactions — spiking-graph decoding of EEG
+auditory attention (Cai et al., IEEE TCDS, 2024) and biomimetic spiking models of biological
+auditory processing (Kim et al., IEEE TCDS, 2025) — indicates the special issue's interest in
+biologically grounded, event-driven approaches; we cite them as scope analogues rather than
+technical antecedents. ARSPI-Net is distinct from both: it is a measurement substrate rather than
+an end-to-end decoder, and it shifts the analytic objective from endpoint accuracy to measurable
+evidence structure.
 
-We evaluate the substrate along axes that match the special issue: a mechanism ablation with
-negative controls under subject-grouped validation; perturbation response across temporal,
-amplitude, spatial, and graph corruptions; representational redundancy; and a closed-loop
-adaptive BCI simulation in which an explicitly defined expected-free-energy controller
-accumulates neural evidence and updates belief over a target affective state. The closed-loop
-study is a simulation over recorded ERP observations from an access-controlled affective ERP
-cohort; it is not an online BCI deployment and does not acquire EEG in real time. Clinical
-labels enter only as exploratory contextual variables bounded by a false-discovery-rate result,
-not as diagnostic validation.
+Novelty. Rather than another end-to-end classifier, ARSPI-Net is a measurement substrate: a fixed
+leaky integrate-and-fire reservoir, a binned spike-count code, a temporal phase-locking graph,
+and a structure-function coupling readout produce four named evidence streams whose predictive
+sufficiency, incremental utility, perturbation response, and representational redundancy are
+tested under subject-grouped validation with negative controls and false-discovery-rate control.
+The paper reports where affective information is preserved, how each stream degrades under
+temporal, amplitude, spatial, and graph perturbation, and how the streams support sequential
+belief updating, measurements a single accuracy number cannot provide.
 
-The underlying EEG and clinical metadata are access-controlled; the manuscript reports aggregate,
-deidentified outputs with methodological detail sufficient for evaluation. We confirm that this
-manuscript is original, is not under consideration elsewhere, and that all authors have approved
-the submission.
+Scope and claim discipline. We do not claim classifier superiority: a conventional ERP-amplitude
+baseline remains stronger for static three-class classification, and we retain it as a reference.
+The closed-loop study is a simulation over recorded ERP observations from an access-controlled
+affective ERP cohort; it is not an online BCI deployment and does not acquire EEG in real time.
+Clinical labels enter only as exploratory contextual variables bounded by a false-discovery-rate
+result, not as diagnostic validation. The underlying EEG and clinical metadata are
+access-controlled; the manuscript reports aggregate, deidentified outputs.
+
+We confirm that this manuscript is original, is not under consideration elsewhere, and that all
+authors have approved the submission. We believe ARSPI-Net offers the special issue's readership a
+rigorous, reproducible methodology for turning affective neural signals into structured,
+perturbation-characterized evidence for adaptive BCI.
 
 Sincerely,
 The Authors

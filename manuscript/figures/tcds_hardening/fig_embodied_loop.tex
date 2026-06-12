@@ -1,53 +1,82 @@
-\documentclass[border=8pt]{standalone}
+\documentclass[border=6pt]{standalone}
 \usepackage{tikz}
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage[scaled=0.92]{helvet}\renewcommand\familydefault{\sfdefault}
-\usetikzlibrary{positioning,fit,backgrounds,calc,arrows}
+\usetikzlibrary{positioning,fit,backgrounds,calc,arrows.meta}
 
 \definecolor{inF}{RGB}{226,233,241}\definecolor{inL}{RGB}{70,90,112}
-\definecolor{reF}{RGB}{255,238,208}\definecolor{reL}{RGB}{196,138,38}
 \definecolor{eF}{RGB}{214,229,247}\definecolor{eL}{RGB}{38,92,164}
 \definecolor{dF}{RGB}{209,238,231}\definecolor{dL}{RGB}{26,132,118}
 \definecolor{tF}{RGB}{230,221,243}\definecolor{tL}{RGB}{114,70,162}
 \definecolor{cF}{RGB}{219,238,219}\definecolor{cL}{RGB}{56,140,60}
 \definecolor{emF}{RGB}{249,225,225}\definecolor{emL}{RGB}{178,68,68}
+\definecolor{blF}{RGB}{255,243,212}\definecolor{blL}{RGB}{170,132,28}
 \definecolor{arr}{RGB}{70,78,90}
 
 \begin{document}
 \begin{tikzpicture}[
   font=\small,
-  box/.style={rounded corners=3pt, draw, line width=0.85pt, align=center, inner sep=5pt, minimum height=15mm, minimum width=40mm},
-  env/.style={box, fill=inF, draw=inL},
-  perc/.style={box, fill=eF, draw=eL},
-  efe/.style={box, fill=emF, draw=emL, minimum height=17mm},
-  mini/.style={rounded corners=2pt, draw, line width=1pt, minimum width=8mm, minimum height=6mm, font=\footnotesize\bfseries, inner sep=1pt},
-  flow/.style={->, >=latex, line width=1pt, draw=arr},
+  >={Latex[length=2.2mm]},
+  flow/.style={->, line width=0.9pt, draw=arr},
+  chip/.style={rounded corners=2pt, draw, line width=0.9pt, minimum width=8mm, minimum height=9mm, font=\footnotesize\bfseries, align=center, inner sep=1pt},
 ]
 
-% ---- cycle nodes (clockwise): env -> perception -> efe -> env ----
-\node[env, text width=58mm]  (env)  at (0,3.4)    {Recorded ERP observation bank /\\simulated affective-state process\\[2pt]{\scriptsize held-out subject-condition observation}\\[-1pt]{\scriptsize simulated affective-state transition}};
-\node[perc, text width=40mm] (perc) at (7.4,3.4)  {ARSPI-Net evidence estimator\\[1pt]{\scriptsize substrate $\rightarrow$ belief $b(s)$}\\[-1pt]{\scriptsize Dirichlet update\ $\boldsymbol{\alpha}\!\leftarrow\!\boldsymbol{\alpha}\!+\!\mathbf{p}_{\theta}(x_t)$}};
-\node[efe]  (efe)  at (3.7,-0.4) {EFE controller\ \ $a^\star=\arg\min_a\mathrm{EFE}(a)$\\[2pt]{\footnotesize $\mathrm{EFE}(a)=\underbrace{\text{risk}}_{\text{pragmatic: toward target}}+\underbrace{\text{ambiguity}}_{\text{epistemic: resolve uncertainty}}$}};
+% ===================== LEFT: observation bank / process =====================
+\node[align=center,font=\scriptsize\bfseries,text=inL] (srctitle) at (0,1.55)
+  {\mbox{Recorded ERP observation bank\,/}\\\mbox{simulated affective-state process}};
+% ERP waveform glyph
+\draw[eL,line width=0.8pt,line cap=round]
+  (-0.95,0.62) .. controls (-0.78,0.86) and (-0.62,0.86) .. (-0.45,0.62)
+  .. controls (-0.30,0.40) and (-0.16,0.40) .. (-0.02,0.62)
+  .. controls (0.14,0.92) and (0.30,0.92) .. (0.46,0.62)
+  .. controls (0.62,0.46) and (0.78,0.46) .. (0.96,0.62);
+\node[font=\scriptsize,text=arr,align=center,text width=37mm] (oalbl) at (0,0.20)
+  {held-out subject-condition observations};
+% state-transition glyph
+\node[circle,draw=inL,line width=0.7pt,minimum size=5.6mm,inner sep=0pt,font=\tiny] (s1) at (-0.85,-0.78) {$s_1$};
+\node[circle,draw=inL,line width=0.7pt,minimum size=5.6mm,inner sep=0pt,font=\tiny] (s2) at (0,-0.78) {$s_2$};
+\node[circle,draw=inL,line width=0.7pt,minimum size=5.6mm,inner sep=0pt,font=\tiny] (sk) at (0.85,-0.78) {$s_k$};
+\draw[->,draw=inL,line width=0.6pt] (s1) to[bend left=42] (s2);
+\draw[->,draw=inL,line width=0.6pt] (s2) to[bend left=42] (sk);
+\draw[->,draw=inL,line width=0.6pt] (sk) to[bend left=58] (s1);
+\node[font=\scriptsize,text=arr,align=center,text width=37mm] (translbl) at (0,-1.34)
+  {simulated affective-state transition};
+\begin{scope}[on background layer]
+  \node[rounded corners=4pt, fill=inF, draw=inL, line width=0.9pt,
+        fit=(srctitle)(oalbl)(s1)(sk)(translbl), inner sep=4pt] (src) {};
+\end{scope}
 
-% ---- loop arrows ----
-\draw[flow] (env) to[bend left=10] node[above,font=\scriptsize]{observation $x_t$} (perc);
-\draw[flow] (perc) to[bend left=14] node[right,font=\scriptsize,align=left,pos=0.55]{belief $b(s)$} (efe);
-\draw[flow] (efe) to[bend left=14] node[left,font=\scriptsize,align=center,pos=0.5]{policy action /\\ target-state query\\{\scriptsize until $b(\text{target})\!\ge\!0.8$}} (env);
+% ===================== ESTIMATOR =====================
+\node[rounded corners=3pt, draw=eL, fill=eF!55, line width=0.9pt,
+      minimum width=37mm, minimum height=26mm] (est) at (5.9,0) {};
+\node[font=\footnotesize\bfseries, text=eL] at ([yshift=-3.4mm]est.north) {ARSPI-Net evidence estimator};
+\node[chip, fill=eF, draw=eL] (cE) at (4.55,0.05) {E};
+\node[chip, fill=dF, draw=dL] (cD) at (5.45,0.05) {D};
+\node[chip, fill=tF, draw=tL] (cT) at (6.35,0.05) {T};
+\node[chip, fill=cF, draw=cL] (cC) at (7.25,0.05) {C};
+\node[font=\tiny,text=arr,align=center,text width=9mm] at ([yshift=-2.2mm]cE.south) {spike\\embedding};
+\node[font=\tiny,text=arr,align=center,text width=9mm] at ([yshift=-2.2mm]cD.south) {dynamical};
+\node[font=\tiny,text=arr,align=center,text width=9mm] at ([yshift=-2.2mm]cT.south) {topological};
+\node[font=\tiny,text=arr,align=center,text width=9mm] at ([yshift=-2.2mm]cC.south) {coupling};
 
-% ---- neural evidence streams feeding the decoder ----
-\node[mini,fill=eF,draw=eL] (mE) at (10.9,4.15){E};
-\node[mini,fill=dF,draw=dL] (mD) at (10.9,3.45){D};
-\node[mini,fill=tF,draw=tL] (mT) at (10.9,2.75){T};
-\node[mini,fill=cF,draw=cL] (mC) at (10.9,2.05){C};
-\node[font=\scriptsize,align=center,text=black!60] at (10.9,4.9){neural evidence streams};
-\coordinate (mrail) at (9.95,3.1);
-\draw[line width=0.85pt,draw=arr] (9.95,4.15) -- (9.95,2.05);
-\draw[line width=0.85pt,draw=arr] (mE.west) -- (mE.west -| mrail);
-\draw[line width=0.85pt,draw=arr] (mD.west) -- (mD.west -| mrail);
-\draw[line width=0.85pt,draw=arr] (mT.west) -- (mT.west -| mrail);
-\draw[line width=0.85pt,draw=arr] (mC.west) -- (mC.west -| mrail);
-\draw[flow] (9.95,3.1) -- (perc.east);
+% ===================== BELIEF UPDATE =====================
+\node[rounded corners=3pt, draw=blL, fill=blF, line width=0.9pt, align=center,
+      minimum width=29mm, minimum height=18mm] (bel) at (10.7,0)
+  {Dirichlet belief\\update\\[2pt]{\footnotesize $\boldsymbol{\alpha}\!\leftarrow\!\boldsymbol{\alpha}\!+\!\mathbf{p}_{\theta}(x_t)$}};
+
+% ===================== EFE CONTROLLER =====================
+\node[rounded corners=3pt, draw=emL, fill=emF, line width=0.9pt, align=center,
+      minimum width=30mm, minimum height=18mm] (efe) at (14.8,0)
+  {Expected-free-energy\\(EFE) controller\\[1pt]{\footnotesize $a^\star\!=\!\arg\min_a\mathrm{EFE}(a)$}};
+
+% ===================== FLOW ARROWS =====================
+\draw[flow] (src.east) -- node[above,font=\scriptsize]{observation $x_t$} (est.west);
+\draw[flow] (est.east) -- node[above,font=\scriptsize,align=center]{class-prob.\\vector $\mathbf{p}_{\theta}(x_t)$} (bel.west);
+\draw[flow] (bel.east) -- node[above,font=\scriptsize]{belief $b(s)$} (efe.west);
+% feedback
+\draw[flow] (efe.south) -- ++(0,-1.25) -| (src.south)
+  node[pos=0.25,above,font=\scriptsize]{policy action\,/\,target-state query $a$};
 
 \end{tikzpicture}
 \end{document}
