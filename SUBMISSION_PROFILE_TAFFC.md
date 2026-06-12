@@ -11,8 +11,7 @@ foregrounds physiological affective computing; the shared `manuscript/main.tex` 
 
 - **Journal:** IEEE Transactions on Affective Computing.
 - **Manuscript type:** Regular Paper.
-- **Title:** ARSPI-Net: A Neuromorphic Reservoir-Graph Substrate for Affective ERP Decoding and
-  Closed-Loop Neural Evidence Accumulation.
+- **Title:** A Neuromorphic Reservoir–Graph Framework for Affective ERP Evidence Accumulation.
 - **Page policy:** 12 free formatted pages (incl. references and biographies); $200/page beyond;
   18-page maximum. **The TAFFC variant `manuscript/taffc/main_taffc.pdf` is 11 pages → within the
   free limit; no overlength charge.** (See `TAFFC_AUTHOR_GUIDELINES_VERIFICATION.md`.)

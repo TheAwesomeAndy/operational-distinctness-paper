@@ -1,8 +1,8 @@
 Dear Prof. Jesse Hoey, Editor-in-Chief, and the Editorial Board of IEEE Transactions on
 Affective Computing,
 
-We submit our manuscript, "ARSPI-Net: A Neuromorphic Reservoir-Graph Substrate for Affective ERP
-Decoding and Closed-Loop Neural Evidence Accumulation," for consideration as a Regular Paper.
+We submit our manuscript, "A Neuromorphic Reservoir–Graph Framework for Affective ERP Evidence
+Accumulation," for consideration as a Regular Paper.
 
 Affective-computing contribution. ARSPI-Net is a physiological affective-computing method: it
 decodes the affective event-related potential (ERP) — a noisy, partially observed
