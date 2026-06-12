@@ -26,14 +26,14 @@
 ]
 
 % ---- cycle nodes (clockwise): env -> perception -> efe -> env ----
-\node[env]  (env)  at (0,3.4)    {Environment\\[1pt]{\scriptsize held-out subject, affective state $s_t$}\\[-1pt]{\scriptsize action-determined transition}};
-\node[perc] (perc) at (7.4,3.4)  {Neural decoder\\[1pt]{\scriptsize ARSPI-Net substrate $\rightarrow$ belief $b(s)$}\\[-1pt]{\scriptsize Dirichlet update\ $\boldsymbol{\alpha}\!\leftarrow\!\boldsymbol{\alpha}\!+\!\mathbf{p}_{\theta}(x_t)$}};
+\node[env, text width=41mm]  (env)  at (0,3.4)    {Recorded ERP observation bank\,/\,simulated affective-state process\\[2pt]{\scriptsize held-out subject-condition observation}\\[-1pt]{\scriptsize simulated affective-state transition}};
+\node[perc, text width=40mm] (perc) at (7.4,3.4)  {ARSPI-Net evidence estimator\\[1pt]{\scriptsize substrate $\rightarrow$ belief $b(s)$}\\[-1pt]{\scriptsize Dirichlet update\ $\boldsymbol{\alpha}\!\leftarrow\!\boldsymbol{\alpha}\!+\!\mathbf{p}_{\theta}(x_t)$}};
 \node[efe]  (efe)  at (3.7,-0.4) {EFE controller\ \ $a^\star=\arg\min_a\mathrm{EFE}(a)$\\[2pt]{\footnotesize $\mathrm{EFE}(a)=\underbrace{\text{risk}}_{\text{pragmatic: toward target}}+\underbrace{\text{ambiguity}}_{\text{epistemic: resolve uncertainty}}$}};
 
 % ---- loop arrows ----
 \draw[flow] (env) to[bend left=10] node[above,font=\scriptsize]{observation $x_t$} (perc);
 \draw[flow] (perc) to[bend left=14] node[right,font=\scriptsize,align=left,pos=0.55]{belief $b(s)$} (efe);
-\draw[flow] (efe) to[bend left=14] node[left,font=\scriptsize,align=center,pos=0.5]{action $a$\\{\scriptsize until $b(\text{target})\!\ge\!0.8$}} (env);
+\draw[flow] (efe) to[bend left=14] node[left,font=\scriptsize,align=center,pos=0.5]{policy action /\\ target-state query\\{\scriptsize until $b(\text{target})\!\ge\!0.8$}} (env);
 
 % ---- neural evidence streams feeding the decoder ----
 \node[mini,fill=eF,draw=eL] (mE) at (10.9,4.15){E};
@@ -51,7 +51,7 @@
 
 % ---- honest finding + scope note ----
 \node[font=\scriptsize,align=center,text=black!60] at (3.7,-2.35)
-  {Epistemic (ambiguity) term adds limited marginal utility under action-determined transitions:\\[-1pt]EFE controller matches pragmatic-only control. Closed loop on the belief side, open loop on the\\[-1pt]environment side; evaluated as a simulation over recorded observations.};
+  {Epistemic (ambiguity) term adds limited marginal utility under the simulated affective-state transition:\\[-1pt]EFE controller matches pragmatic-only control. Closed loop on the belief side, open loop on the\\[-1pt]process side; evaluated as a simulation over recorded observations.};
 
 \end{tikzpicture}
 \end{document}

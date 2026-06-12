@@ -242,7 +242,7 @@ We evaluate the substrate as the evidence estimator in a closed-loop adaptive BC
 \begin{figure*}[!t]
 \centering
 \includegraphics[width=0.80\textwidth]{fig_embodied_loop.pdf}
-\caption{Closed-loop adaptive BCI simulation over recorded ERP observations. The held-out environment emits an observation $x_t$; the ARSPI-Net substrate updates a Dirichlet belief $b(s)$ over the affective state from the four neural evidence streams; the expected-free-energy controller selects $a^\star=\arg\min_a\mathrm{EFE}(a)$ under a risk (pragmatic, toward target) plus ambiguity (epistemic, resolve uncertainty) decomposition and updates the simulated affective-state environment until $b(\text{target})\geq 0.8$. Under the action-determined transition the epistemic term adds limited marginal utility, so the controller matches pragmatic-only control. The loop is closed on the belief side and open on the environment side.}
+\caption{Neural evidence accumulation over recorded ERP observations. The recorded observation bank emits a held-out subject-condition observation $x_t$; the ARSPI-Net evidence estimator updates a Dirichlet belief $b(s)$ over the affective state from the four neural evidence streams; the expected-free-energy controller selects $a^\star=\arg\min_a\mathrm{EFE}(a)$ under a risk (pragmatic, toward target) plus ambiguity (epistemic, resolve uncertainty) decomposition and queries the next target affective state until $b(\text{target})\geq 0.8$. Under the simulated affective-state transition the epistemic term adds limited marginal utility, so the controller matches pragmatic-only control. The loop is closed on the belief side and open on the process side.}
 \label{fig:embodied_loop}
 \end{figure*}
 
