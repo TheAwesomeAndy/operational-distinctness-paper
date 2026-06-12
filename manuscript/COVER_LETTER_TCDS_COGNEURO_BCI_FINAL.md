@@ -8,14 +8,19 @@ issue.
 
 Fit with the special issue. The special issue concerns where cognitive neuroscience and
 brain-computer interfaces meet at neural decoding, and ARSPI-Net sits precisely at that
-interface. It treats the affective event-related potential (ERP) as a noisy, partially observed
-output of a biological dynamical system and decodes it into operationally distinct neural
-evidence streams, which an explicitly defined expected-free-energy controller then accumulates
-in a closed-loop adaptive BCI simulation. This continues a line of neuromorphic EEG/BCI work the
-Transactions has recently published, including spiking-graph decoding of EEG auditory attention
-(Cai et al., IEEE TCDS, 2024) and biomimetic spiking models of biological auditory processing
-(Kim et al., IEEE TCDS, 2025); ARSPI-Net shares their biologically grounded, event-driven stance
-while shifting the analytic objective from endpoint accuracy to measurable evidence structure.
+interface. The paper addresses neural decoding, electrophysiological evidence extraction,
+perturbation robustness, and closed-loop adaptive BCI simulation: it treats the affective
+event-related potential (ERP) as a noisy, partially observed output of a biological dynamical
+system, decodes it into operationally distinct neural evidence streams, characterizes how those
+streams degrade under temporal, amplitude, spatial, and graph perturbation, and accumulates them
+with an explicitly defined expected-free-energy controller in a closed-loop adaptive BCI
+simulation. Recent neuromorphic EEG/BCI work in the Transactions — spiking-graph decoding of EEG
+auditory attention (Cai et al., IEEE TCDS, 2024) and biomimetic spiking models of biological
+auditory processing (Kim et al., IEEE TCDS, 2025) — indicates the special issue's interest in
+biologically grounded, event-driven approaches; we cite them as scope analogues rather than
+technical antecedents. ARSPI-Net is distinct from both: it is a measurement substrate rather than
+an end-to-end decoder, and it shifts the analytic objective from endpoint accuracy to measurable
+evidence structure.
 
 Novelty. Rather than another end-to-end classifier, ARSPI-Net is a measurement substrate: a fixed
 leaky integrate-and-fire reservoir, a binned spike-count code, a temporal phase-locking graph,
