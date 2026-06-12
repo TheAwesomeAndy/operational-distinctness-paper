@@ -71,6 +71,8 @@ statements.
   correct portal; confirm the journal name on the portal).
 
 ## 10. Packaging decision
-TAFFC permits ≥10 pages (12 free) → reuse `manuscript/main.pdf` unchanged; **no TAFFC overlay**
-(`manuscript/taffc/main_taffc.tex` / `.pdf`). The TCDS submission package is preserved unchanged;
-this TAFFC layer is purely additive.
+TAFFC permits 12 free formatted pages. The TAFFC submission uses an **additive manuscript variant**,
+`manuscript/taffc/main_taffc.tex` / `.pdf` (with a double-blind twin `main_taffc_blind`), that
+foregrounds physiological affective computing and compiles to **11 pages** — within the free limit.
+The shared `manuscript/main.tex` / `.pdf` and `main_blind` (the TCDS manuscript) are preserved
+byte-for-byte; this TAFFC layer is purely additive.

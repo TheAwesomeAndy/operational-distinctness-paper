@@ -18,7 +18,10 @@ and C behave as different affective measurements or as redundant relabelings of 
 Under subject-grouped cross-validation with negative controls and false-discovery-rate control, we
 test their predictive sufficiency, incremental utility, perturbation response, and representational
 redundancy under centered-kernel alignment. The streams are operationally distinct: each exposes
-affective structure the others omit, which a single recognition number cannot reveal.
+affective structure the others omit, which a single recognition number cannot reveal. Among these, the
+structure-function coupling block C contributes a graph-linked, systems-level observable that carries
+above-chance electrode coordination while remaining, by our own measurement, a non-predictor of static
+classification.
 
 Perturbation robustness. We characterize every stream under temporal jitter, amplitude noise,
 channel dropout, and graph edge perturbation, reporting per-stream operating regimes rather than a

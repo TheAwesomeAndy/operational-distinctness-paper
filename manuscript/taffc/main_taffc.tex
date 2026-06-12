@@ -1,0 +1,353 @@
+\documentclass[journal]{IEEEtran}
+
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{cite}
+\usepackage{url}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{balance}
+
+\graphicspath{{figures/architecture/}{figures/generated/}{figures/tcds_hardening/}{figures/tcds_ready9/observations/}{figures/tcds_ready9/analysis/}{../figures/tcds_ready9/observations/}{../figures/tcds_ready9/analysis/}}
+
+\newcommand{\E}{\mathcal{E}}
+\newcommand{\D}{\mathcal{D}}
+\newcommand{\T}{\mathcal{T}}
+\newcommand{\C}{\mathcal{C}}
+\newcommand{\BA}{\mathrm{BA}}
+\newcommand{\AUC}{\mathrm{AUC}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\KL}{\mathrm{KL}}
+\newcommand{\Hent}{\mathcal{H}}
+
+\hyphenation{observations observation perceptual classifier classifiers neuromorphic differentiation}
+\begin{document}
+
+\title{ARSPI-Net: A Neuromorphic Reservoir-Graph Substrate for Affective ERP Decoding and Closed-Loop Neural Evidence Accumulation}
+
+\author{Andrew A. Lane, K. Wendy Tang, and Brady D. Nelson}
+
+\maketitle
+
+\begin{abstract}
+Affective EEG decoding is usually judged by endpoint recognition accuracy, yet physiological affective computing also needs to know how that affective neural evidence is structured, how robust it is, and how it behaves under uncertainty. We present ARSPI-Net (Affective Reservoir-Spike Processing and Inference Network), a neuromorphic event-driven reservoir-graph substrate for affective event-related potential (ERP) decoding. Treating the electroencephalogram (EEG) as a noisy, partially observed output of a biological dynamical system, ARSPI-Net transforms each affective ERP observation into four operationally distinct neural evidence streams: a spike-coded embedding $E$ from a fixed leaky integrate-and-fire (LIF) spiking reservoir and binned spike-count (BSC$_6$) code, dynamical descriptors $D$, graph-topological descriptors $T$ from a temporal phase-locking (tPLV) graph, and a structure-function coupling block $C$. On 633 trial-averaged subject-condition observations from 211 adults under subject-grouped cross-validation, a mechanism ablation with negative controls separates the streams, and four perturbation families (temporal jitter, amplitude noise, channel dropout, and graph edge perturbation) expose their operating regimes rather than a single endpoint. A conventional ERP-amplitude baseline remains stronger for static classification, so we position ARSPI-Net as a measurement substrate rather than a static classifier. An explicitly defined expected-free-energy controller then uses the substrate as an evidence estimator in a closed-loop adaptive BCI simulation over recorded ERP observations, which is a simulation and not an online BCI deployment. Clinical labels serve only as exploratory contextual variables, bounded by a false-discovery-rate result. All results are specific to the measured SHAPE ERP regime.
+\end{abstract}
+
+\begin{IEEEkeywords}
+EEG, event-related potentials, brain-computer interfaces, neural decoding, neuromorphic computing, reservoir computing, spiking neural networks, graph signal processing, structure-function coupling, affective computing, closed-loop evidence accumulation, adaptive BCI simulation.
+\end{IEEEkeywords}
+
+\section{Introduction}
+EEG offers millisecond-scale access to neural activity, but scalp recordings are noisy, indirect, and subject-dependent. For physiological affective computing, the central problem is to transform the affective event-related potential (ERP)---the affective neural response elicited by discrete affective stimulus conditions~\cite{ding2023tsception}---into reliable physiological affective evidence under uncertainty, rather than a single recognition score. We treat this affective ERP as the output of a biological dynamical system and ask how an event-driven, neuromorphic substrate can transform it into evidence streams whose reliability can be measured under perturbation and accumulated in a closed-loop decision. This is a physiological-affective-computing measurement question rather than one of psychology or diagnosis. Static accuracy alone cannot identify where affective information is preserved, how each representation degrades under perturbation, or whether two feature streams encode redundant evidence.
+
+This work does not present ARSPI-Net as a superior static affective-EEG classifier. A conventional ERP-amplitude baseline is retained as a reference and achieves higher three-class balanced accuracy under a static readout. The contribution is instead a neuromorphic reservoir-graph measurement substrate for affective ERP decoding that separates the response into spike-coded, dynamical, graph-topological, and structure-function evidence streams, then evaluates those streams under perturbation and in a closed-loop adaptive BCI simulation over recorded ERP observations. ARSPI-Net is a staged neuromorphic architecture for clinical affective EEG~\cite{lane2023arspi,lane2024arspi}, evaluated here through cross-subject protocols, controlled ablation, and module-level metrics rather than one accuracy number.
+
+ARSPI-Net produces four feature families per observation: a reservoir spike embedding $E$, dynamical descriptors $D$, electrode-level topological descriptors $T$, and structure-function coupling descriptors $C$. The present study asks a structural question about these four feature families. Do $E$, $D$, $T$, and $C$ behave as different measurements, or are they redundant relabelings of the same response?
+
+Operational distinctness is one of the criteria we apply to the substrate. Two streams are operationally distinct when, under a fixed evaluation protocol, they differ in a measurable property: predictive sufficiency, incremental utility, perturbation response, or representational redundancy.
+
+The dataset comprises a 211-subject affective EEG cohort with five overlapping psychiatric labels and per-subject comorbidity counts. The architecture decomposes the staged pipeline into four blocks, each tied to a named neural mechanism. The evaluation protocol combines subject-respecting permutation inference, FDR correction, redundancy under centered-kernel alignment~\cite{kornblith2019similarity}, an electrode-permutation null on the coupling readout, and a closed-loop evidence-accumulation simulation read as a precursor to active-inference-style control~\cite{friston2010free,parr2022activeinference,pezzulo2015active}.
+
+Existing affective EEG and ERP models primarily optimize endpoint decoding accuracy, but they rarely measure how affective neural information is transformed across temporal, dynamical, graph-topological, and structure-function coupling observables, how these evidence streams degrade under perturbation, or how they support closed-loop evidence accumulation under uncertainty. This paper closes that gap with five contributions:
+\begin{itemize}\setlength{\itemsep}{-1pt}
+\item ARSPI-Net, a neuromorphic reservoir-graph substrate that maps each affective ERP observation into four named evidence streams ($E$, $D$, $T$, $C$), each anchored to a named neural mechanism (LIF spiking, BSC$_6$ coding, tPLV connectivity, $\kappa$ coupling) with an explicit mathematical observable (Section~\ref{sec:mechanisms});
+\item an operational-distinctness analysis of $E$, $D$, $T$, and $C$ via a multi-seed mechanism ablation, centered-kernel redundancy analysis, and negative controls (Section~\ref{sec:pillarB}, Fig.~\ref{fig:cka});
+\item a perturbation characterization of every stream under temporal, amplitude, channel, and graph corruption, reporting stream-specific operating regimes rather than a single endpoint (Section~\ref{sec:pillarC});
+\item a characterization of structure-function coupling $\kappa$ as a graph-linked systems-level observable, reporting both its above-chance electrode-coordination signal and its measured limit as a non-predictor of static classification (Section~\ref{sec:pillarA}); and
+\item an evaluation of downstream utility through a closed-loop evidence-accumulation simulation that accumulates the streams under an expected-free-energy controller over recorded ERP observations (Section~\ref{sec:embodied_results}).
+\end{itemize}
+Throughout, clinical labels enter only as exploratory contextual variables bounded by a false-discovery-rate result, and reported outputs are aggregate and deidentified.
+
+\section{Related Work}
+Compact EEG decoders have largely framed neural decoding as an endpoint-classification problem. EEGNet established a canonical compact convolutional baseline whose EEG-specific depthwise and separable convolutions generalize across BCI paradigms while remaining interpretable~\cite{lawhern2018eegnet}, and the broader deep-learning EEG literature follows the same endpoint-accuracy convention~\cite{craik2019deep,delpup2025preprocessing}. More recent convolutional-transformer decoders extend this line by modeling longer-range temporal dependencies and richer inter-channel interactions for EEG decoding~\cite{ding2024eegdeformer}. ARSPI-Net is positioned differently: rather than optimizing a single end-to-end decoder head, it asks whether a fixed event-driven reservoir-graph substrate can transform an affective ERP observation into named evidence streams whose sufficiency, redundancy, perturbation response, and closed-loop utility can be measured, while a conventional ERP-amplitude baseline remains the stronger static classifier.
+
+In affective EEG, temporal structure and spatial asymmetry have become first-class inductive biases. TSception explicitly models multi-scale temporal dynamics together with hemisphere-aware spatial structure for emotion recognition~\cite{ding2023tsception}, and related work shows that functional-connectivity features complement single-channel descriptors in multimodal settings~\cite{wu2022connectivity,guo2025mma,chiang2023depression}. ARSPI-Net adopts these insights but shifts the analytic objective: temporal encoding, dynamical response, and topology are not fused immediately into one latent representation for endpoint prediction, but retained as separately measured evidence streams so that operational distinctness can be tested under a fixed readout and subject-grouped validation.
+
+Graph-based EEG models increasingly treat electrodes as nodes and inter-channel relations as the primary object of representation learning. RGNN uses biologically informed adjacency and regularization for cross-subject EEG emotion recognition~\cite{zhong2022rgnn}, while the wider graph-EEG literature has made graph construction, node-feature design, and readout choice central design decisions~\cite{klepl2024gnn,klepl2023ad,kipf2017gcn,velickovic2018gat,battaglia2018relational}. ARSPI-Net differs from end-to-end graph classifiers by using a temporal phase-locking topology~\cite{lachaux1999plv} and a structure-function coupling readout~\cite{honey2009structural,park2013structural,suarez2020linking} as measured observables: topological summaries and structure-function coupling are explicit evidence streams rather than latent conveniences inside a graph classifier.
+
+Neuromorphic and reservoir approaches are the closest conceptual neighbor to the present work. EEG-specific reservoir studies show that fixed recurrent dynamics, such as echo-state networks with plasticity-pretrained reservoirs, can support emotion recognition from EEG~\cite{maass2002liquid,jaeger2001echo,lukosevicius2009reservoir,fourati2018reservoir}, and spiking-graph hybrids combine event-driven computation with spatial-dependency modeling for EEG-based BCIs~\cite{gong2023sglnet,cai2024spiking,davies2018loihi,furber2014spinnaker}. Separately, adaptive-BCI work has used active inference in speller-based simulations to cast decoding and control as sequential Bayesian belief updating under uncertainty~\cite{mladenovic2018active,rao1999predictive,friston2010free,parr2022activeinference,pezzulo2015active}. ARSPI-Net sits at the intersection of these strands: it uses a fixed LIF reservoir as a nonlinear measurement operator, retains graph topology and coupling as separate evidence streams, and evaluates the resulting substrate in a closed-loop adaptive BCI simulation over recorded ERP observations rather than in an online deployment, with the expected-free-energy controller read as a precursor to active-inference-style control rather than a full implementation.
+
+\section{ARSPI-Net Layer Formulation}
+\subsection{Input Representation}
+Let
+\begin{equation}
+X_s^{(c)} \in \mathbb{R}^{N_{ch}\times T}, \qquad N_{ch}=34,
+\end{equation}
+denote the preprocessed event-related EEG response for subject $s$ under condition $c\in\{\mathrm{negative},\mathrm{neutral},\mathrm{pleasant}\}$. The affective task uses subject-condition observations directly. Clinical-label analyses average each feature family over the available conditions per subject.
+
+\subsection{Reservoir Dynamics and Spike Embedding}
+Each channel is fed independently into a fixed LIF reservoir whose discrete-time update is
+\begin{equation}
+\mathbf{u}_{t+1}=\beta\mathbf{u}_{t}+W_{in}x_t+W_{rec}\mathbf{z}_t-\mathbf{r}_t,
+\label{eq:lif}
+\end{equation}
+with spike emission
+\begin{equation}
+\mathbf{z}_{t+1}=H(\mathbf{u}_{t+1}-\theta),
+\label{eq:spike}
+\end{equation}
+where $H(\cdot)$ is the Heaviside step function, $\beta=0.05$ is the membrane decay, $\theta=0.5$ is the threshold, $W_{in}$ and $W_{rec}$ are Xavier-initialized input and recurrent matrices, and the reservoir size is $N_{\text{res}}=256$. The recurrent matrix is rescaled so that its largest eigenvalue magnitude is $0.9$. Spike counts are pooled into $n_{\text{bins}}=6$ non-overlapping windows over the response interval $t\in[10,70]$ to form the BSC$_6$ feature, and the per-channel BSC$_6$ vector is PCA-compressed to 64 components. The full embedding for a subject-condition observation is
+\begin{equation}
+E_s^{(c)}=\left[h_1\|h_2\|\cdots\|h_{34}\right]\in\mathbb{R}^{2176},
+\label{eq:E}
+\end{equation}
+where $h_v\in\mathbb{R}^{64}$ is the channel-level embedding.
+
+\subsection{Dynamical, Topological, and Coupling Blocks}
+The dynamical block $D$ contains reservoir-response descriptors per channel. The topological block $T$ summarizes electrode-level connectivity as a temporal phase-locking matrix and reduces it to two per-electrode summaries (mean strength and clustering). For per-channel matrices $D_s\in\mathbb{R}^{34\times p}$ and $T_s\in\mathbb{R}^{34\times q}$, the rank-correlation coupling matrix is
+\begin{equation}
+K_s = \mathrm{corr}_{\rho}(D_s,T_s) \in \mathbb{R}^{p\times q}
+\end{equation}
+and the coupling magnitude is
+\begin{equation}
+\kappa_s = \frac{\|K_s\|_F}{\sqrt{pq}}.
+\label{eq:kappa}
+\end{equation}
+The block $C$ contains $\kappa_s$ alongside signed strength and clustering coupling summaries.
+
+\subsection{Operational Distinctness Criteria}
+For families $L_i,L_j\in\{E,D,T,C\}$ and target $Y$, the performance contrast is
+\begin{equation}
+\Delta_{ij}(Y)=\mathcal{M}(f(L_i),Y)-\mathcal{M}(f(L_j),Y),
+\label{eq:contrast}
+\end{equation}
+with $\mathcal{M}$ either balanced accuracy or ROC-AUC and $f$ a fixed L2-regularized logistic readout. The incremental utility relative to a baseline $L_b$ is
+\begin{equation}
+\Gamma_i(Y|L_b)=\mathcal{M}(f([L_b\|L_i]),Y)-\mathcal{M}(f(L_b),Y).
+\label{eq:increment}
+\end{equation}
+Redundancy is assessed using linear centered-kernel alignment,
+\begin{equation}
+\mathrm{CKA}(X,Y)=\frac{\|X_c^{\top}Y_c\|_F^2}{\|X_c^{\top}X_c\|_F\|Y_c^{\top}Y_c\|_F},
+\label{eq:cka}
+\end{equation}
+with $X_c$ and $Y_c$ column-centered~\cite{kornblith2019similarity}.
+
+\section{Brain-Inspired Mechanisms for Neural Decoding}\label{sec:mechanisms}
+
+The blocks of ARSPI-Net each have a named neural correlate. This section states the correlate, the implementation choice, and its scope, so that the architecture is described as a sequence of physiologically motivated transformations rather than a stack of feature extractors. Table~\ref{tab:neural_mechanisms} summarizes the mapping from each neural principle to its ARSPI-Net implementation, the computational object it produces, the observable it exposes, and its role in neural decoding.
+
+\input{../tables/tcds_ready9/table_neural_mechanisms.tex}
+
+\subsection{LIF Spiking Reservoir as a Recurrent Cortical Substrate}
+The reservoir realized by~\eqref{eq:lif}--\eqref{eq:spike} is a fixed leaky integrate-and-fire network. The neuron model is the canonical biophysical reduction of the Hodgkin-Huxley axon~\cite{hodgkin1952quantitative}: a sub-threshold membrane that integrates synaptic drive, decays toward rest, fires when the integrated potential crosses threshold, and resets. Biologically grounded spiking mechanisms of this kind also underpin biomimetic neuromorphic models in cognitive and developmental systems~\cite{kim2024biomimetic}. With $\beta=0.05$ the decay constant places the reservoir in the temporal regime that liquid state machines use for transient projection of input streams~\cite{maass2002liquid}. The recurrent matrix is held at spectral radius $0.9$, just below the marginal-stability boundary at which a recurrent network's transient response becomes long enough to support readout while remaining contractive on average~\cite{jaeger2001echo,sussillo2009generating}. The reservoir weights are fixed; supervised training is confined to the downstream readout.
+
+This fixed-reservoir design follows the reservoir-computing abstraction~\cite{lukosevicius2009reservoir}, in which the recurrent transformation is held fixed and supervised learning is confined to the readout.
+
+\subsection{BSC$_6$ as an Event-Driven Code}
+The embedding $E$ in~\eqref{eq:E} is built from binned spike counts over $n_{\text{bins}}=6$ windows of the post-stimulus interval $t\in[10,70]$. BSC$_6$ has three relevant properties. First, it is event-driven. The representation is read from spikes rather than membrane traces; the readout operates on spike-count summaries rather than membrane trajectories. Second, the encoding window starts a small distance after stimulus onset and ends well before the stimulus offset, covering the temporal interval where ERP components such as P200, N200, and the early portion of P300 are expressed. The bins are coarse enough to be robust to small temporal jitter but fine enough to preserve coarse temporal structure within the response. Third, the format is compatible with event-counter abstractions used in neuromorphic systems: spike counts over fixed time windows correspond to on-chip event-counter operations on Loihi~\cite{davies2018loihi} and SpiNNaker~\cite{furber2014spinnaker}, and binned spike-count classifiers have been shown to support unsupervised digit recognition~\cite{diehl2015unsupervised}. PCA compression to 64 per channel gives a fixed-length representation that the downstream readout consumes without retraining the reservoir.
+
+\subsection{tPLV Connectivity as Cortical Network Organization}
+The topological block $T$ is derived from per-observation $34\times34$ temporal phase-locking value matrices~\cite{lachaux1999plv}. PLV measures inter-electrode phase consistency across trials and is one of the standard tools in EEG functional connectivity. Computed within the event-related response window, tPLV captures the connectivity that is in force during the task rather than during rest, mitigating the stationarity concerns that follow from full-trace PLV estimates. The matrix is reduced to two per-electrode summaries, mean strength and clustering. Both belong to the established graph-theoretic vocabulary of brain network analysis~\cite{bullmore2009complex}, and both have a direct biological reading: strength tracks how synchronized an electrode is with the rest of the head, while clustering tracks whether its synchronized neighbors are themselves synchronized. The reduction loses information by design. We trade pairwise resolution for a per-channel descriptor compatible with the embedding shape used by the other blocks.
+
+\subsection{Structure-Function Coupling $\kappa$}
+The coupling readout~\eqref{eq:kappa} measures whether a subject's per-electrode dynamical signature ($D$) and topological signature ($T$) co-vary across electrodes. It is a single non-negative scalar bounded above by $1$, computed per subject-condition pair, and admits an electrode-permutation null. Structure-function coupling is a recurring quantity in network neuroscience, where it indexes the degree to which functional patterns line up with the structural backbone~\cite{honey2009structural,park2013structural,suarez2020linking}. The use here is closer to a within-subject signature than to a population-level claim: $\kappa$ asks whether one subject's local electrode dynamics and the same subject's electrode-level network position are coordinated, and the permutation null asks whether the coordination is more than would arise from chance electrode labeling. The block $C$ embeds $\kappa$ alongside signed strength and clustering coupling.
+
+\subsection{Sequential Evidence Accumulation}
+The four streams are interpreted as operationally distinct evidence sources available to a closed-loop neural decoder (Section~\ref{sec:embodied_results}), but they are not themselves the controller actions. The decoder maintains a Dirichlet posterior $\mathrm{Dir}(\boldsymbol{\alpha}_t)$ over a held-out subject's affective state. At each step the controller selects an affective-state action in the simulated environment, and the ARSPI-Net evidence estimator supplies a class-probability vector $\mathbf{p}_{\theta}(x_t)$ from the recorded ERP observation. The posterior update is
+\begin{equation}
+\boldsymbol{\alpha}_{t+1} = \boldsymbol{\alpha}_t + \mathbf{p}_{\theta}(x_t),
+\label{eq:dirichlet_update}
+\end{equation}
+where $\mathbf{p}_{\theta}(x_t)$ is the estimated class-probability vector for the current observation, and expected information gain is the KL divergence of the predictive distribution across the update. This formulation is the sequential-decision counterpart to the offline ablation: the offline analysis asks which streams carry distinct evidence, whereas the closed-loop simulation asks how accumulated neural evidence supports belief updating and action selection. The loop is closed on the belief side and open on the environment side, and should be read as a precursor to active-inference-style control rather than a full active-inference implementation~\cite{friston2010free,parr2022activeinference}.
+
+\section{Experimental Protocol}
+\subsection{Data, Splitting, and Privacy}
+The analysis uses 633 subject-condition observations from 211 community-recruited adults, exactly balanced across the three affective conditions (negative, neutral, pleasant). Clinical-label analyses use 206 subjects with available SUD, MDD, PTSD, GAD, and ADHD labels. Comorbidity is the rule rather than the exception in this cohort: most subjects carry more than one label, and the analyses below use comorbidity counts as a covariate where appropriate. Subject-level data are restricted; reported outputs are aggregate and deidentified. Raw EEG, clinical metadata, and subject-level features remain access-controlled.
+
+Table~\ref{tab:protocol} summarizes the analysis protocol.
+
+\begin{table*}[!t]
+\caption{Affective and Clinical Analysis Protocol}
+\label{tab:protocol}
+\centering
+\footnotesize
+\begin{tabular}{p{0.18\textwidth}p{0.22\textwidth}p{0.22\textwidth}p{0.25\textwidth}}
+\toprule
+Stage & Input & Operation & Output / Control \\
+\midrule
+Data & 211 subjects, 633 subject-condition EEG observations & Condition-level affective analysis; subject-level clinical analysis & Three affective classes; 206 subjects with clinical labels \\
+Feature diagnostics & BandPower, $E$, $D$, $T$, $C$ & Check finite values, ranks, zero fractions, constant columns & Embedding $E$ nonzero with standardized rank 632; all blocks nondegenerate \\
+Affective ablation & A0 to A9 feature configurations & 10-fold subject-grouped CV with train-fold-only scaling & Balanced accuracy, macro ROC-AUC, macro-F1, predictions, confusion matrices \\
+Clinical sensitivity & C1 to C6 subject-average features & Binary logistic readout per clinical label & Exploratory clinical-label sensitivity, not diagnostic validation \\
+\bottomrule
+\end{tabular}
+\end{table*}
+
+\subsection{Architecture Overview}
+Fig.~\ref{fig:source_pipeline} shows the staged ARSPI-Net architecture.
+
+\begin{figure*}[!t]
+\centering
+\includegraphics[width=0.98\textwidth]{arch_fig_pipeline_overview.pdf}
+\caption{ARSPI-Net pipeline overview: the staged event-driven reservoir-graph architecture, from the per-channel LIF reservoir and BSC$_6$ event-driven code to the embedding $E$, dynamical descriptors $D$, topological descriptors $T$, and coupling readout $C$ evaluated in this work.}
+\label{fig:source_pipeline}
+\end{figure*}
+
+\subsection{Feature Blocks and Diagnostics}
+Table~\ref{tab:feature_blocks} lists the evaluated blocks. The embedding $E$ has shape $(633,2176)$ with full standardized rank $632$ and no constant columns.
+
+\input{tables/table1_feature_blocks.tex}
+
+\subsection{Ablation Matrices}
+Affective classification used the A0 to A9 configurations. The classifier is L2-regularized logistic regression with train-fold-only standardization under a 10-fold StratifiedGroupKFold subject separation. Clinical-label sensitivity used the C1 to C6 configurations at the subject level with the same logistic readout. Linear separability is the deliberate choice, because operational distinctness is a property of the feature spaces under a fixed read-out, not of an unconstrained nonlinear endpoint model. The optimization is
+\begin{equation}
+\hat{\theta}=\arg\min_{\theta}\left[-\sum_{i=1}^{n}\log p_{\theta}(y_i|x_i)+\lambda\|\theta\|_2^2\right]
+\label{eq:logreg}
+\end{equation}
+and the primary metric is balanced accuracy
+\begin{equation}
+\BA=\frac{1}{K}\sum_{k=1}^{K}\frac{TP_k}{TP_k+FN_k}
+\label{eq:ba}
+\end{equation}
+with $K=2$ for clinical-label sensitivity and $K=3$ for affective classification.
+
+\section{Results}
+We organize the results in four parts: (A) dataset provenance and the computational objects the substrate produces; (B) the reservoir-graph mechanism ablation; (C) perturbation robustness and operating regimes; and (D) the closed-loop adaptive BCI simulation. The primary ablation is the multi-seed mechanism ablation of Section~\ref{sec:pillarB}; an independent ten-fold permutation-FDR protocol corroborates it, and that protocol together with the secondary clinical, redundancy, and comorbidity analyses is reported in the supplementary material.
+
+\subsection{Dataset Provenance and Observed Computational Objects}\label{sec:pillarA}
+The data are trial-averaged event-related EEG from 211 community-recruited adults (subject 127 excluded for a recording anomaly), giving 633 subject-condition observations balanced across Negative, Neutral, and Pleasant. The evaluation uses subject-grouped cross-validation, so each subject appears in either the training or the test partition of a fold. Subject-level data are restricted; reported outputs are aggregate and deidentified.
+
+Fig.~\ref{fig:reservoir_dynamics} shows the computational objects the substrate produces, for one exemplar per affective class: the LIF spike raster and membrane trajectory that generate the embedding $E$ (panels a and b), the per-class $34\times34$ tPLV connectivity that defines the graph block $T$ (panel c), and the BSC$_6$ projection that defines the event-driven code (panel d). Structure-function coupling is summarized by $\kappa=\|C\|_F/\sqrt{pq}$: across the 633 observations the mean is $0.250$ (sd $0.115$), and a 5{,}000-permutation electrode-shuffle null is rejected at $p<0.05$ in $33.5\%$ of observations, so a non-trivial subset of subjects show coordination above a randomized electrode labeling. Subject-mean $\kappa$ is uncorrelated with per-subject classification accuracy ($\rho=0.01$), behaving as a complementary systems-level readout rather than a proxy for predictive sufficiency.
+
+\begin{figure*}[!t]
+\centering
+\includegraphics[width=0.98\textwidth]{fig_reservoir_dynamics.pdf}
+\caption{Computational objects produced by the substrate. (a) LIF spike rasters for one exemplar per affective class on a representative channel; the BSC$_6$ encoding window $t\in[10,70]$ is shaded. (b) Membrane-potential heatmaps for the same exemplars. (c) Per-class average $34\times34$ tPLV connectivity matrices across all 211 subjects. (d) BSC$_6$ PCA projection (PC1 vs PC2) colored by class with the three exemplars marked.}
+\label{fig:reservoir_dynamics}
+\end{figure*}
+
+\subsection{Reservoir-Graph Mechanism Ablation}\label{sec:pillarB}
+The primary ablation evaluates configurations A0 to A9 under subject-grouped cross-validation across five seeds, with bootstrap intervals and two negative controls (Table~\ref{tab:mechanism_ablation}). Balanced accuracy is highest for the spectral band-power baseline (A0, $0.485$) and the embedding-containing configurations ($E{+}D{+}T$ $0.481$, $E{+}D{+}T{+}C$ $0.481$, $E{+}D$ $0.478$, $E$ $0.463$); the standalone dynamical, topological, and coupling streams are lower ($D$ $0.432$, $C$ $0.368$, $T$ $0.355$) but remain above the three-class chance level of $0.333$. The shuffled-label control collapses to chance ($0.335$), confirming the protocol. An independent ten-fold permutation-FDR protocol corroborates the ordering: eight of ten configurations exceed a subject-respecting permutation null, with standalone $T$ and $C$ the two exceptions.
+
+\input{../tables/tcds_ready9/table_mechanism_ablation.tex}
+
+\begin{figure}[!t]
+\centering
+\includegraphics[width=0.84\columnwidth]{fig08_layer_redundancy_cka.pdf}
+\caption{Representational redundancy across the four evidence streams under linear centered-kernel alignment. The off-diagonal entries are small relative to the unit diagonal, indicating that $E$, $D$, $T$, and $C$ are operationally distinct rather than redundant relabelings of one ERP response.}
+\label{fig:cka}
+\end{figure}
+
+The ablation shows operational differentiation rather than classifier superiority. The embedding carries most of the affective-classification signal, while $D$, $T$, and $C$ remain linearly distinct (largest pairwise centered-kernel alignment $\mathrm{CKA}(E,D)=0.31$; Fig.~\ref{fig:cka}) and expose dynamical, topological, and coupling structure that the embedding alone omits. Clinical labels are used only as exploratory contextual variables: per-diagnosis balanced accuracies are near chance ($0.49$ to $0.53$ across SUD, MDD, PTSD, GAD, ADHD) and clinical contrasts are bounded by a Benjamini-Hochberg false-discovery-rate result~\cite{benjamini1995fdr} across the 30 diagnosis$\times$configuration cells, serving as exploratory context only. The clinical-sensitivity, redundancy, and comorbidity-adjusted analyses are reported in full in the supplementary material.
+
+\subsection{Perturbation Robustness and Operating Regimes}\label{sec:pillarC}
+We characterize each evidence stream under four perturbation families (temporal jitter, amplitude noise, channel dropout, and graph edge perturbation) applied at the representation level across all ten configurations, with a limited raw-signal diagnostic on a prespecified subset that recomputes a reservoir embedding within fold. Fig.~\ref{fig:ana03} reports the degradation profiles, which separate the streams by operating regime rather than by a single endpoint. Under additive amplitude noise the spectral band-power baseline is the most resilient, retaining $0.395$ balanced accuracy at $5$\,dB SNR, whereas the $E{+}D{+}T$ configuration falls toward chance ($0.341$, from a clean $0.481$); the same ordering holds under channel dropout ($0.408$ versus $0.340$ at $30\%$ dropout). Graph edge perturbation, by contrast, leaves the embedding-dominated configurations essentially unchanged ($E{+}D{+}T$: $0.481\!\to\!0.483$ at $30\%$) while degrading the topological stream ($T$: $0.355\!\to\!0.331$). The measured regime is stream-specific: band-power and embedding descriptors are comparatively robust to signal-domain corruption, and the graph descriptor is sensitive to graph-domain perturbation. A supplemental nested evidence-routing analysis bounds this result. An oracle over the streams shows that better stream selection could improve performance, but the tested label-free selection rules do not exceed the best fixed stream under the measured perturbation regime. The substrate makes these stream-specific operating regimes measurable, even where a label-free router does not yet exploit them.
+
+\begin{figure*}[!t]
+\centering
+\includegraphics[width=0.95\textwidth]{ana03_robustness_degradation_curves.pdf}
+\caption{Representation-level robustness degradation under amplitude noise, channel dropout, and graph edge perturbation for representative configurations. Curves report balanced accuracy as a function of perturbation level; they expose the operating regime of each evidence stream rather than a single endpoint.}
+\label{fig:ana03}
+\end{figure*}
+
+A classical ERP-amplitude baseline (windowed $P1$ to $\mathrm{LPP}$ features) reaches $67.2\%$ balanced accuracy on the three-class task, exceeding ARSPI-Net under a static readout. This comparison anchors the endpoint-classification trade-off: ARSPI-Net is not optimized as a static classifier, but as a neuromorphic reservoir-graph substrate for decomposing affective ERP responses into perturbation-characterized evidence streams and evaluating their utility in closed-loop adaptive BCI simulation. The full static comparison is reported in the supplementary material.
+
+\subsection{Closed-Loop Adaptive BCI Simulation}\label{sec:pillarD}\label{sec:embodied_results}
+We evaluate the substrate as the evidence estimator in a closed-loop adaptive BCI simulation over recorded ERP observations. The decoder maintains a categorical belief $b$ over the affective state, updated by sequential Bayesian accumulation of the per-policy classifier likelihood (Section~\ref{sec:mechanisms}); the environment is action-determined with transition noise, $P(s'\mid a)=(1-\epsilon)\,\mathbf{1}[s'{=}a]+\epsilon\,\mathcal{U}$. The loop is offline: it is an algorithmic validation layer for policy behavior under uncertainty---not online BCI deployment, neurofeedback, or a human-in-the-loop intervention---and it does not acquire EEG in real time. Fig.~\ref{fig:embodied_loop} summarizes the cycle and the controller's risk-ambiguity decomposition.
+
+\begin{figure*}[!t]
+\centering
+\includegraphics[width=\textwidth]{fig_embodied_loop.pdf}
+\caption{Neural evidence accumulation over recorded ERP observations. The recorded observation bank emits a held-out subject-condition observation $x_t$; the ARSPI-Net evidence estimator updates a Dirichlet belief $b(s)$ over the affective state from the four neural evidence streams; the expected-free-energy controller selects $a^\star=\arg\min_a\mathrm{EFE}(a)$ under a risk (pragmatic, toward target) plus ambiguity (epistemic, resolve uncertainty) decomposition and queries the next target affective state until $b(\text{target})\geq 0.8$. Under the simulated affective-state transition the epistemic term adds limited marginal utility, so the controller matches pragmatic-only control. The loop is closed on the belief side and open on the process side.}
+\label{fig:embodied_loop}
+\end{figure*}
+
+Open-loop, the four streams act as competing observation channels: under sequential evidence accumulation their final posterior entropy ranks them $E{+}D{+}T$ (fastest, $0.931$ nats) $<E<D<$ random $<T$ (slowest, $1.075$), the same ordering as the offline ablation, so offline sufficiency and evidence-stream value agree.
+
+Closed-loop, the decoder must drive the environment to a target affective state and confirm it. The expected-free-energy (EFE) controller assigns each candidate action a risk-plus-ambiguity score,
+\begin{equation}
+\mathrm{EFE}(a)=\underbrace{\mathrm{KL}\!\big(P(s'\mid a)\,\|\,C\big)}_{\text{risk}}+\underbrace{\mathbb{E}_{s'\sim P(\cdot\mid a)}\big[\hat H(s')\big]}_{\text{ambiguity}},
+\label{eq:efe}
+\end{equation}
+where $C$ is a preference distribution peaked on the target and $\hat H(s)$ is the expected observation-posterior entropy for state $s$ estimated on the training fold. The controller selects the action with minimum EFE, and the decoder stops when $b(\text{target})\geq 0.8$. It is compared against passive (belief-blind), random, pragmatic-only (risk term only), epistemic-only (ambiguity term only), and a perfect-information oracle, over $1{,}500$ episodes per policy at each transition-noise level $\epsilon$ (Table~\ref{tab:closed_loop_policy}, Fig.~\ref{fig:ana07}). The oracle bounds success at $1.000$. The EFE and pragmatic controllers reach and confirm the target ($0.862$ and $0.864$ at $\epsilon=0$; $0.805$ and $0.808$ at $\epsilon=0.4$), while belief-blind control degrades fastest with transition noise ($1.000\!\to\!0.733$) and the random and epistemic-only baselines stay low. Under an action-determined transition the epistemic term adds limited marginal utility, so the EFE controller matches pragmatic-only control, and the gap to the oracle quantifies the cost of observation-level decoding uncertainty.
+
+\input{../tables/tcds_ready9/table_closed_loop_policy.tex}
+
+\begin{figure}[!t]
+\centering
+\includegraphics[width=\columnwidth]{ana07_closed_loop_success_by_policy.pdf}
+\caption{Closed-loop success rate by policy and transition noise $\epsilon$, with Wilson 95\% intervals. The expected-free-energy and pragmatic controllers reach and confirm the target affective state and maintain higher success rates across transition-noise levels; belief-blind, random, and epistemic-only baselines remain below the EFE and pragmatic controllers under the measured regime.}
+\label{fig:ana07}
+\end{figure}
+
+\section{Discussion}
+The mechanism ablation establishes operational differentiation. Embedding-containing configurations carry most of the affective-classification signal. The standalone dynamical, topological, and coupling streams are weaker classifiers, but they remain linearly distinct and expose structure omitted by the embedding. A stream that is sub-threshold as a classifier can still be operationally distinct as a measurement. The brain-inspired claim follows from the named mechanisms of Section~\ref{sec:mechanisms} (LIF spiking, BSC$_6$ event-driven coding, tPLV connectivity, and $\kappa$ coupling), not from analogy.
+
+Perturbation robustness locates a stream-specific operating regime rather than a single ordering: the band-power and embedding descriptors are comparatively robust to signal-domain corruption (amplitude noise, channel dropout), while the topological descriptor is the component sensitive to graph-domain perturbation. Resource accounting in the supplementary material reports reservoir size, event rate, spike sparsity, and runtime. These measurements characterize computational sparsity of the event-driven substrate but do not constitute hardware-energy, latency, or deployment results.
+
+The closed-loop adaptive BCI simulation shows the substrate functions as a usable evidence estimator: under transition noise the expected-free-energy controller reaches and confirms the target affective state, bounded above by a perfect-information oracle, with the epistemic term adding limited marginal utility over pragmatic control. The loop is a sequential-decision precursor to active-inference-style control~\cite{friston2010free,parr2022activeinference}, not a full implementation.
+
+This work sits at the interface of cognitive neuroscience and brain-computer interfaces, treating affective ERP responses as electrophysiological observations to be decoded, transformed, and accumulated under uncertainty. By locating where affective information is preserved, how each stream degrades under temporal, amplitude, spatial, and graph perturbation, and which streams carry non-redundant evidence (Fig.~\ref{fig:cka}), the substrate supplies the per-stream operating-regime measurements an adaptive BCI needs to decide which evidence to trust under changing signal quality, which a single endpoint accuracy cannot provide. The closed-loop simulation evaluates how these streams support adaptive belief updating over cognitive-affective state, within the recorded-observation scope established above.
+
+Positioned against prior affective-EEG work, ARSPI-Net trades endpoint optimization for evidence provenance. Endpoint decoders~\cite{lawhern2018eegnet,ding2024eegdeformer} and affective temporal-spatial models~\cite{ding2023tsception} optimize a single classification head, for which a conventional ERP-amplitude baseline remains the stronger static classifier here; graph-EEG models~\cite{zhong2022rgnn,klepl2024gnn} learn topology as a latent for that head; and reservoir and neuromorphic EEG models~\cite{fourati2018reservoir,gong2023sglnet,cai2024spiking} fix recurrent dynamics for the same endpoint. ARSPI-Net instead retains temporal, dynamical, graph-topological, and structure-function coupling structure as separately measured observables and reports their redundancy, perturbation regimes, and closed-loop accumulation. It leads no axis on static accuracy, where the ERP baseline is explicitly stronger; its contribution is measured evidence structure, stream-specific operating regimes, an explicit structure-function coupling observable, and an offline closed-loop accumulation layer, reported under subject-grouped validation with access-controlled, aggregate-only data governance.
+
+\section{Limitations}
+The closed-loop evaluation is a simulation over recorded ERP observations. The decoder updates beliefs and selects actions sequentially, but this is not an online BCI deployment and the EEG stream is not acquired in real time. The result therefore supports closed-loop evidence-accumulation utility in simulation, not online BCI deployment, neurofeedback training, or functional restoration.
+
+All measurements are restricted to the SHAPE ERP regime. The access-controlled dataset limits direct public benchmarking, but it provides the properties required for this study: a 211-subject affective ERP cohort, clinically annotated metadata, balanced subject-condition observations, and subject-grouped validation. Public emotion-EEG datasets such as SEED or DEAP support different benchmarking questions, but they do not replace the clinically annotated SHAPE ERP regime evaluated here.
+
+The clinical-label analyses are exploratory. Near-chance performance across SUD, MDD, PTSD, GAD, and ADHD is consistent with the cohort structure: comorbidity is common, diagnostic labels are overlapping, and the substrate was designed to measure affective ERP evidence streams rather than to validate diagnostic biomarkers. The false-discovery-rate result therefore bounds the clinical interpretation rather than weakening the engineering contribution.
+
+\section{Conclusion}
+ARSPI-Net establishes a neuromorphic reservoir-graph substrate for affective ERP decoding in which each observation is transformed into four named neural evidence streams: a spike-coded embedding $E$, dynamical descriptors $D$, graph-topological descriptors $T$, and a structure-function coupling block $C$. Under subject-grouped validation, a mechanism ablation with negative controls separates these streams, perturbation analyses show that they occupy different operating regimes rather than collapsing to a single endpoint, and the closed-loop adaptive BCI simulation shows that the substrate can serve as an evidence estimator for sequential belief updating over recorded ERP observations.
+
+A conventional ERP-amplitude baseline remains stronger for static classification, so the contribution should not be read as a claim of classifier superiority. Nor do these results establish online BCI deployment, diagnostic validation, hardware-energy efficiency, or cognitive augmentation. Instead, they demonstrate that a fixed event-driven reservoir, coupled to graph-topological and structure-function observables, can transform affective ERP responses into structured neural evidence whose distinctness and utility are measurable under uncertainty. Taken together, the results support ARSPI-Net as a substrate-level methodology for transforming affective ERP observations into structured neural evidence streams whose distinctness, perturbation response, and closed-loop utility can be measured under subject-level validation.
+
+\section*{Data Availability and Ethics}
+The subject-level EEG and ERP recordings are restricted human-subject data governed by institutional and data-use constraints. The SHAPE Community dataset is access-controlled and available from the Laboratory for Clinical Affective Neuroscience at Stony Brook University subject to approval and a data-use agreement; clinical metadata are access-controlled and are not publicly redistributed. Raw EEG, clinical metadata, and subject-level feature artifacts are not publicly distributed, and no protected health information or raw subject identifiers appear in any public artifact; reported outputs are aggregate and deidentified. Aggregate outputs, analysis and figure-generation scripts, tables, and reproducibility manifests are provided in the project repository where permissible. Clinical labels are used only as exploratory contextual variables, not as diagnostic validation.
+
+\section*{Acknowledgment}
+The authors thank the SHAPE Community study participants and the Laboratory for Clinical Affective Neuroscience at Stony Brook University for dataset curation and documentation support.
+
+\balance
+\begin{thebibliography}{99}
+\bibitem{maass2002liquid} W. Maass, T. Natschl\"ager, and H. Markram, ``Real-time computing without stable states: A new framework for neural computation based on perturbations,'' \emph{Neural Computation}, vol. 14, no. 11, pp. 2531--2560, 2002.
+\bibitem{jaeger2001echo} H. Jaeger, ``The echo state approach to analysing and training recurrent neural networks,'' GMD Report 148, German National Research Center for Information Technology, 2001.
+\bibitem{lukosevicius2009reservoir} M. Luko\v{s}evi\v{c}ius and H. Jaeger, ``Reservoir computing approaches to recurrent neural network training,'' \emph{Computer Science Review}, vol. 3, no. 3, pp. 127--149, 2009.
+\bibitem{fourati2018reservoir} R. Fourati, B. Ammar, J. Sanchez-Medina, and A. M. Alimi, ``Unsupervised learning in reservoir computing for EEG-based emotion recognition,'' \emph{IEEE Transactions on Affective Computing}, vol. 13, no. 2, pp. 972--984, 2022.
+\bibitem{hodgkin1952quantitative} A. L. Hodgkin and A. F. Huxley, ``A quantitative description of membrane current and its application to conduction and excitation in nerve,'' \emph{Journal of Physiology}, vol. 117, no. 4, pp. 500--544, 1952.
+\bibitem{sussillo2009generating} D. Sussillo and L. F. Abbott, ``Generating coherent patterns of activity from chaotic neural networks,'' \emph{Neuron}, vol. 63, no. 4, pp. 544--557, 2009.
+\bibitem{kim2024biomimetic} J. Kim \emph{et al.}, ``Biomimetic spiking neural network based on a monolayer 2-D synapse with short-term plasticity for auditory brainstem processing,'' \emph{IEEE Transactions on Cognitive and Developmental Systems}, vol. 17, no. 2, pp. 247--258, 2025.
+\bibitem{lawhern2018eegnet} V. J. Lawhern, A. J. Solon, N. R. Waytowich, S. M. Gordon, C.-P. Hung, and B. J. Lance, ``EEGNet: A compact convolutional neural network for EEG-based brain-computer interfaces,'' \emph{Journal of Neural Engineering}, vol. 15, no. 5, Art. no. 056013, 2018.
+\bibitem{craik2019deep} A. Craik, Y. He, and J. L. Contreras-Vidal, ``Deep learning for electroencephalogram (EEG) classification tasks: A review,'' \emph{Journal of Neural Engineering}, vol. 16, no. 3, Art. no. 031001, 2019.
+\bibitem{klepl2024gnn} D. Klepl, M. Wu, and F. He, ``Graph neural network-based EEG classification: A survey,'' \emph{IEEE Transactions on Neural Systems and Rehabilitation Engineering}, vol. 32, pp. 493--503, 2024.
+\bibitem{gong2023sglnet} P. Gong, P. Wang, Y. Zhou, and D. Zhang, ``A spiking neural network with adaptive graph convolution and LSTM for EEG-based brain-computer interfaces,'' \emph{IEEE Transactions on Neural Systems and Rehabilitation Engineering}, vol. 31, pp. 1440--1450, 2023.
+\bibitem{cai2024spiking} S. Cai, R. Zhang, M. Zhang, J. Wu, and H. Li, ``EEG-based auditory attention detection with spiking graph convolutional network,'' \emph{IEEE Transactions on Cognitive and Developmental Systems}, vol. 16, no. 5, pp. 1698--1706, 2024.
+\bibitem{klepl2023ad} D. Klepl, F. He, M. Wu, D. J. Blackburn, and P. Sarrigiannis, ``Adaptive gated graph convolutional network for explainable diagnosis of Alzheimer's disease using EEG data,'' \emph{IEEE Transactions on Neural Systems and Rehabilitation Engineering}, vol. 31, pp. 3978--3987, 2023.
+\bibitem{zhong2022rgnn} P. Zhong, D. Wang, and C. Miao, ``EEG-based emotion recognition using regularized graph neural networks,'' \emph{IEEE Transactions on Affective Computing}, vol. 13, no. 3, pp. 1290--1301, 2022.
+\bibitem{guo2025mma} Y. Guo, K. Yang, and Y. Wu, ``A multi-modality attention network for driver fatigue detection based on frontal EEG, EDA and PPG signals,'' \emph{IEEE Journal of Biomedical and Health Informatics}, vol. 29, no. 6, pp. 4009--4022, 2025.
+\bibitem{chiang2023depression} H.-S. Chiang, M.-Y. Chen, and L.-S. Liao, ``Cognitive depression detection cyber-medical system based on EEG analysis and deep learning approaches,'' \emph{IEEE Journal of Biomedical and Health Informatics}, vol. 27, no. 2, pp. 608--616, 2023.
+\bibitem{ding2023tsception} Y. Ding, N. Robinson, S. Zhang, Q. Zeng, and C. Guan, ``TSception: Capturing temporal dynamics and spatial asymmetry from EEG for emotion recognition,'' \emph{IEEE Transactions on Affective Computing}, vol. 14, no. 3, pp. 2238--2250, 2023.
+\bibitem{ding2024eegdeformer} Y. Ding \emph{et al.}, ``EEG-Deformer: A dense convolutional transformer for brain-computer interfaces,'' \emph{IEEE Journal of Biomedical and Health Informatics}, vol. 29, no. 3, pp. 1909--1918, 2025.
+\bibitem{wu2022connectivity} X. Wu, W.-L. Zheng, Z. Li, and B.-L. Lu, ``Investigating EEG-based functional connectivity patterns for multimodal emotion recognition,'' \emph{Journal of Neural Engineering}, vol. 19, no. 1, Art. no. 016012, 2022.
+\bibitem{delpup2025preprocessing} F. Del Pup, A. Zanola, L. F. Tshimanga, A. Bertoldo, and M. Atzori, ``The more, the better? Evaluating the role of EEG preprocessing for deep learning applications,'' \emph{IEEE Transactions on Neural Systems and Rehabilitation Engineering}, vol. 33, pp. 1061--1070, 2025.
+\bibitem{kipf2017gcn} T. N. Kipf and M. Welling, ``Semi-supervised classification with graph convolutional networks,'' in \emph{Proc. International Conference on Learning Representations}, 2017.
+\bibitem{velickovic2018gat} P. Veli\v{c}kovi\'{c} \emph{et al.}, ``Graph attention networks,'' in \emph{Proc. International Conference on Learning Representations}, 2018.
+\bibitem{battaglia2018relational} P. W. Battaglia \emph{et al.}, ``Relational inductive biases, deep learning, and graph networks,'' arXiv:1806.01261, 2018.
+\bibitem{kornblith2019similarity} S. Kornblith, M. Norouzi, H. Lee, and G. Hinton, ``Similarity of neural network representations revisited,'' in \emph{Proc. International Conference on Machine Learning}, pp. 3519--3529, 2019.
+\bibitem{benjamini1995fdr} Y. Benjamini and Y. Hochberg, ``Controlling the false discovery rate: A practical and powerful approach to multiple testing,'' \emph{Journal of the Royal Statistical Society: Series B}, vol. 57, no. 1, pp. 289--300, 1995.
+
+
+
+
+\bibitem{lachaux1999plv} J.-P. Lachaux, E. Rodriguez, J. Martinerie, and F. J. Varela, ``Measuring phase synchrony in brain signals,'' \emph{Human Brain Mapping}, vol. 8, no. 4, pp. 194--208, 1999.
+\bibitem{bullmore2009complex} E. Bullmore and O. Sporns, ``Complex brain networks: Graph theoretical analysis of structural and functional systems,'' \emph{Nature Reviews Neuroscience}, vol. 10, no. 3, pp. 186--198, 2009.
+\bibitem{honey2009structural} C. J. Honey, O. Sporns, L. Cammoun, X. Gigandet, J. P. Thiran, R. Meuli, and P. Hagmann, ``Predicting human resting-state functional connectivity from structural connectivity,'' \emph{Proceedings of the National Academy of Sciences}, vol. 106, no. 6, pp. 2035--2040, 2009.
+\bibitem{park2013structural} H.-J. Park and K. Friston, ``Structural and functional brain networks: From connections to cognition,'' \emph{Science}, vol. 342, no. 6158, Art. no. 1238411, 2013.
+\bibitem{suarez2020linking} L. E. Su\'arez, R. D. Markello, R. F. Betzel, and B. Misic, ``Linking structure and function in macroscale brain networks,'' \emph{Trends in Cognitive Sciences}, vol. 24, no. 4, pp. 302--315, 2020.
+\bibitem{rao1999predictive} R. P. N. Rao and D. H. Ballard, ``Predictive coding in the visual cortex: A functional interpretation of some extra-classical receptive-field effects,'' \emph{Nature Neuroscience}, vol. 2, no. 1, pp. 79--87, 1999.
+\bibitem{friston2010free} K. Friston, ``The free-energy principle: A unified brain theory?'' \emph{Nature Reviews Neuroscience}, vol. 11, no. 2, pp. 127--138, 2010.
+\bibitem{parr2022activeinference} T. Parr, G. Pezzulo, and K. J. Friston, \emph{Active Inference: The Free Energy Principle in Mind, Brain, and Behavior}. Cambridge, MA, USA: MIT Press, 2022.
+\bibitem{pezzulo2015active} G. Pezzulo, F. Rigoli, and K. J. Friston, ``Active inference, homeostatic regulation and adaptive behavioural control,'' \emph{Progress in Neurobiology}, vol. 134, pp. 17--35, 2015.
+\bibitem{mladenovic2018active} J. Mladenovi\'{c}, J. Frey, E. Maby, M. Joffily, F. Lotte, and J. Mattout, ``Active inference for adaptive BCI: Application to the P300 speller,'' in \emph{Proc. 7th Int. Brain-Computer Interface Meeting}, Asilomar, CA, USA, 2018.
+
+\bibitem{diehl2015unsupervised} P. U. Diehl and M. Cook, ``Unsupervised learning of digit recognition using spike-timing-dependent plasticity,'' \emph{Frontiers in Computational Neuroscience}, vol. 9, Art. no. 99, 2015.
+\bibitem{davies2018loihi} M. Davies \emph{et al.}, ``Loihi: A neuromorphic manycore processor with on-chip learning,'' \emph{IEEE Micro}, vol. 38, no. 1, pp. 82--99, 2018.
+\bibitem{furber2014spinnaker} S. B. Furber, F. Galluppi, S. Temple, and L. A. Plana, ``The SpiNNaker project,'' \emph{Proceedings of the IEEE}, vol. 102, no. 5, pp. 652--665, 2014.
+\bibitem{lane2023arspi} A. Lane, W. Tang, and B. Nelson, ``Towards ARSPI-Net: Development of an efficient hybrid deep learning framework,'' in \emph{Proc. IEEE Long Island Systems, Applications and Technology Conf. (LISAT)}, Old Westbury, NY, USA, 2023, pp. 1--8, doi: 10.1109/LISAT58403.2023.10179592.
+\bibitem{lane2024arspi} A. Lane, W. Tang, and B. Nelson, ``Towards ARSPI-Net: Advancing EEG feature extraction with neuromorphic algorithms,'' in \emph{Proc. IEEE Long Island Systems, Applications and Technology Conf. (LISAT)}, Holtsville, NY, USA, 2024, pp. 1--8, doi: 10.1109/LISAT63094.2024.10808138.
+\end{thebibliography}
+
+\end{document}
