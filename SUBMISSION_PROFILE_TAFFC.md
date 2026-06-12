@@ -13,6 +13,13 @@ fallback target.
 - **Page policy:** 12 free formatted pages (incl. references and biographies); $200/page beyond;
   18-page maximum. **Manuscript is 10 pages → within the free limit; no overlength charge; no
   overlay needed.** (See `TAFFC_AUTHOR_GUIDELINES_VERIFICATION.md`.)
+- **Editor-in-Chief:** Prof. Jesse Hoey (University of Waterloo); the cover letter addresses him by
+  name. Re-verify on the journal masthead at submission (a 2027 successor search is underway).
+- **Review model:** single-blind (IEEE Transactions / TAFFC default) — confirm on the portal.
+  Submit `manuscript/main.pdf` for single-blind; `manuscript/main_blind.pdf` is ready if
+  double-blind is required.
+- **Open access:** hybrid — choose traditional (no APC) or open access (2026 IEEE hybrid APC
+  US$2,800); confirm at submission.
 - **Primary positioning:** a physiological affective-computing measurement substrate that decodes
   affective ERP into four operationally distinct, perturbation-characterized neural evidence
   streams (E, D, T, C). Closed-loop neural evidence accumulation is a **secondary** utility.
@@ -20,16 +27,14 @@ fallback target.
   result; the closed-loop study is a simulation over recorded ERP observations, not an
   online/real-time system; clinical labels are exploratory, not diagnostic validation; no
   neurofeedback, cognitive-augmentation, hardware-energy, or full-active-inference claims.
-- **Default upload set:** manuscript PDF + `supplement.pdf` + `COVER_LETTER_TAFFC_FINAL.md`. Use
-  `manuscript/main.pdf` for single-blind review; switch to `manuscript/main_blind.pdf` if the
-  portal requires anonymized review (confirm policy at submission — both are compiled).
-- **Review model:** confirm single- vs double-blind on the ScholarOne portal; both anonymized and
-  non-anonymized PDFs are ready.
-- **Editor:** address the current Editor-in-Chief by name at submission (verify on the journal
-  masthead).
+- **Cover letter:** `manuscript/COVER_LETTER_TAFFC_FINAL.md` — foregrounds the affective-computing
+  contribution; addresses the EIC by name; includes the IEEE-required prior-work disclosure (the
+  manuscript extends the authors' LISAT 2023/2024 ARSPI-Net conference papers); names no
+  institution or cohort ("an access-controlled affective ERP cohort").
+- **Default upload set:** manuscript PDF + `supplement.pdf` + `COVER_LETTER_TAFFC_FINAL.md`, via
+  ScholarOne (https://mc.manuscriptcentral.com/taffc-cs; confirm at submission).
 - **Branch:** `submission/taffc-first-target`.
 - **Compile status:** `main.pdf` 10 pages; `supplement.pdf` 6 pages; 0 undefined references;
   numerical results unchanged from the merged manuscript.
-- **Privacy / anonymization:** the cover letter names no institution or cohort
-  ("an access-controlled affective ERP cohort"); the blind manuscript omits SHAPE / Stony Brook;
-  only aggregate, deidentified outputs are reported.
+- **Privacy / anonymization:** the cover letter names no institution or cohort; the blind
+  manuscript omits SHAPE / Stony Brook; only aggregate, deidentified outputs are reported.

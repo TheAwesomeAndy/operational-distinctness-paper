@@ -1,4 +1,5 @@
-Dear Editor-in-Chief and Editorial Board of IEEE Transactions on Affective Computing,
+Dear Prof. Jesse Hoey, Editor-in-Chief, and the Editorial Board of IEEE Transactions on
+Affective Computing,
 
 We submit our manuscript, "ARSPI-Net: A Neuromorphic Reservoir-Graph Substrate for Affective ERP
 Decoding and Closed-Loop Neural Evidence Accumulation," for consideration as a Regular Paper.
@@ -35,6 +36,12 @@ recorded observations, not an online or real-time system. Clinical labels enter 
 contextual variables bounded by a false-discovery-rate result, not as diagnostic validation. The
 underlying EEG and metadata come from an access-controlled affective ERP cohort; the manuscript
 reports aggregate, deidentified outputs.
+
+Prior work. This manuscript substantially extends our earlier ARSPI-Net development work presented
+at the IEEE Long Island Systems, Applications and Technology Conference (LISAT 2023 and 2024). The
+present study adds the formal reservoir-graph substrate, the operational-distinctness analysis of
+the four evidence streams, the perturbation characterization, and the closed-loop neural
+evidence-accumulation simulation, none of which appeared in those earlier papers.
 
 We confirm that this manuscript is original, is not under consideration elsewhere, and that all
 authors have approved the submission. We believe ARSPI-Net offers the affective-computing
