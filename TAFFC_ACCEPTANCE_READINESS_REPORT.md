@@ -1,6 +1,6 @@
 # TAFFC Acceptance-Readiness Report
 
-**Date:** 2026-06-12 · **Branch:** `submission/taffc-first-target`
+**Date:** 2026-06-12 · **Status:** merged to `main` via PR #19.
 
 This records the TAFFC framing-and-compliance pass that incorporated the acceptance feedback into an
 **additive** TAFFC manuscript variant, leaving the shared (TCDS) manuscript untouched. It was a

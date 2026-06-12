@@ -1,6 +1,6 @@
 # TAFFC Reviewer-Objection & Acceptance-Readiness Audit
 
-**Date:** 2026-06-12 · **Branch:** `submission/taffc-first-target` · **Manuscript:** ARSPI-Net (10 pages,
+**Date:** 2026-06-12 · **Branch:** `main` (merged via PR #19) · **Manuscript:** ARSPI-Net (10 pages,
 `manuscript/main.pdf`; blind twin `main_blind.pdf`) · **Supplement:** 6 pages.
 
 **Method.** This is a desk-rejection-prevention and reviewer-risk audit. No numerical result, figure,

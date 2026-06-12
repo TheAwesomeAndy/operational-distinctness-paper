@@ -16,8 +16,9 @@ Paper.
 biographies); **$200 per overlength page**; **18 formatted pages** hard maximum. Source: IEEE
 Computer Society Mandatory Overlength Page Charges policy, which **explicitly lists IEEE
 Transactions on Affective Computing**.
-- **Implication for ARSPI-Net:** the manuscript is **10 formatted pages** → within the free limit,
-  no overlength charge. Reuse `manuscript/main.pdf`; **no overlay, no manuscript edits**.
+- **Implication for ARSPI-Net:** TAFFC uses the **additive variant** under `manuscript/taffc/`;
+  `main_taffc.pdf` and `main_taffc_blind.pdf` are **11 formatted pages** → within the free limit, no
+  overlength charge. The shared TCDS files remain preserved.
 
 ## 3. Supplemental material allowed?
 ✓ **Yes**, and encouraged: "supporting but nonessential information should be submitted as
