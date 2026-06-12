@@ -1,68 +1,88 @@
-# Submission Cascade — ARSPI-Net
+# Submission Cascade — ARSPI-Net (TAFFC-first)
 
-Aim high and do not undersell. Submit to the top choice first; on rejection, incorporate the
-reviewers' feedback, reformat to the next venue's class file and reference style, and resubmit.
-Submit to exactly one venue at a time.
+Aim high; submit to exactly one venue at a time; on rejection, incorporate the reviewers'
+feedback, reformat to the next venue's class file and reference style, and resubmit. **The TCDS
+Cognitive Neuroscience + BCI special-issue package remains a valid, unchanged fallback (ranked
+#5).** **No new experiments are required for any venue in this cascade** — each step is a
+reframing and reformatting task, not a re-measurement.
 
 **Paper identity (held constant across the cascade):** a neuromorphic reservoir-graph
-**measurement substrate** for affective ERP decoding and **closed-loop adaptive BCI simulation
-over recorded ERP observations** — a rigorous, claim-bounded methodology (subject-grouped
-validation, negative controls, FDR control, perturbation/operating-regime characterization,
-operational-distinctness analysis, expected-free-energy evidence accumulation). It is explicitly
-**not** a static-accuracy leaderboard result, and it makes **no** claim of online BCI deployment,
-real-time EEG operation, neurofeedback, cognitive augmentation, diagnostic validation, or
-hardware-energy efficiency.
+**measurement substrate** for affective ERP decoding into four operationally distinct,
+perturbation-characterized neural evidence streams (E, D, T, C), with **closed-loop neural
+evidence accumulation as a secondary utility**. It is not a recognition-accuracy leaderboard
+result, and it makes no claim of online or real-time operation, neurofeedback, cognitive
+augmentation, diagnostic validation, hardware-energy efficiency, or full active inference.
 
-**No new experiments are required for any venue in this cascade.** Each retargeting step is a
-reframing and reformatting task, not a re-measurement. The reserved extensions (public-benchmark
-generalization, online/single-trial decoding, hardware-energy accounting) are deliberately out of
-scope and must not be added merely to chase a venue.
+## Ranked targets
 
-## Ranked target list
+### 1. IEEE Transactions on Affective Computing (TAFFC) — current target
+- **Why ARSPI-Net fits:** affective-computing home of the cited affective-EEG models (TSception,
+  RGNN, Fourati); affective ERP decoding, operational distinctness, and perturbation robustness
+  sit on the journal's affective-signal-processing and methodology axis.
+- **Main reviewer risk:** affective-computing reviewers may expect higher endpoint
+  emotion-recognition accuracy and a public-benchmark (SEED / DEAP) comparison.
+- **Retargeting action if rejected:** move to TNSRE; shift the lead from affective computing to
+  neural-engineering / BCI decoding while keeping the measurement-substrate argument.
+- **New experiments required:** No. (A public-benchmark comparison is a reserved scope extension;
+  it must not be added solely to chase this venue.)
+- **Logistics:** Regular Paper; 12 free pages ($200/overlength page, 18 max) → the 10-page
+  manuscript fits free. See `TAFFC_AUTHOR_GUIDELINES_VERIFICATION.md`.
 
-### 1. IEEE Trans. Cognitive and Developmental Systems (TCDS) — SI "Cognitive Neuroscience Meets BCIs" — **current target**
-- **Scope fit:** direct theme match — neural decoding at the cognitive-neuroscience/BCI interface; neuromorphic, spiking, and graph precedents already published in TCDS (Cai et al., 2024; Kim et al., 2025).
-- **Main strength here:** claim-bounded methodology and the closed-loop expected-free-energy evidence-accumulation simulation sit squarely on the "neural decoding" side of *From Neural Decoding to Function Augmentation*.
-- **Main reviewer risk:** a conventional ERP-amplitude baseline beats ARSPI-Net on static three-class accuracy; a reviewer may expect a stronger endpoint or an online/deployment result.
-- **Retargeting action if rejected:** move to TNSRE; shift the lead framing from "cognitive/developmental" to "neural-engineering / BCI decoding"; sharpen the measurement-substrate argument against the endpoint-accuracy expectation.
-- **New experiments needed:** No.
-- **Logistics:** 10 free pages, $200/overlength page, 15 max. Deadline 2026-07-31. Re-verify the current Editor-in-Chief and guest editors before submitting.
-
-### 2. IEEE Trans. Neural Systems and Rehabilitation Engineering (TNSRE)
-- **Scope fit:** core EEG/BCI decoding and neural-engineering venue; our graph-EEG (Klepl et al.) and spiking-graph BCI (Gong et al.) anchors are TNSRE papers.
-- **Main strength here:** rigorous cross-subject protocol, perturbation robustness, and reproducible evaluation; adaptive evidence accumulation is relevant to assistive/rehabilitation BCI.
-- **Main reviewer risk:** expectation of an online or patient-facing evaluation, or a rehabilitation endpoint; the static-accuracy gap resurfaces.
-- **Retargeting action if rejected:** move to JBHI; foreground the clinically annotated cohort and a health-informatics framing while keeping all claim boundaries.
-- **New experiments needed:** No (reframe only).
+### 2. IEEE Transactions on Neural Systems and Rehabilitation Engineering (TNSRE)
+- **Why ARSPI-Net fits:** core EEG/BCI decoding and neural-engineering venue; the graph-EEG
+  (Klepl) and spiking-graph BCI (Gong) anchors cited here are TNSRE papers.
+- **Main reviewer risk:** expectation of an online or patient-facing evaluation; the
+  static-accuracy gap relative to the ERP-amplitude baseline.
+- **Retargeting action if rejected:** move to JBHI; foreground the clinically annotated cohort and
+  a health-informatics framing while preserving claim boundaries.
+- **New experiments required:** No (reframe only).
 
 ### 3. IEEE Journal of Biomedical and Health Informatics (JBHI)
-- **Scope fit:** biomedical and health-informatics venue; home of several cited works (EEG-Deformer; Guo et al., 2025; Chiang et al., 2023).
-- **Main strength here:** clinically annotated 211-subject cohort, FDR-bounded exploratory clinical-label sensitivity, deidentified aggregate reporting, and methodological rigor.
-- **Main reviewer risk:** reviewers may push for diagnostic or clinical-utility claims that we deliberately do not make; near-chance clinical-label accuracy invites a "so what" question.
-- **Retargeting action if rejected:** move to TAFFC; lead with affective ERP decoding and operational distinctness; de-emphasize the clinical-label and BCI-loop framing.
-- **New experiments needed:** No — and the exploratory, non-diagnostic framing must be preserved rather than upgraded to fit the venue.
+- **Why ARSPI-Net fits:** biomedical / health-informatics venue and home of cited works
+  (EEG-Deformer; Guo 2025; Chiang 2023); clinically annotated cohort with FDR-bounded exploratory
+  clinical-label sensitivity and deidentified aggregate reporting.
+- **Main reviewer risk:** reviewers may push for diagnostic or clinical-utility claims we
+  deliberately do not make; near-chance clinical-label accuracy invites a "so what" question.
+- **Retargeting action if rejected:** move to TBME; broaden to a general biomedical-signal
+  methodology.
+- **New experiments required:** No — preserve the exploratory, non-diagnostic framing rather than
+  upgrading it to fit the venue.
 
-### 4. IEEE Trans. Affective Computing (TAFFC)
-- **Scope fit:** affective-computing home of TSception, RGNN, and Fourati et al. (all cited here).
-- **Main strength here:** affective ERP decoding into operationally distinct streams; CKA redundancy and perturbation analyses are uncommon in affective-EEG work.
-- **Main reviewer risk:** affective-computing reviewers typically expect higher endpoint emotion-recognition accuracy and a public-benchmark (SEED/DEAP) comparison.
-- **Retargeting action if rejected:** move to TBME or Neural Networks; broaden the methodological framing beyond affect.
-- **New experiments needed:** No — a public-benchmark comparison is a reserved scope expansion and must not be bolted on solely to satisfy this venue.
+### 4. IEEE Transactions on Biomedical Engineering (TBME)
+- **Why ARSPI-Net fits:** broad biomedical-signal and neural-engineering venue for a general
+  neuromorphic measurement-substrate methodology with a reproducible evaluation protocol.
+- **Main reviewer risk:** breadth and positioning — must justify general biomedical interest
+  beyond the specific cohort.
+- **Retargeting action if rejected:** move to the TCDS Cognitive Neuroscience + BCI special issue
+  (the preserved fallback package below).
+- **New experiments required:** No.
 
-### 5. IEEE Trans. Biomedical Engineering (TBME) *or* Neural Networks (Elsevier) — later fallback
-- **Scope fit:** broad biomedical-signal / neural-computation venues.
-- **Main strength here:** a general neuromorphic measurement-substrate methodology with a reproducible evaluation protocol.
-- **Main reviewer risk:** breadth and positioning — must justify general interest beyond the specific cohort.
-- **Retargeting action if rejected:** revisit framing; consider a methods-forward venue (e.g., Journal of Neural Engineering) or a focused workshop.
-- **New experiments needed:** No for the initial submission; a public-benchmark or generalization extension is the reserved option, used only if a venue explicitly requires demonstrated generality.
+### 5. IEEE Transactions on Cognitive and Developmental Systems (TCDS) — Cognitive Neuroscience + BCI SI (preserved fallback)
+- **Why ARSPI-Net fits:** direct theme match (neural decoding at the cognitive-neuroscience / BCI
+  interface); neuromorphic, spiking, and graph precedents already published in TCDS (Cai 2024,
+  Kim 2025); closed-loop expected-free-energy evidence accumulation fits the decoding side of the
+  special-issue theme.
+- **Main reviewer risk:** the static-accuracy gap; a reviewer may expect a stronger endpoint or an
+  online result.
+- **Retargeting action if rejected:** revisit framing; consider a methods-forward venue (Journal
+  of Neural Engineering) or a focused workshop.
+- **New experiments required:** No. The complete TCDS package
+  (`manuscript/COVER_LETTER_TCDS_COGNEURO_BCI_FINAL.md`, `SUBMISSION_PROFILE.md`,
+  `CFP_ALIGNMENT_COGNEURO_BCI.md`, `READY_FOR_COGNEURO_BCI_SUBMISSION_CHECKLIST.md`) is preserved
+  and ready.
+- **Logistics:** 10 free pages, $200/overlength page, 15 max; special-issue deadline 2026-07-31;
+  re-verify the Editor-in-Chief and guest editors (current EIC: Huajin Tang, as of Sept 2025).
 
-## Per-resubmission checklist (if rejected)
+## Per-resubmission checklist
 1. Read every review; separate **must-fix** (validity, clarity) from **scope** comments.
-2. Incorporate fixable feedback; for out-of-scope asks, prepare a brief rebuttal note for the next cover letter.
-3. Reformat to the next venue's class file, page limit, and reference style; re-run the page / undefined-reference / numeric-preservation / forbidden-claim checks.
-4. Rewrite the cover letter for the new venue: name its current editor, restate scope fit, and cite 1–2 recent papers that venue published **as scope analogues, not technical ancestors**.
-5. Keep all claim boundaries intact across venues (no online-deployment / real-time / neurofeedback / diagnostic / hardware-energy / cognitive-augmentation / full-active-inference claims).
+2. Incorporate fixable feedback; for out-of-scope asks, prepare a brief rebuttal note for the next
+   cover letter.
+3. Reformat to the next venue's class file, page limit, and reference style; re-run the page /
+   undefined-reference / numeric-preservation / forbidden-claim checks.
+4. Rewrite the cover letter for the new venue: name its current editor, restate scope fit, and
+   cite 1–2 recent papers that venue published **as scope analogues, not technical ancestors**.
+5. Keep all claim boundaries intact across venues.
 
 ## Notes
-- Editors-in-chief and editorial boards rotate; re-verify the target venue's current Editor-in-Chief and any guest editors before each submission.
-- Page-charge thresholds differ by venue; confirm the free-page limit before finalizing length.
+- Editors-in-chief, editorial boards, and page-charge thresholds rotate or differ by venue;
+  re-verify the target venue's current editor and free-page limit before each submission.
