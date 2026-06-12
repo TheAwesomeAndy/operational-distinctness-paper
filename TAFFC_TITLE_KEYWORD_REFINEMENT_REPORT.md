@@ -1,18 +1,17 @@
 # TAFFC Title and Keyword Refinement Report
 
-**Date:** 2026-06-12 · **Branch:** `submission/taffc-title-eeg-dynamics` (from `main` `6ecec5d`)
+**Date:** 2026-06-12 · **Status:** merged into `main` via PR #21; `main` is canonical.
 
 Scope: TAFFC manuscript **variant only**. The shared TCDS manuscript, TCDS package, figures, tables,
 numerical results, and experiment outputs were not touched. Only the title, the first ARSPI-Net
 definition in the abstract (plus an ERP-specificity sentence), and the keyword list changed.
 
-> Note: this branch diffs from the canonical `main` title. A separate open PR (#20) proposes a
-> different title (`A Neuromorphic Reservoir–Graph Framework for Affective ERP Evidence
-> Accumulation`); the two title PRs are mutually exclusive and will need reconciliation before
-> either merges.
+> Status: this title refinement was **merged into `main` via PR #21**, which supplied the final
+> title. The alternative title PR (#20, `A Neuromorphic Reservoir–Graph Framework for Affective ERP
+> Evidence Accumulation`) was **closed/superseded**. `main` is now canonical.
 
 ## Title
-- **Old (canonical on `main`):** `ARSPI-Net: A Neuromorphic Reservoir-Graph Substrate for Affective ERP Decoding and Closed-Loop Neural Evidence Accumulation`
+- **Old (superseded TAFFC variant title):** `ARSPI-Net: A Neuromorphic Reservoir-Graph Substrate for Affective ERP Decoding and Closed-Loop Neural Evidence Accumulation`
 - **New:** `Spatiotemporal Characterization of Affective EEG Dynamics Using a Neuromorphic Reservoir–Graph Framework`
 
 The title now uses **EEG** for broader indexing/citation visibility and a physiological

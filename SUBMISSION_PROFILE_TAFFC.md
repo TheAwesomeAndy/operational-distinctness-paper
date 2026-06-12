@@ -38,7 +38,7 @@ foregrounds physiological affective computing; the shared `manuscript/main.tex` 
 - **Default upload set:** `manuscript/taffc/main_taffc.pdf` + `supplement.pdf` +
   `COVER_LETTER_TAFFC_FINAL.md`, via ScholarOne (https://mc.manuscriptcentral.com/taffc-cs; confirm
   at submission).
-- **Branch:** `submission/taffc-first-target`.
+- **Branch:** `main` (canonical; the TAFFC variant and docs were merged via PRs #19 and #21).
 - **Compile status:** `main_taffc.pdf` / `main_taffc_blind.pdf` 11 pages; `supplement.pdf` 6 pages;
   0 undefined references; numerical result values identical to the shared `main.pdf` /
   `main_blind.pdf` (verified by numeric-token comparison).
