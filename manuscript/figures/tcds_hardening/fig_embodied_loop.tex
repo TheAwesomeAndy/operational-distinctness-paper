@@ -26,7 +26,7 @@
 ]
 
 % ---- cycle nodes (clockwise): env -> perception -> efe -> env ----
-\node[env, text width=41mm]  (env)  at (0,3.4)    {Recorded ERP observation bank\,/\,simulated affective-state process\\[2pt]{\scriptsize held-out subject-condition observation}\\[-1pt]{\scriptsize simulated affective-state transition}};
+\node[env, text width=58mm]  (env)  at (0,3.4)    {Recorded ERP observation bank /\\simulated affective-state process\\[2pt]{\scriptsize held-out subject-condition observation}\\[-1pt]{\scriptsize simulated affective-state transition}};
 \node[perc, text width=40mm] (perc) at (7.4,3.4)  {ARSPI-Net evidence estimator\\[1pt]{\scriptsize substrate $\rightarrow$ belief $b(s)$}\\[-1pt]{\scriptsize Dirichlet update\ $\boldsymbol{\alpha}\!\leftarrow\!\boldsymbol{\alpha}\!+\!\mathbf{p}_{\theta}(x_t)$}};
 \node[efe]  (efe)  at (3.7,-0.4) {EFE controller\ \ $a^\star=\arg\min_a\mathrm{EFE}(a)$\\[2pt]{\footnotesize $\mathrm{EFE}(a)=\underbrace{\text{risk}}_{\text{pragmatic: toward target}}+\underbrace{\text{ambiguity}}_{\text{epistemic: resolve uncertainty}}$}};
 
