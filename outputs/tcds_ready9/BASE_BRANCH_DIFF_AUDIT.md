@@ -5,7 +5,7 @@ the requirement to inspect the working branch before branching.
 
 ## Finding
 
-At audit time, the working branch `claude/arspi-ready9-substrate-w4odb1` was
+At audit time, the working branch was
 **byte-identical to `origin/main`**:
 
 ```
