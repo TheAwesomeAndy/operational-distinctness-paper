@@ -38,6 +38,8 @@ _build/
 *.fls
 *.fdb_latexmk
 *.synctex.gz
+*.bbl
+*.blg
 manuscript/*.log
 manuscript/**/*.log
 outputs/tcds_risk_reduction/_*.log
