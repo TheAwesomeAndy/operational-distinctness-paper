@@ -13,7 +13,9 @@ Bottom band: three REAL data panels computed from the shipped features,
 anchored under the first three flow stages:
     (a) trial-averaged ERPs by affective condition           (X_ds)
     (b) LIF-reservoir spike raster for one exemplar           (X_ds -> reservoir)
-    (c) BSC6 reservoir embedding (PCA-2) of every observation (X_ds -> reservoir -> BSC6)
+    (c) diagnostic BSC6 reservoir projection (PCA-2), recomputed from the
+        channel-mean ERP of every observation, for visual overview only --
+        NOT the production per-channel ARSPI-Net embedding E used in analyses
 
 This script reuses the upstream reservoir spec (``LIFReservoir`` and its
 constants from ``prepare_inputs/extract_ch5_features.py``) and reads ONLY
@@ -220,7 +222,7 @@ def main() -> int:
                        color=COND_COLOR[c], edgecolor="white", linewidth=0.15)
     ax_emb.set_xlabel(f"PC1 ({pca.explained_variance_ratio_[0]:.0%})", labelpad=1)
     ax_emb.set_ylabel(f"PC2 ({pca.explained_variance_ratio_[1]:.0%})", labelpad=1)
-    ax_emb.set_title(r"(c) BSC$_6$ embedding (PCA-2)", fontsize=7, pad=2)
+    ax_emb.set_title(r"(c) BSC$_6$ projection (diagnostic)", fontsize=7, pad=2)
     ax_emb.tick_params(length=2, pad=1)
 
     # Thin connectors from each flow box down to its data panel.

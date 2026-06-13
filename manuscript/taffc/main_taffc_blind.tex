@@ -44,7 +44,7 @@ EEG offers millisecond-scale access to neural activity, but scalp recordings are
 \begin{figure*}[!t]
 \centering
 \includegraphics[width=\textwidth]{fig_overview_evidence_streams.pdf}
-\caption{Overview of ARSPI-Net as a measurement substrate. Each affective ERP observation $X^{(c)}_s$ is transformed by a fixed leaky integrate-and-fire reservoir and a binned spike-count (BSC$_6$) code into four operationally distinct evidence streams---spike embedding $E$, dynamical descriptors $D$, topological descriptors $T$, and structure-function coupling $C$---which are then evaluated by mechanism ablation, perturbation robustness, and closed-loop evidence accumulation. Bottom panels are computed from the cohort: (a) trial-averaged ERPs by affective condition, (b) a leaky integrate-and-fire reservoir spike raster for one exemplar observation, and (c) the BSC$_6$ reservoir embedding (PCA-2) of every observation, colored by condition.}
+\caption{Overview of ARSPI-Net as a measurement substrate. Each affective ERP observation $X^{(c)}_s$ is transformed by a fixed leaky integrate-and-fire reservoir and a binned spike-count (BSC$_6$) code into four operationally distinct evidence streams---spike embedding $E$, dynamical descriptors $D$, topological descriptors $T$, and structure-function coupling $C$---which are then evaluated by mechanism ablation, perturbation robustness, and closed-loop evidence accumulation. Bottom panels are computed from the cohort: (a) trial-averaged ERPs by affective condition, (b) a leaky integrate-and-fire reservoir spike raster for one exemplar observation, and (c) a diagnostic BSC$_6$ reservoir projection (PCA-2) recomputed from the channel-mean ERP for visual overview only; the production ARSPI-Net spike embedding $E$ used in all reported analyses is defined in Section~\ref{sec:formulation}.}
 \label{fig:overview}
 \end{figure*}
 
@@ -75,7 +75,7 @@ Graph-based EEG models increasingly treat electrodes as nodes and inter-channel 
 
 Neuromorphic and reservoir approaches are the closest conceptual neighbor to the present work. EEG-specific reservoir studies show that fixed recurrent dynamics, such as echo-state networks with plasticity-pretrained reservoirs, can support emotion recognition from EEG~\cite{maass2002liquid,jaeger2001echo,lukosevicius2009reservoir,fourati2018reservoir}, and spiking-graph hybrids combine event-driven computation with spatial-dependency modeling for EEG-based BCIs~\cite{gong2023sglnet,cai2024spiking,davies2018loihi,furber2014spinnaker}. Separately, adaptive-BCI work has used active inference in speller-based simulations to cast decoding and control as sequential Bayesian belief updating under uncertainty~\cite{mladenovic2018active,rao1999predictive,friston2010free,parr2022activeinference,pezzulo2015active}. ARSPI-Net sits at the intersection of these strands: it uses a fixed LIF reservoir as a nonlinear measurement operator, retains graph topology and coupling as separate evidence streams, and evaluates the resulting substrate in a closed-loop adaptive BCI simulation over recorded ERP observations rather than in an online deployment, with the expected-free-energy controller read as a precursor to active-inference-style control rather than a full implementation.
 
-\section{ARSPI-Net Layer Formulation}
+\section{ARSPI-Net Layer Formulation}\label{sec:formulation}
 \subsection{Input Representation}
 Let
 \begin{equation}
