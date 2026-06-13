@@ -110,43 +110,44 @@ def distinctness_map():
     fig = plt.figure(figsize=(3.45, 3.05))
     ax = fig.add_axes([0, 0, 1, 1]); ax.set_xlim(0, 1); ax.set_ylim(0, 1); ax.axis("off")
 
-    # Row of four evidence-stream chips (top).
-    ax.text(0.5, 0.965, "Evidence streams", ha="center", va="center",
-            fontsize=7.4, fontweight="bold", color="#222")
-    cw = 0.205
-    for j, (lab, ec, fc) in enumerate(STREAM):
-        cx = 0.06 + j * (cw + 0.02)
-        ax.add_patch(FancyBboxPatch(
-            (cx, 0.84, ), cw, 0.085, boxstyle="round,pad=0.004,rounding_size=0.02",
-            linewidth=1.0, edgecolor=ec, facecolor=fc, zorder=2))
-        ax.text(cx + cw / 2, 0.882, lab, ha="center", va="center",
-                fontsize=9, fontweight="bold", color=ec, zorder=3)
+    # Top: streams x measured-behavior matrix that visualizes the distinctness
+    # vector Delta = (S, 1-CKA, rho, kappa, U). Rows are the four streams (small
+    # row headers, not chips, to stay visually distinct from the Fig. 1 overview);
+    # columns are the measured-behavior axes; each filled cell marks that the
+    # stream is characterized along that axis.
+    ax.text(0.5, 0.965, r"Measured behavior   $\Delta=(\,S,\,1-\mathrm{CKA},\,\rho,\,\kappa,\,U\,)$",
+            ha="center", va="center", fontsize=6.8, fontweight="bold", color="#222")
 
-    # Five evaluation properties (middle), each a thin labeled cell.
-    ax.text(0.5, 0.79, "characterized by", ha="center", va="center",
-            fontsize=6.6, style="italic", color="#555")
-    props = [
-        r"predictive sufficiency  $S$",
-        r"redundancy  $1-\mathrm{CKA}$",
-        r"perturbation response  $\rho$",
-        r"structure-function coupling  $\kappa$",
-        r"closed-loop utility  $U$",
-    ]
-    py, ph = 0.745, 0.052
-    for k, p in enumerate(props):
-        y = py - k * (ph + 0.013)
-        ax.add_patch(FancyBboxPatch(
-            (0.10, y - ph), 0.80, ph, boxstyle="round,pad=0.003,rounding_size=0.015",
-            linewidth=0.8, edgecolor="#888", facecolor="#F7F7F9", zorder=2))
-        ax.text(0.50, y - ph / 2, p, ha="center", va="center", fontsize=6.8,
-                color="#222", zorder=3)
-    # Bracket arrows from the stream band into the property stack.
-    for j in range(4):
-        cx = 0.06 + j * (cw + 0.02) + cw / 2
-        _arrow(ax, cx, 0.835, 0.5, 0.752, color="#BBB", lw=0.6, style="-")
+    cols = [r"$S$", r"$1{-}\mathrm{CKA}$", r"$\rho$", r"$\kappa$", r"$U$"]
+    col_sub = ["suffic.", "redund.", "perturb.", "coupl.", "closed-loop"]
+    x0, x1 = 0.20, 0.97
+    cwid = (x1 - x0) / len(cols)
+    ytop, ybot = 0.83, 0.55
+    rh = (ytop - ybot) / len(STREAM)
 
-    # Novelty comparison band (bottom).
-    ax.text(0.5, 0.345, "Novelty: the reservoir-graph observable map",
+    # Column headers.
+    for c, (sym, sub) in enumerate(zip(cols, col_sub)):
+        cx = x0 + (c + 0.5) * cwid
+        ax.text(cx, 0.885, sym, ha="center", va="center", fontsize=7.2, color="#222")
+        ax.text(cx, 0.855, sub, ha="center", va="center", fontsize=4.8, color="#666")
+    # Row headers + grid cells.
+    for r, (lab, ec, fc) in enumerate(STREAM):
+        ry = ytop - (r + 0.5) * rh
+        ax.text(0.135, ry, lab, ha="center", va="center", fontsize=8.5,
+                fontweight="bold", color=ec)
+        for c in range(len(cols)):
+            cx = x0 + (c + 0.5) * cwid
+            ax.add_patch(FancyBboxPatch(
+                (x0 + c * cwid + 0.006, ry - rh / 2 + 0.006),
+                cwid - 0.012, rh - 0.012,
+                boxstyle="round,pad=0.001,rounding_size=0.006",
+                linewidth=0.6, edgecolor="#BBB", facecolor="#F4F6F9", zorder=2))
+            ax.add_patch(plt.Circle((cx, ry), 0.012, color=ec, alpha=0.85, zorder=3))
+    ax.text(0.135, ytop + 0.035, "stream", ha="center", va="center",
+            fontsize=4.8, color="#666")
+
+    # Novelty comparison band (bottom) -- distinct from the matrix above.
+    ax.text(0.5, 0.45, "Novelty: the reservoir-graph observable map",
             ha="center", va="center", fontsize=7.0, fontweight="bold", color="#222")
     rows = [
         ("Endpoint EEG classifiers", "collapse evidence into one score", "#ECECEE", "#888"),
@@ -154,15 +155,15 @@ def distinctness_map():
         ("Reservoir EEG models", "judged by readout accuracy", "#ECECEE", "#888"),
         ("ARSPI-Net", r"$E,D,T,C$ kept as measured streams", "#D6E5F7", "#2660A4"),
     ]
-    ry, rh = 0.295, 0.058
+    ry0, rbh = 0.40, 0.072
     for k, (name, desc, fc, ec) in enumerate(rows):
-        y = ry - k * (rh + 0.012)
+        y = ry0 - k * (rbh + 0.014)
         ax.add_patch(FancyBboxPatch(
-            (0.05, y - rh), 0.90, rh, boxstyle="round,pad=0.003,rounding_size=0.012",
+            (0.05, y - rbh), 0.90, rbh, boxstyle="round,pad=0.003,rounding_size=0.012",
             linewidth=(1.2 if k == 3 else 0.8), edgecolor=ec, facecolor=fc, zorder=2))
-        ax.text(0.075, y - rh / 2, name, ha="left", va="center", fontsize=6.6,
+        ax.text(0.075, y - rbh / 2, name, ha="left", va="center", fontsize=6.6,
                 fontweight=("bold" if k == 3 else "normal"), color="#222", zorder=3)
-        ax.text(0.93, y - rh / 2, desc, ha="right", va="center", fontsize=6.0,
+        ax.text(0.93, y - rbh / 2, desc, ha="right", va="center", fontsize=6.0,
                 color="#444", zorder=3)
 
     out = OUT_DIR / "fig_operational_distinctness_map.pdf"
