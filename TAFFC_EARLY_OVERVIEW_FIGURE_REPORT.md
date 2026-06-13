@@ -6,7 +6,7 @@ branch and the validation performed.
 
 ## Branch and commits
 
-- **Branch:** `claude/ieee-manuscript-overview-wjiis7`
+- **Branch:** the PR #27 development branch (deleted on merge)
 - **Base commit (merge-base with `main`):** `c73c19613311a2206b95d3815e27751515acaff0`
 - **Head commit (figure caption-precision revision):** `0b9f294765fa8a82a46d0abf5cdace970b45f745`
 - Intermediate commits on the branch:
