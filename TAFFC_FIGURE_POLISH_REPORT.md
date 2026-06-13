@@ -64,7 +64,7 @@ is rendered identically to the shared generator (NaN x-coordinate).
 8. Shared TCDS manuscript/package files and the `main.tex` graphicspath unchanged (`main.tex` has no
    `figures/taffc` reference). ✓
 9. No numerical result, table, experiment output, subject count, or observation count changed. ✓
-10. No forbidden claims and no Claude/Anthropic/session references in artifact-facing files. ✓
+10. No forbidden claims and no AI-assistant/vendor/session references in artifact-facing files. ✓
 
 ## Scope
 TAFFC-variant-only, style-only. The change set is: two polished figure PDFs, one restyle script, a
