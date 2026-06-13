@@ -75,7 +75,45 @@ Graph-based EEG models increasingly treat electrodes as nodes and inter-channel 
 
 Neuromorphic and reservoir approaches are the closest conceptual neighbor to the present work. EEG-specific reservoir studies show that fixed recurrent dynamics, such as echo-state networks with plasticity-pretrained reservoirs, can support emotion recognition from EEG~\cite{maass2002liquid,jaeger2001echo,lukosevicius2009reservoir,fourati2018reservoir}, and spiking-graph hybrids combine event-driven computation with spatial-dependency modeling for EEG-based BCIs~\cite{gong2023sglnet,cai2024spiking,davies2018loihi,furber2014spinnaker}. Separately, adaptive-BCI work has used active inference in speller-based simulations to cast decoding and control as sequential Bayesian belief updating under uncertainty~\cite{mladenovic2018active,rao1999predictive,friston2010free,parr2022activeinference,pezzulo2015active}. ARSPI-Net sits at the intersection of these strands: it uses a fixed LIF reservoir as a nonlinear measurement operator, retains graph topology and coupling as separate evidence streams, and evaluates the resulting substrate in a closed-loop adaptive BCI simulation over recorded ERP observations rather than in an online deployment, with the expected-free-energy controller read as a precursor to active-inference-style control rather than a full implementation.
 
+\textit{Novelty.} The contribution is not that ARSPI-Net is another hybrid neural model. Endpoint EEG classifiers---convolutional, transformer, or graph---collapse the affective response into a single discriminative score; graph-EEG models typically absorb topology as a latent component of that score; and reservoir-EEG models are usually judged by readout accuracy. The novelty is the reservoir-graph \emph{observable map} $\Phi$ (Eq.~\ref{eq:phi}): a fixed event-driven transformation that keeps $E$, $D$, $T$, and $C$ as separately measurable evidence streams and characterizes them by predictive sufficiency, representational redundancy, perturbation response, structure-function coupling, and closed-loop utility rather than by one accuracy number (Fig.~\ref{fig:distinctmap}).
+
 \section{ARSPI-Net Layer Formulation}\label{sec:formulation}
+\subsection{Affective ERP as a Partially Observed Dynamical-System Output}\label{subsec:obsmodel}
+We model the affective ERP as the observable output of a partially observed nonlinear dynamical system (Fig.~\ref{fig:obsmodel}). A latent neural state $x_t$ evolves under an affective stimulus drive $u_t$, and the scalp recording is a noisy linear projection of that state,
+\begin{equation}
+x_{t+1}=f_{\theta}(x_t,u_t)+\eta_t,\qquad X_t=Hx_t+\epsilon_t,
+\label{eq:obsmodel}
+\end{equation}
+where $f_{\theta}$ is the unknown latent transition, $\eta_t$ is process noise, $H$ is the scalp projection, and $\epsilon_t$ is observation noise. The affective ERP $X_s^{(c)}$ is therefore a low-rank, partially observed projection of the latent affective trajectory, not the trajectory itself.
+
+ARSPI-Net does not invert this system. It applies a fixed observable map that reads the recorded observation through four complementary lenses,
+\begin{equation}
+\Phi\!\left(X_s^{(c)}\right)=\left[\,E(X_s^{(c)}),\,D(X_s^{(c)}),\,T(X_s^{(c)}),\,C(X_s^{(c)})\,\right],
+\label{eq:phi}
+\end{equation}
+the spike embedding $E$, dynamical descriptors $D$, graph-topological descriptors $T$, and structure-function coupling $C$ defined in the following subsections.
+
+Two streams $L_i,L_j\in\{E,D,T,C\}$ are operationally distinct when they differ in measurable behavior, summarized as a four-component distinctness vector (Fig.~\ref{fig:distinctmap})
+\begin{equation}
+\Delta_{ij}=\Big(\,|S_i-S_j|,\;1-\mathrm{CKA}(L_i,L_j),\;|\rho_i-\rho_j|,\;|U_i-U_j|\,\Big),
+\label{eq:distinctvec}
+\end{equation}
+where $S_i$ is predictive sufficiency, $\mathrm{CKA}$ is representational redundancy, $\rho_i$ is the perturbation response, and $U_i$ is closed-loop utility. Sections~\ref{sec:pillarB}--\ref{sec:embodied_results} estimate these components, and Eqs.~(\ref{eq:contrast})--(\ref{eq:cka}) give the corresponding scalar estimators.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.96\columnwidth]{fig_observation_model.pdf}
+\caption{The affective ERP as the noisy, partially observed output of a latent biological dynamical system. ARSPI-Net's fixed observable map $\Phi$ reads the recorded scalp observation $X_s^{(c)}$, not the latent state.}
+\label{fig:obsmodel}
+\end{figure}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.96\columnwidth]{fig_operational_distinctness_map.pdf}
+\caption{Operational distinctness. The streams $E,D,T,C$ are characterized by predictive sufficiency, redundancy, perturbation response, coupling, and closed-loop utility. The novelty is the reservoir-graph observable map that keeps the streams separately measurable, unlike endpoint, graph, and reservoir EEG models.}
+\label{fig:distinctmap}
+\end{figure}
+
 \subsection{Input Representation}
 Let
 \begin{equation}
@@ -286,9 +324,9 @@ Perturbation robustness locates a stream-specific operating regime rather than a
 
 The closed-loop adaptive BCI simulation shows the substrate functions as a usable evidence estimator: under transition noise the expected-free-energy controller reaches and confirms the target affective state, bounded above by a perfect-information oracle, with the epistemic term adding limited marginal utility over pragmatic control. The loop is a sequential-decision precursor to active-inference-style control~\cite{friston2010free,parr2022activeinference}, not a full implementation.
 
-This work sits at the interface of cognitive neuroscience and brain-computer interfaces, treating affective ERP responses as electrophysiological observations to be decoded, transformed, and accumulated under uncertainty. By locating where affective information is preserved, how each stream degrades under temporal, amplitude, spatial, and graph perturbation, and which streams carry non-redundant evidence (Fig.~\ref{fig:cka}), the substrate supplies the per-stream operating-regime measurements an adaptive BCI needs to decide which evidence to trust under changing signal quality, which a single endpoint accuracy cannot provide. The closed-loop simulation evaluates how these streams support adaptive belief updating over cognitive-affective state, within the recorded-observation scope established above.
+By locating where affective information is preserved, how each stream degrades under temporal, amplitude, spatial, and graph perturbation, and which streams carry non-redundant evidence (Fig.~\ref{fig:cka}), the substrate supplies the per-stream operating-regime measurements an adaptive BCI needs to decide which evidence to trust under changing signal quality---measurements a single endpoint accuracy cannot provide.
 
-Positioned against prior affective-EEG work, ARSPI-Net trades endpoint optimization for evidence provenance. Endpoint decoders~\cite{lawhern2018eegnet,ding2024eegdeformer} and affective temporal-spatial models~\cite{ding2023tsception} optimize a single classification head, for which a conventional ERP-amplitude baseline remains the stronger static classifier here; graph-EEG models~\cite{zhong2022rgnn,klepl2024gnn} learn topology as a latent for that head; and reservoir and neuromorphic EEG models~\cite{fourati2018reservoir,gong2023sglnet,cai2024spiking} fix recurrent dynamics for the same endpoint. ARSPI-Net instead retains temporal, dynamical, graph-topological, and structure-function coupling structure as separately measured observables and reports their redundancy, perturbation regimes, and closed-loop accumulation. It leads no axis on static accuracy, where the ERP baseline is explicitly stronger; its contribution is measured evidence structure, stream-specific operating regimes, an explicit structure-function coupling observable, and an offline closed-loop accumulation layer, reported under subject-grouped validation with access-controlled, aggregate-only data governance. This extends the journal's movement from endpoint affect recognition toward physiological characterization, neural encoding, connectivity-based analysis, physiological-biomarker measurement, and continuous-label affective dynamics~\cite{pan2026encoding,kumar2026nasal,jiang2025seedvii}, contributing a neuromorphic reservoir--graph formulation for affective ERP dynamics restricted to the measured ERP regime.
+Positioned against prior affective-EEG work, ARSPI-Net trades endpoint optimization for evidence provenance (Fig.~\ref{fig:distinctmap}). It leads no axis on static accuracy, where the conventional ERP-amplitude baseline is explicitly stronger; its contribution is measured evidence structure, stream-specific operating regimes, an explicit structure-function coupling observable, and an offline closed-loop accumulation layer, reported under subject-grouped validation with access-controlled, aggregate-only data governance. This extends the journal's movement from endpoint affect recognition toward physiological characterization, neural encoding, connectivity-based analysis, and continuous-label affective dynamics~\cite{pan2026encoding,kumar2026nasal,jiang2025seedvii}.
 
 \section{Limitations}
 The closed-loop evaluation is a simulation over recorded ERP observations. The decoder updates beliefs and selects actions sequentially, but this is not an online BCI deployment and the EEG stream is not acquired in real time. The result therefore supports closed-loop evidence-accumulation utility in simulation, not online BCI deployment, neurofeedback training, or functional restoration.
@@ -300,7 +338,7 @@ The clinical-label analyses are exploratory. Near-chance performance across SUD,
 \section{Conclusion}
 ARSPI-Net establishes a neuromorphic reservoir-graph substrate for affective ERP decoding in which each observation is transformed into four named neural evidence streams: a spike-coded embedding $E$, dynamical descriptors $D$, graph-topological descriptors $T$, and a structure-function coupling block $C$. Under subject-grouped validation, a mechanism ablation with negative controls separates these streams, perturbation analyses show that they occupy different operating regimes rather than collapsing to a single endpoint, and the closed-loop adaptive BCI simulation shows that the substrate can serve as an evidence estimator for sequential belief updating over recorded ERP observations.
 
-A conventional ERP-amplitude baseline remains stronger for static classification, so the contribution should not be read as a claim of classifier superiority. Nor do these results establish online BCI deployment, diagnostic validation, hardware-energy efficiency, or cognitive augmentation. Instead, they demonstrate that a fixed event-driven reservoir, coupled to graph-topological and structure-function observables, can transform affective ERP responses into structured neural evidence whose distinctness and utility are measurable under uncertainty. Taken together, the results support ARSPI-Net as a substrate-level methodology for transforming affective ERP observations into structured neural evidence streams whose distinctness, perturbation response, and closed-loop utility can be measured under subject-level validation.
+A conventional ERP-amplitude baseline remains stronger for static classification, so the contribution should not be read as a claim of classifier superiority. Nor do these results establish online BCI deployment, diagnostic validation, hardware-energy efficiency, or cognitive augmentation. Instead, they demonstrate that a fixed event-driven reservoir, coupled to graph-topological and structure-function observables, can transform affective ERP responses into structured neural evidence whose distinctness and utility are measurable under uncertainty.
 
 \section*{Data Availability and Ethics}
 The subject-level EEG and ERP recordings are restricted human-subject data governed by institutional and data-use constraints. The SHAPE Community dataset is access-controlled and available from the Laboratory for Clinical Affective Neuroscience at Stony Brook University subject to approval and a data-use agreement; clinical metadata are access-controlled and are not publicly redistributed. Raw EEG, clinical metadata, and subject-level feature artifacts are not publicly distributed, and no protected health information or raw subject identifiers appear in any public artifact; reported outputs are aggregate and deidentified. Aggregate outputs, analysis and figure-generation scripts, tables, and reproducibility manifests are provided in the project repository where permissible. Clinical labels are used only as exploratory contextual variables, not as diagnostic validation.
