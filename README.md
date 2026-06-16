@@ -144,8 +144,12 @@ python experiments/tcds_ready9/run_ready9.py
 
 ## Building the manuscripts
 
-Both manuscripts use the IEEEtran document class with an inline bibliography (no bibtex step). The
-shared figures/tables resolve relative to `manuscript/`, so compile from that directory:
+Both manuscripts use the official **IEEEtran document class in journal mode**
+(`\documentclass[journal]{IEEEtran}`), pinned to the standard release **V1.8b (2015/08/26)**. That
+class is vendored at `manuscript/IEEEtran.cls` (and in the self-contained `submission_package_blind/`)
+so the build is reproducible and self-contained rather than depending on a system TeX installation.
+Bibliographies are inline (no bibtex step). The shared figures/tables resolve relative to
+`manuscript/`, so compile from that directory:
 
 ```
 # TAFFC variant (current target) -> manuscript/taffc/main_taffc.pdf
