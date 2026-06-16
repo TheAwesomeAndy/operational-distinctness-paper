@@ -12,7 +12,7 @@ abstract framing, and keywords.
 
 | Manuscript | Path | Pages | Title | Role |
 |---|---|---|---|---|
-| **TAFFC variant** | `manuscript/taffc/main_taffc.pdf` (blind twin `main_taffc_blind.pdf`) | 11 | *Spatiotemporal Characterization of Affective EEG Dynamics Using a Neuromorphic Reservoir–Graph Framework* | **current / primary submission target** |
+| **TAFFC variant** | `manuscript/taffc/main_taffc.pdf` (blind twin `main_taffc_blind.pdf`) | 12 | *Spatiotemporal Characterization of Affective EEG Dynamics Using a Neuromorphic Reservoir–Graph Framework* | **current / primary submission target** |
 | **TCDS manuscript** | `manuscript/main.pdf` (blind twin `main_blind.pdf`) | 10 | *ARSPI-Net: A Neuromorphic Reservoir-Graph Substrate for Affective ERP Decoding and Closed-Loop Neural Evidence Accumulation* | **preserved fallback** |
 
 Both share the same 6-page supplement (`manuscript/supplemental_risk_reduction/supplement.pdf`),
@@ -92,7 +92,7 @@ manuscript/
   main.tex / main.pdf                 TCDS manuscript (shared; 10 pp; fallback)
   main_blind.tex / main_blind.pdf     anonymized twin of the TCDS manuscript
   taffc/                              additive TAFFC variant (current target)
-    main_taffc.tex / .pdf              TAFFC manuscript (11 pp; EEG-dynamics title)
+    main_taffc.tex / .pdf              TAFFC manuscript (12 pp; EEG-dynamics title)
     main_taffc_blind.tex / .pdf        anonymized twin of the TAFFC manuscript
   supplemental_risk_reduction/        supplement.tex / supplement.pdf (6 pp; shared)
   submission_package_blind/           self-contained anonymized LaTeX bundle
