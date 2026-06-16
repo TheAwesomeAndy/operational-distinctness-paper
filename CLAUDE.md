@@ -1,8 +1,8 @@
 # Repository Agent Guide
 
 Instructions for any automated coding/writing agent operating in this repository. Read this before
-making changes. (This is the vendor-neutral root agent specification; it deliberately carries no
-tool/vendor brand name in its filename or body.)
+making changes. This is the root agent specification; its body stays brand-neutral, and agents must
+not introduce vendor/AI/session footers or identifiers into any other committed file.
 
 ## Target venue and central idea
 - **Target venue:** IEEE Transactions on Affective Computing (TAFFC). Preserved fallback: IEEE TCDS.

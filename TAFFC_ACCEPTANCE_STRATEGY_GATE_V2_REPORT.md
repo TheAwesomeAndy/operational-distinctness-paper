@@ -48,9 +48,9 @@ and prior validation reports.
 | 7.1 | Cover letter (sober, fits TAFFC) | **PASS (optional trim)** | addresses Hoey; what/why/fit + prior-work (LISAT) disclosure; no breakthrough/SOTA/diagnostic/real-time except as negations. ~587 words / ~6 labeled paragraphs — longer than the strict "three short paragraphs" ideal; optional to tighten to one page |
 | 7.2 | Review-response protocol exists | **PASS** | added `REVIEW_RESPONSE_PROTOCOL.md` |
 | 7.3 | Citation-integrity policy exists | **PASS** | added `CITATION_INTEGRITY_POLICY.md` |
-| 8.1 | Root agent specification | **PASS (named `AGENTS.md`) / NEEDS AUTHOR DECISION on filename** | added vendor-neutral `AGENTS.md` (venue, central idea, files, data restrictions, no-fabrication, forbidden claims, validation commands, blind caution, audit-before-edit, no-auto-merge, no-raw-data/paths, no-vendor-footers). Named `AGENTS.md` rather than the tool-branded filename specified in the task, to honor the standing no-vendor-reference rule — rename only if you want the branded filename |
-| 8.2 | Verifier layer (facts not memory) | **PASS** | `AGENTS.md` mandates using actual files/guidelines/model papers/validation reports, and reporting NEEDS WEB VERIFICATION when guidelines/recent-fit are unavailable |
-| 8.3 | Environment layer at repo root | **PASS** | `AGENTS.md` lives at repo root for ingestion before editing |
+| 8.1 | Root agent specification | **PASS** | added `CLAUDE.md` at repo root (venue, central idea, files, data restrictions, no-fabrication, forbidden claims, validation commands, blind caution, audit-before-edit, no-auto-merge, no-raw-data/paths, no-vendor-footers). Author authorized the `CLAUDE.md` filename as functionally necessary for agent ingestion; the file body remains brand-neutral |
+| 8.2 | Verifier layer (facts not memory) | **PASS** | `CLAUDE.md` mandates using actual files/guidelines/model papers/validation reports, and reporting NEEDS WEB VERIFICATION when guidelines/recent-fit are unavailable |
+| 8.3 | Environment layer at repo root | **PASS** | `CLAUDE.md` lives at repo root for ingestion before editing |
 | 9 | Post-publication amplification plan | **PASS** | added `POST_ACCEPTANCE_VISIBILITY_PLAN.md`; no promotion language placed in the manuscript |
 
 ---
@@ -64,7 +64,7 @@ edit threshold).
 - `TAFFC_ACCEPTANCE_STRATEGY_GATE_V2_REPORT.md` (this file)
 - `REVIEW_RESPONSE_PROTOCOL.md`
 - `CITATION_INTEGRITY_POLICY.md`
-- `AGENTS.md` (vendor-neutral root agent spec)
+- `CLAUDE.md` (root agent spec)
 - `POST_ACCEPTANCE_VISIBILITY_PLAN.md`
 
 ## Optional reviewer-anticipation hardening (deferrable, never fabricated)
@@ -76,8 +76,9 @@ edit threshold).
 
 ## Author decisions outstanding
 1. **Blind model** (single vs double) on ScholarOne → upload `main_taffc.pdf` or `main_taffc_blind.pdf`.
-2. **Agent-spec filename**: keep vendor-neutral `AGENTS.md` (default) or rename to the tool-branded filename named in the task spec.
-3. **Recent-publication/novelty** check needs a live literature/web confirmation.
+2. **Recent-publication/novelty** check needs a live literature/web confirmation.
+
+(Resolved: the root agent spec is `CLAUDE.md`, authorized by the author as functionally necessary for agent ingestion.)
 
 ## Final verdict
 **Submit after portal blind-review selection.** The article implements top-tier acceptance strategy,
