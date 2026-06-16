@@ -31,7 +31,7 @@ and prior validation reports.
 | 1.3 | Wardle's Law (true + so-what) | **PASS** | each result paired with interpretation: ablation→"sub-threshold classifier can still be operationally distinct" (321); perturbation→"stream-specific operating regime" + hardware/latency disclaimer (323); closed-loop→"usable evidence estimator… precursor, not full implementation" (325); explicit adaptive-BCI so-what (327) |
 | 2.1 | Journal fit beyond impact factor | **PASS** | cover letter "Fit with this journal" maps DEAP/MAHNOB, continuous affect, connectivity, neural-encoding, biomarker measurement; discussion (329) frames it as extending the journal's trajectory |
 | 2.2 | Reference venue mining | **PASS** | of 55 bibitems: **18** IEEE Trans. Affective Computing, **24** IEEE Trans (any), **31** IEEE, ~9 neuromorphic/reservoir, ~16 graph/connectivity — TAFFC strongly represented; no citation padding needed |
-| 2.3 | Recent-publication duplication | **NEEDS WEB VERIFICATION** | no duplication evident from local material (verified TAC comparators are positioned as complementary), but a live novelty/duplication check requires author/web verification not performed here |
+| 2.3 | Recent-publication duplication | **PASS** | web check 2026-06-16 found no duplicate of the integrated contribution; searching "ARSPI-Net" returns only the authors' own disclosed prior work; closest neighbors are endpoint classifiers. See `TAFFC_PRESUBMISSION_WEB_VERIFICATION.md` |
 | 3.1 | Claims traceable to figures/tables | **PASS** | abstract/intro/conclusion claims map to Fig. 1 overview, Fig. 3 distinctness map, CKA (Fig.), ablation/perturbation/closed-loop tables and figures |
 | 3.2 | Inside-out (wall-to-fish) coherence | **PASS** | figures → mechanisms → results/tables → discussion-of-limits → title/abstract aligned; no early claim left unsupported |
 | 4.1 | Title (8–13 words, searchable, no overclaim) | **PASS** | "Spatiotemporal Characterization of Affective EEG Dynamics Using a Neuromorphic Reservoir–Graph Framework" = **11 words**, technical, no overclaim |
@@ -74,15 +74,18 @@ edit threshold).
 - Grayscale proof-print of Fig. 1/2/3.
 - A consolidated claim→script→output→figure reproduction map.
 
-## Author decisions outstanding
-1. **Blind model** (single vs double) on ScholarOne → upload `main_taffc.pdf` or `main_taffc_blind.pdf`.
-2. **Recent-publication/novelty** check needs a live literature/web confirmation.
+## Author decisions
+1. **Blind model** — *resolved (web check 2026-06-16):* TAFFC is single-blind by default → upload `main_taffc.pdf`. Double-anonymous is an optional author election (upload `main_taffc_blind.pdf` and request it at submission). See `TAFFC_PRESUBMISSION_WEB_VERIFICATION.md`.
+2. **Recent-publication/novelty** — *resolved (web check 2026-06-16):* no duplicate of the integrated contribution located. See `TAFFC_PRESUBMISSION_WEB_VERIFICATION.md`.
 
 (Resolved: the root agent spec is `CLAUDE.md`, authorized by the author as functionally necessary for agent ingestion.)
 
 ## Final verdict
-**Submit after portal blind-review selection.** The article implements top-tier acceptance strategy,
-not just formatting: a compound gap, a single transferable idea, Wardle-compliant results, genuine
-TAFFC fit, an inside-out structure with an early hook, crunchy contributions, axis-organized related
-work, and disciplined weakness ownership. The remaining pre-upload action is the portal blind-review
-choice; all other items are optional post-submission hardening or governance docs, none blocking.
+**Ready to submit via the single-blind default path** (upload `main_taffc.pdf`). The June 2026 web
+verification resolved both previously-open items: TAFFC is single-blind by default, and no duplicate
+of the integrated contribution was located (see `TAFFC_PRESUBMISSION_WEB_VERIFICATION.md`). The
+article implements top-tier acceptance strategy, not just formatting: a compound gap, a single
+transferable idea, Wardle-compliant results, genuine TAFFC fit, an inside-out structure with an early
+hook, crunchy contributions, axis-organized related work, and disciplined weakness ownership. The
+only remaining choices are optional and non-blocking: electing double-anonymous review instead of the
+single-blind default, and the deferrable post-submission hardening items.
